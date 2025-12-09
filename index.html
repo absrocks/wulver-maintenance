@@ -38,11 +38,21 @@
           labels: labels,
           datasets: [{
             label: 'Performance (ns/day)',
-            data: perfValues
+              data: perfValues,
+	      backgroundColor: '#d8272d',   // bar fill
+	      borderColor: 'rgba(54, 162, 235, 1)',         // bar outline
+	      borderWidth: 1
           }]
         },
         options: {
           plugins: {
+	    legend: {
+	      labels: {
+	        font: {
+                  size: 14   // legend text size
+		}
+	      }
+	    },	
             tooltip: {
               callbacks: {
                 afterLabel: (context) => {
@@ -56,13 +66,21 @@
             x: {
               title: {
                 display: true,
-                text: 'Node'
+                  text: 'Node',
+		  font: {
+		      size: 16,  // X-axis title size
+		      weight: 'bold'
+		  }
               }
             },
             y: {
               title: {
                 display: true,
-                text: 'Performance (ns/day)'
+                  text: 'Performance (ns/day)',
+		  font: {
+		      size: 16,  // X-axis title size
+		      weight: 'bold'
+		  }
               }
             }
           }
