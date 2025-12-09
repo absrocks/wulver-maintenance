@@ -24,7 +24,11 @@
     .then(response => response.json())
     .then(data => {
       // Optional: sort by file_number
-      data.sort((a, b) => a["file_number"] - b["file_number"]);
+      data.sort((a, b) => {
+      const na = parseInt(a["Node Number"].slice(1), 10); // drop the 'n'
+      const nb = parseInt(b["Node Number"].slice(1), 10);
+      return na - nb;
+      });
 
       const labels     = data.map(d => d["node"]);
       const perfValues = data.map(d => d["performance_ns_per_day"]);
