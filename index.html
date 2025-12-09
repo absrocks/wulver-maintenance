@@ -23,12 +23,12 @@
   fetch('data/gmx_performance_results.json')
     .then(response => response.json())
     .then(data => {
-      // Optional: sort by File Number
-      data.sort((a, b) => a["File Number"] - b["File Number"]);
+      // Optional: sort by file_number
+      data.sort((a, b) => a["file_number"] - b["file_number"]);
 
-      const labels     = data.map(d => d["Node Number"]);
-      const perfValues = data.map(d => d["Performance (ns/day)"]);
-      const hourPerNs  = data.map(d => d["Hour/ns"]);
+      const labels     = data.map(d => d["node"]);
+      const perfValues = data.map(d => d["performance_ns_per_day"]);
+      const hourPerNs  = data.map(d => d["hour_per_ns"]);
 
       const ctx = document.getElementById('perfChart').getContext('2d');
 
@@ -37,7 +37,7 @@
         data: {
           labels: labels,
           datasets: [{
-            label: 'Performance (ns/day)',
+            label: 'performance_ns_per_day',
               data: perfValues,
 	      backgroundColor: '#d8272d',   // bar fill
 	      borderColor: 'rgba(54, 162, 235, 1)',         // bar outline
@@ -81,7 +81,7 @@
             y: {
               title: {
                 display: true,
-                  text: 'Performance (ns/day)',
+                  text: 'performance_ns_per_day',
 		  font: {
 		      size: 16,  
 		      weight: 'bold'
