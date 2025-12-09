@@ -105,6 +105,21 @@
       console.error('Error loading JSON:', err);
     });
   </script>
+  <h2>NVIDIA HPL Performance</h2>
+  <script>
+  fetch('data/hpl_gflops_per_gpu.json')
+  .then(r => r.json())
+  .then(data => {
+    data.sort((a, b) =>
+      parseInt(a["Node Number"].slice(1), 10) -
+      parseInt(b["Node Number"].slice(1), 10)
+    );
 
+    const labels = data.map(d => d["Node Number"]);
+    const gflops = data.map(d => d["Gflops_per_GPU"]);
+
+    // build Chart.js bar plot using labels & gflops...
+  });
+ </script>
 </body>
 </html>

@@ -1,0 +1,82 @@
+[
+  {
+    "Node Number": "n0001",
+    "Gflops_per_GPU": 17840.0
+  },
+  {
+    "Node Number": "n0002",
+    "Gflops_per_GPU": 17900.0
+  },
+  {
+    "Node Number": "n0004",
+    "Gflops_per_GPU": 17910.0
+  },
+  {
+    "Node Number": "n0005",
+    "Gflops_per_GPU": 17860.0
+  },
+  {
+    "Node Number": "n0024",
+    "Gflops_per_GPU": 17940.0
+  },
+  {
+    "Node Number": "n0025",
+    "Gflops_per_GPU": 17850.0
+  },
+  {
+    "Node Number": "n0026",
+    "Gflops_per_GPU": 17910.0
+  },
+  {
+    "Node Number": "n0027",
+    "Gflops_per_GPU": 17830.0
+  },
+  {
+    "Node Number": "n0028",
+    "Gflops_per_GPU": 17820.0
+  },
+  {
+    "Node Number": "n0045",
+    "Gflops_per_GPU": 17780.0
+  },
+  {
+    "Node Number": "n0046",
+    "Gflops_per_GPU": 17940.0
+  },
+  {
+    "Node Number": "n0047",
+    "Gflops_per_GPU": 17920.0
+  },
+  {
+    "Node Number": "n0048",
+    "Gflops_per_GPU": 17770.0
+  },
+  {
+    "Node Number": "n0049",
+    "Gflops_per_GPU": 17800.0
+  },
+  {
+    "Node Number": "n0066",
+    "Gflops_per_GPU": 17840.0
+  },
+  {
+    "Node Number": "n0067",
+    "Gflops_per_GPU": 17940.0
+  },
+  {
+    "Node Number": "n0068",
+    "Gflops_per_GPU": 17840.0
+  },
+  {
+    "Node Number": "n0069",
+    "Gflops_per_GPU": 17930.0
+  },
+  {
+    "Node Number": "n0090",
+    "Gflops_per_GPU": 17950.0
+  },
+  {
+    "Node Number": "n0092",
+    "Gflops_per_GPU": 17840.0
+  }
+]
