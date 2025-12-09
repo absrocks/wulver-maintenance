@@ -177,7 +177,10 @@
             }
           }
         }
-    // build Chart.js bar plot using labels & gflops...
+     });
+    })
+    .catch(err => {
+      console.error('Error loading JSON:', err);
   });
  </script>
 </body>
