@@ -105,22 +105,23 @@
       console.error('Error loading JSON:', err);
     });
   </script>
-  <h2>NVIDIA HPL Performance</h2>
-  <script>
+<h2>NVIDIA HPL Performance</h2>
+<canvas id="hplChart"></canvas>
+
+<script>
   fetch('data/hpl_gflops_per_gpu.json')
     .then(response => response.json())
     .then(data => {
-      // Optional: sort by file_number
+      // Optional: sort by node number
       data.sort((a, b) => {
-      parseInt(a["Node Number"].slice(1), 10) -
-      parseInt(b["Node Number"].slice(1), 10)
-    );
+        return parseInt(a["Node Number"].slice(1), 10) -
+               parseInt(b["Node Number"].slice(1), 10);
+      });
 
-    const labels = data.map(d => d["Node Number"]);
-    const gflops = data.map(d => d["Gflops_per_GPU"]);
-    
+      const labels = data.map(d => d["Node Number"]);
+      const gflops = data.map(d => d["Gflops_per_GPU"]);
 
-    const ctx = document.getElementById('perfChart').getContext('2d');
+      const ctx = document.getElementById('hplChart').getContext('2d');
 
       new Chart(ctx, {
         type: 'bar',
@@ -128,10 +129,10 @@
           labels: labels,
           datasets: [{
             label: 'GFLOPS/GPU',
-              data: perfValues,
-              backgroundColor: '#d8272d',   // bar fill
-              borderColor: 'rgba(54, 162, 235, 1)',         // bar outline
-              borderWidth: 1
+            data: gflops,
+            backgroundColor: '#d8272d',   // bar fill
+            borderColor: 'rgba(54, 162, 235, 1)', // bar outline
+            borderWidth: 1
           }]
         },
         options: {
@@ -148,26 +149,26 @@
             x: {
               title: {
                 display: true,
-                  text: 'Node',
-                  font: {
-                      size: 16,  // X-axis title size
-                      weight: 'bold'
-                  }
+                text: 'Node',
+                font: {
+                  size: 16,  // X-axis title size
+                  weight: 'bold'
+                }
               },
               ticks: {
-               font: {
-                 size: 14          // X-axis tick label size
-               }
+                font: {
+                  size: 14   // X-axis tick label size
+                }
               }
             },
             y: {
               title: {
                 display: true,
-                  text: 'GFLOPS/GPU',
-                  font: {
-                      size: 16,
-                      weight: 'bold'
-                  }
+                text: 'GFLOPS/GPU',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                }
               },
               ticks: {
                 font: {
@@ -177,11 +178,12 @@
             }
           }
         }
-     });
+      });
     })
     .catch(err => {
       console.error('Error loading JSON:', err);
-  });
- </script>
+    });
+</script>
+
 </body>
 </html>
