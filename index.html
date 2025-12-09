@@ -108,16 +108,75 @@
   <h2>NVIDIA HPL Performance</h2>
   <script>
   fetch('data/hpl_gflops_per_gpu.json')
-  .then(r => r.json())
-  .then(data => {
-    data.sort((a, b) =>
+    .then(response => response.json())
+    .then(data => {
+      // Optional: sort by file_number
+      data.sort((a, b) => {
       parseInt(a["Node Number"].slice(1), 10) -
       parseInt(b["Node Number"].slice(1), 10)
     );
 
     const labels = data.map(d => d["Node Number"]);
     const gflops = data.map(d => d["Gflops_per_GPU"]);
+    
 
+    const ctx = document.getElementById('perfChart').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'GFLOPS/GPU',
+              data: perfValues,
+              backgroundColor: '#d8272d',   // bar fill
+              borderColor: 'rgba(54, 162, 235, 1)',         // bar outline
+              borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              labels: {
+                font: {
+                  size: 14   // legend text size
+                }
+              }
+            },
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                  text: 'Node',
+                  font: {
+                      size: 16,  // X-axis title size
+                      weight: 'bold'
+                  }
+              },
+              ticks: {
+               font: {
+                 size: 14          // X-axis tick label size
+               }
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                  text: 'GFLOPS/GPU',
+                  font: {
+                      size: 16,
+                      weight: 'bold'
+                  }
+              },
+              ticks: {
+                font: {
+                  size: 14
+                }
+              }
+            }
+          }
+        }
     // build Chart.js bar plot using labels & gflops...
   });
  </script>
