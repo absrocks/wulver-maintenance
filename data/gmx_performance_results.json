@@ -1,0 +1,122 @@
+[
+  {
+    "File Number": 1,
+    "Node Number": "n0088",
+    "Performance (ns/day)": 75.6,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 10,
+    "Node Number": "n0027",
+    "Performance (ns/day)": 75.682,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 11,
+    "Node Number": "n0028",
+    "Performance (ns/day)": 75.526,
+    "Hour/ns": 0.318
+  },
+  {
+    "File Number": 12,
+    "Node Number": "n0045",
+    "Performance (ns/day)": 74.765,
+    "Hour/ns": 0.321
+  },
+  {
+    "File Number": 13,
+    "Node Number": "n0046",
+    "Performance (ns/day)": 75.608,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 14,
+    "Node Number": "n0047",
+    "Performance (ns/day)": 75.672,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 15,
+    "Node Number": "n0048",
+    "Performance (ns/day)": 75.415,
+    "Hour/ns": 0.318
+  },
+  {
+    "File Number": 16,
+    "Node Number": "n0049",
+    "Performance (ns/day)": 75.36,
+    "Hour/ns": 0.318
+  },
+  {
+    "File Number": 17,
+    "Node Number": "n0066",
+    "Performance (ns/day)": 75.216,
+    "Hour/ns": 0.319
+  },
+  {
+    "File Number": 18,
+    "Node Number": "n0067",
+    "Performance (ns/day)": 75.551,
+    "Hour/ns": 0.318
+  },
+  {
+    "File Number": 19,
+    "Node Number": "n0068",
+    "Performance (ns/day)": 75.736,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 2,
+    "Node Number": "n0090",
+    "Performance (ns/day)": 75.755,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 20,
+    "Node Number": "n0069",
+    "Performance (ns/day)": 75.603,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 3,
+    "Node Number": "n0092",
+    "Performance (ns/day)": 75.557,
+    "Hour/ns": 0.318
+  },
+  {
+    "File Number": 4,
+    "Node Number": "n0001",
+    "Performance (ns/day)": 75.384,
+    "Hour/ns": 0.318
+  },
+  {
+    "File Number": 5,
+    "Node Number": "n0002",
+    "Performance (ns/day)": 75.601,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 6,
+    "Node Number": "n0003",
+    "Performance (ns/day)": 75.605,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 7,
+    "Node Number": "n0004",
+    "Performance (ns/day)": 75.533,
+    "Hour/ns": 0.318
+  },
+  {
+    "File Number": 8,
+    "Node Number": "n0024",
+    "Performance (ns/day)": 75.62,
+    "Hour/ns": 0.317
+  },
+  {
+    "File Number": 9,
+    "Node Number": "n0025",
+    "Performance (ns/day)": 75.338,
+    "Hour/ns": 0.319
+  }
+]
