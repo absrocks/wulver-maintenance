@@ -25,8 +25,8 @@
     .then(data => {
       // Optional: sort by file_number
       data.sort((a, b) => {
-      const na = parseInt(a["Node Number"].slice(1), 10); // drop the 'n'
-      const nb = parseInt(b["Node Number"].slice(1), 10);
+      const na = parseInt(a["node"].slice(1), 10); // drop the 'n'
+      const nb = parseInt(b["node"].slice(1), 10);
       return na - nb;
       });
 
