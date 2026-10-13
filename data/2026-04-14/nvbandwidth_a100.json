@@ -1,0 +1,323 @@
+{
+ "test": "nvbandwidth_a100",
+ "label": "nvbandwidth (A100)",
+ "group": "NVLink",
+ "variant": "a100",
+ "metrics": [
+  {
+   "key": "host_to_device_memcpy_ce",
+   "label": "host to device memcpy ce (GB/s)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "device_to_host_memcpy_ce",
+   "label": "device to host memcpy ce (GB/s)",
+   "higher_is_better": true,
+   "primary": false
+  },
+  {
+   "key": "host_to_device_bidirectional_memcpy_ce",
+   "label": "host to device bidirectional memcpy ce (GB/s)",
+   "higher_is_better": true,
+   "primary": false
+  },
+  {
+   "key": "device_to_host_bidirectional_memcpy_ce",
+   "label": "device to host bidirectional memcpy ce (GB/s)",
+   "higher_is_better": true,
+   "primary": false
+  },
+  {
+   "key": "device_to_device_memcpy_read_ce",
+   "label": "device to device memcpy read ce (GB/s)",
+   "higher_is_better": true,
+   "primary": false
+  },
+  {
+   "key": "errors",
+   "label": "Tests with error",
+   "higher_is_better": false,
+   "expect_zero": true
+  }
+ ],
+ "source": "nvlink_gpu/nvlink_results.json",
+ "rows": [
+  {
+   "node": "n0003",
+   "host_to_device_memcpy_ce": 102.99,
+   "device_to_host_memcpy_ce": 99.39,
+   "host_to_device_bidirectional_memcpy_ce": 59.42,
+   "device_to_host_bidirectional_memcpy_ce": 83.3,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0004",
+   "host_to_device_memcpy_ce": 101.85,
+   "device_to_host_memcpy_ce": 99.22,
+   "host_to_device_bidirectional_memcpy_ce": 59.37,
+   "device_to_host_bidirectional_memcpy_ce": 84.57,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0005",
+   "host_to_device_memcpy_ce": 100.95,
+   "device_to_host_memcpy_ce": 98.86,
+   "host_to_device_bidirectional_memcpy_ce": 59.37,
+   "device_to_host_bidirectional_memcpy_ce": 83.35,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0024",
+   "host_to_device_memcpy_ce": 101.76,
+   "device_to_host_memcpy_ce": 99.71,
+   "host_to_device_bidirectional_memcpy_ce": 59.3,
+   "device_to_host_bidirectional_memcpy_ce": 83.32,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0026",
+   "host_to_device_memcpy_ce": 100.86,
+   "device_to_host_memcpy_ce": 104.66,
+   "host_to_device_bidirectional_memcpy_ce": 59.26,
+   "device_to_host_bidirectional_memcpy_ce": 83.13,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0027",
+   "host_to_device_memcpy_ce": 100.78,
+   "device_to_host_memcpy_ce": 99.71,
+   "host_to_device_bidirectional_memcpy_ce": 59.31,
+   "device_to_host_bidirectional_memcpy_ce": 83.3,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0028",
+   "host_to_device_memcpy_ce": 102.33,
+   "device_to_host_memcpy_ce": 103.54,
+   "host_to_device_bidirectional_memcpy_ce": 59.39,
+   "device_to_host_bidirectional_memcpy_ce": 83.33,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0028",
+   "host_to_device_memcpy_ce": 101.45,
+   "device_to_host_memcpy_ce": 104.03,
+   "host_to_device_bidirectional_memcpy_ce": 59.32,
+   "device_to_host_bidirectional_memcpy_ce": 83.82,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0045",
+   "host_to_device_memcpy_ce": 102.41,
+   "device_to_host_memcpy_ce": 103.76,
+   "host_to_device_bidirectional_memcpy_ce": 59.22,
+   "device_to_host_bidirectional_memcpy_ce": 83.3,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0046",
+   "host_to_device_memcpy_ce": 102.06,
+   "device_to_host_memcpy_ce": 106.5,
+   "host_to_device_bidirectional_memcpy_ce": 59.24,
+   "device_to_host_bidirectional_memcpy_ce": 83.31,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0046",
+   "host_to_device_memcpy_ce": 102.45,
+   "device_to_host_memcpy_ce": 103.38,
+   "host_to_device_bidirectional_memcpy_ce": 59.29,
+   "device_to_host_bidirectional_memcpy_ce": 83.05,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0047",
+   "host_to_device_memcpy_ce": 100.24,
+   "device_to_host_memcpy_ce": 99.03,
+   "host_to_device_bidirectional_memcpy_ce": 59.33,
+   "device_to_host_bidirectional_memcpy_ce": 83.35,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0048",
+   "host_to_device_memcpy_ce": 101.61,
+   "device_to_host_memcpy_ce": 100.05,
+   "host_to_device_bidirectional_memcpy_ce": 59.27,
+   "device_to_host_bidirectional_memcpy_ce": 83.31,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0049",
+   "host_to_device_memcpy_ce": 101.66,
+   "device_to_host_memcpy_ce": 104.95,
+   "host_to_device_bidirectional_memcpy_ce": 59.24,
+   "device_to_host_bidirectional_memcpy_ce": 83.34,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0066",
+   "host_to_device_memcpy_ce": 103.04,
+   "device_to_host_memcpy_ce": 100.62,
+   "host_to_device_bidirectional_memcpy_ce": 59.32,
+   "device_to_host_bidirectional_memcpy_ce": 83.3,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0067",
+   "host_to_device_memcpy_ce": 101.83,
+   "device_to_host_memcpy_ce": 101.72,
+   "host_to_device_bidirectional_memcpy_ce": 59.33,
+   "device_to_host_bidirectional_memcpy_ce": 83.31,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0068",
+   "host_to_device_memcpy_ce": 102.64,
+   "device_to_host_memcpy_ce": 105.21,
+   "host_to_device_bidirectional_memcpy_ce": 59.25,
+   "device_to_host_bidirectional_memcpy_ce": 83.29,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0068",
+   "host_to_device_memcpy_ce": 103.78,
+   "device_to_host_memcpy_ce": 103.23,
+   "host_to_device_bidirectional_memcpy_ce": 59.3,
+   "device_to_host_bidirectional_memcpy_ce": 83.34,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0069",
+   "host_to_device_memcpy_ce": 102.25,
+   "device_to_host_memcpy_ce": 102.45,
+   "host_to_device_bidirectional_memcpy_ce": 59.39,
+   "device_to_host_bidirectional_memcpy_ce": 83.3,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0069",
+   "host_to_device_memcpy_ce": 101.91,
+   "device_to_host_memcpy_ce": 102.49,
+   "host_to_device_bidirectional_memcpy_ce": 59.37,
+   "device_to_host_bidirectional_memcpy_ce": 83.36,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0088",
+   "host_to_device_memcpy_ce": 101.21,
+   "device_to_host_memcpy_ce": 104.89,
+   "host_to_device_bidirectional_memcpy_ce": 59.37,
+   "device_to_host_bidirectional_memcpy_ce": 83.34,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0090",
+   "host_to_device_memcpy_ce": 99.59,
+   "device_to_host_memcpy_ce": 98.34,
+   "host_to_device_bidirectional_memcpy_ce": 59.27,
+   "device_to_host_bidirectional_memcpy_ce": 83.27,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  },
+  {
+   "node": "n0092",
+   "host_to_device_memcpy_ce": 101.1,
+   "device_to_host_memcpy_ce": 102.15,
+   "host_to_device_bidirectional_memcpy_ce": 59.35,
+   "device_to_host_bidirectional_memcpy_ce": 83.3,
+   "device_to_device_memcpy_read_ce": null,
+   "errors": 1,
+   "error_tests": [
+    "device_to_device_memcpy_read_ce"
+   ]
+  }
+ ]
+}

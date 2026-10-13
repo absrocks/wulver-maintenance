@@ -1,0 +1,83 @@
+{
+ "test": "nccl_l40",
+ "label": "NCCL all_reduce (L40)",
+ "group": "NCCL",
+ "variant": "l40",
+ "metrics": [
+  {
+   "key": "avg_busbw",
+   "label": "Avg bus BW (GB/s)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "busbw_1g",
+   "label": "Bus BW @1 GiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "algbw_1g",
+   "label": "Alg BW @1 GiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "busbw_512m",
+   "label": "Bus BW @512 MiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "time_us_1g",
+   "label": "Time @1 GiB (\u00b5s)",
+   "higher_is_better": false
+  },
+  {
+   "key": "wrong",
+   "label": "#wrong (sum)",
+   "higher_is_better": false,
+   "expect_zero": true
+  }
+ ],
+ "source": "nccl_l40",
+ "rows": [
+  {
+   "node": "n1541",
+   "task_id": "1",
+   "avg_busbw": 5.4675,
+   "busbw_1g": 14.41,
+   "algbw_1g": 14.41,
+   "time_us_1g": 74502.9,
+   "busbw_512m": 14.39,
+   "wrong": 0
+  },
+  {
+   "node": "n1543",
+   "task_id": "2",
+   "avg_busbw": 5.48702,
+   "busbw_1g": 14.41,
+   "algbw_1g": 14.41,
+   "time_us_1g": 74503.7,
+   "busbw_512m": 14.39,
+   "wrong": 0
+  },
+  {
+   "node": "n1545",
+   "task_id": "3",
+   "avg_busbw": 5.463,
+   "busbw_1g": 14.4,
+   "algbw_1g": 14.4,
+   "time_us_1g": 74543.9,
+   "busbw_512m": 14.38,
+   "wrong": 0
+  },
+  {
+   "node": "n1547",
+   "task_id": "4",
+   "avg_busbw": 5.44467,
+   "busbw_1g": 14.41,
+   "algbw_1g": 14.41,
+   "time_us_1g": 74535.8,
+   "busbw_512m": 14.38,
+   "wrong": 0
+  }
+ ]
+}

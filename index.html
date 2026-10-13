@@ -1,189 +1,540 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>GROMACS Node Performance</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 30px auto;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wulver Maintenance Benchmarks</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f4f4f2;      /* page */
+    --surface-1: #fcfcfb;      /* cards / chart surface */
+    --surface-2: #eeede9;      /* hover rows, chips */
+    --border:    #dedcd6;
+    --grid:      #e6e4df;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #7a7975;
+    --series-1: #2a78d6;       /* current period */
+    --series-2: #1baf7a;       /* compare period */
+    --series-1-soft: rgba(42,120,214,0.14);
+    --good:     #0ca30c;
+    --warning:  #fab219;
+    --serious:  #ec835a;
+    --critical: #d03b3b;
+    --div-neg:  #2a78d6;
+    --div-mid:  #f0efec;
+    --div-pos:  #d03b3b;
+    --accent:   #2a78d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-0: #121211; --surface-1: #1a1a19; --surface-2: #262624;
+      --border: #333331; --grid: #2d2d2b;
+      --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e88;
+      --series-1: #3987e5; --series-2: #199e70; --series-1-soft: rgba(57,135,229,0.18);
+      --div-neg: #3987e5; --div-mid: #383835; --div-pos: #e66767; --accent: #3987e5;
     }
-    canvas {
-      max-width: 100%;
-    }
-  </style>
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #121211; --surface-1: #1a1a19; --surface-2: #262624;
+    --border: #333331; --grid: #2d2d2b;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e88;
+    --series-1: #3987e5; --series-2: #199e70; --series-1-soft: rgba(57,135,229,0.18);
+    --div-neg: #3987e5; --div-mid: #383835; --div-pos: #e66767; --accent: #3987e5;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--surface-0); color: var(--text-primary);
+    font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  body { padding: 0 16px 48px; }
+  .wrap { max-width: 1400px; margin: 0 auto; }
+  header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 18px 0 10px; }
+  h1 { font-size: 20px; margin: 0; font-weight: 650; letter-spacing: -0.01em; }
+  h1 small { font-weight: 400; color: var(--text-secondary); font-size: 13px; margin-left: 8px; }
+  h2 { font-size: 15px; font-weight: 600; margin: 0 0 8px; }
+  h2 .sub { font-weight: 400; color: var(--text-secondary); margin-left: 8px; font-size: 13px; }
+  .controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 16px; padding: 10px 14px; background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px; position: sticky; top: 0; z-index: 5; }
+  .ctl { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--text-secondary); }
+  .ctl select, .ctl input[type=number] { font: inherit; font-size: 14px; color: var(--text-primary); background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; min-width: 150px; }
+  .ctl input[type=number] { min-width: 80px; width: 90px; }
+  .ctl label.chk { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-primary); padding: 7px 0; }
+  .spacer { flex: 1; }
+  button.ghost { font: inherit; font-size: 13px; background: transparent; color: var(--text-primary); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+  button.ghost:hover { background: var(--surface-2); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-bottom: 18px; }
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; cursor: pointer;
+    transition: border-color .12s; }
+  .card:hover { border-color: var(--text-muted); }
+  .card.active { border-color: var(--accent); box-shadow: 0 0 0 2px var(--series-1-soft); }
+  .card .t { font-weight: 600; font-size: 13.5px; }
+  .card .m { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .card .big { font-size: 22px; font-weight: 600; margin: 6px 0 2px; letter-spacing: -0.01em; }
+  .card .big span { font-size: 12px; font-weight: 400; color: var(--text-secondary); margin-left: 6px; }
+  .status { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 2px 8px; border-radius: 999px;
+    background: var(--surface-2); color: var(--text-primary); white-space: nowrap; }
+  .status .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot.good { background: var(--good); } .dot.serious { background: var(--serious); } .dot.critical { background: var(--critical); }
+  .dot.warning { background: var(--warning); } .dot.muted { background: var(--text-muted); }
+  .card .nodes { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.4; }
+  .card .nodes b { color: var(--text-primary); font-weight: 500; }
+
+  .panel { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; }
+  .panel-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-bottom: 8px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .tab { font: inherit; font-size: 13px; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); background: transparent;
+    color: var(--text-primary); cursor: pointer; }
+  .tab:hover { background: var(--surface-2); }
+  .tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .tab .n { color: var(--text-muted); font-size: 12px; margin-left: 4px; }
+  .tab.active .n { color: rgba(255,255,255,.8); }
+  .scrollx { overflow-x: auto; overflow-y: hidden; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12.5px; color: var(--text-secondary); margin-top: 4px; }
+  .legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 6px; }
+  .legend .ln { display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--text-secondary); vertical-align: 3px; margin-right: 6px; }
+  .legend .bd { display: inline-block; width: 18px; height: 10px; background: var(--series-1-soft); vertical-align: -1px; margin-right: 6px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12.5px; color: var(--text-secondary); margin: 2px 0 6px; }
+  .stats b { color: var(--text-primary); font-weight: 500; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th { color: var(--text-secondary); font-weight: 500; font-size: 12px; cursor: pointer; user-select: none; position: sticky; top: 0; background: var(--surface-1); }
+  th.sorted::after { content: " ▾"; } th.sorted.asc::after { content: " ▴"; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.flag td { background: color-mix(in srgb, var(--critical) 8%, transparent); }
+  tr.sel td { background: var(--series-1-soft); }
+  tbody tr:hover td { background: var(--surface-2); }
+  tbody tr { cursor: pointer; }
+  .tablewrap { max-height: 420px; overflow: auto; border: 1px solid var(--border); border-radius: 8px; }
+  .muted { color: var(--text-muted); }
+  .note { font-size: 12.5px; color: var(--text-secondary); }
+  .kv { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .mat { font-size: 12px; } .mat td, .mat th { padding: 3px 8px; }
+  .empty { color: var(--text-muted); padding: 18px 0; text-align: center; }
+  @media (max-width: 700px) { .ctl select { min-width: 120px; } h1 { font-size: 17px; } }
+</style>
 </head>
 <body>
-  <h2>GROMACS Performance by Node</h2>
-  <canvas id="perfChart"></canvas>
+<div class="wrap">
+  <header>
+    <h1>Wulver Maintenance Benchmarks <small id="hdrSub"></small></h1>
+    <div class="spacer"></div>
+    <button class="ghost" id="themeBtn" type="button">Dark mode</button>
+  </header>
 
-  <script>
-  fetch('data/gmx_performance_results.json')
-    .then(response => response.json())
-    .then(data => {
-      // Optional: sort by file_number
-      data.sort((a, b) => {
-      const na = parseInt(a["node"].slice(1), 10); // drop the 'n'
-      const nb = parseInt(b["node"].slice(1), 10);
-      return na - nb;
-      });
+  <div class="controls">
+    <div class="ctl"><span>Maintenance period</span><select id="periodSel"></select></div>
+    <div class="ctl"><span>Compare with</span><select id="compareSel"><option value="">— none —</option></select></div>
+    <div class="ctl"><span>Tolerance (± % of median)</span><input id="tolInp" type="number" min="0.1" step="0.5" value="3" /></div>
+    <div class="ctl"><label class="chk"><input id="yzero" type="checkbox" /> Start y-axis at zero</label></div>
+    <div class="ctl"><label class="chk"><input id="onlyFlag" type="checkbox" /> Table: flagged only</label></div>
+  </div>
 
-      const labels     = data.map(d => d["node"]);
-      const perfValues = data.map(d => d["performance_ns_per_day"]);
-      const hourPerNs  = data.map(d => d["hour_per_ns"]);
+  <section>
+    <h2>Node health by test <span class="sub" id="cardsSub"></span></h2>
+    <div class="cards" id="cards"></div>
+  </section>
 
-      const ctx = document.getElementById('perfChart').getContext('2d');
+  <section class="panel">
+    <div class="panel-head">
+      <h2 id="chartTitle">Per-node comparison</h2>
+      <div class="spacer"></div>
+      <div class="ctl"><span>Metric</span><select id="metricSel"></select></div>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="stats" id="stats"></div>
+    <div class="scrollx"><div id="chart" style="height:380px;"></div></div>
+    <div class="legend" id="chartLegend"></div>
+  </section>
 
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Performance (ns/day)',
-              data: perfValues,
-	      backgroundColor: '#d8272d',   // bar fill
-	      borderColor: 'rgba(54, 162, 235, 1)',         // bar outline
-	      borderWidth: 1
-          }]
-        },
-        options: {
-          plugins: {
-	    legend: {
-	      labels: {
-	        font: {
-                  size: 14   // legend text size
-		}
-	      }
-	    },	
-            tooltip: {
-              callbacks: {
-                afterLabel: (context) => {
-                  const idx = context.dataIndex;
-                  return ' Hour/ns: ' + hourPerNs[idx];
-                }
-              }
-            }
-          },
-          scales: {
-            x: {
-              title: {
-                display: true,
-                  text: 'Node',
-		  font: {
-		      size: 16,  // X-axis title size
-		      weight: 'bold'
-		  }
-	      },  
-	      ticks: {
-	       font: {
-	         size: 14          // X-axis tick label size
-	       }
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                  text: 'Performance (ns/day)',
-		  font: {
-		      size: 16,  
-		      weight: 'bold'
-		  }
-	      },
-	      ticks: {
-		font: {
-		  size: 14          
-		}
-              }
-            }
-          }
-        }
-      });
-    })
-    .catch(err => {
-      console.error('Error loading JSON:', err);
-    });
-  </script>
-<h2>NVIDIA HPL Performance</h2>
-<canvas id="hplChart"></canvas>
+  <section class="panel">
+    <h2>Deviation from median, all tests <span class="sub">cell = (node − median) / median, primary metric of each test. Click a cell to inspect.</span></h2>
+    <div class="scrollx"><div id="heat"></div></div>
+    <div class="legend"><span><span class="sw" style="background:var(--div-neg)"></span>below median</span>
+      <span><span class="sw" style="background:var(--div-mid); border:1px solid var(--border)"></span>at median</span>
+      <span><span class="sw" style="background:var(--div-pos)"></span>above median</span>
+      <span class="muted">color range clipped at ±<span id="heatClip">10</span> %; blank = node not in that test</span></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2 id="tableTitle">Values</h2><div class="spacer"></div><span class="note" id="tableNote"></span></div>
+    <div class="tablewrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+  </section>
+
+  <section class="panel" id="detailPanel">
+    <h2 id="detailTitle">Node detail <span class="sub">click a bar, a heatmap cell or a table row</span></h2>
+    <div id="detail" class="empty">No node selected.</div>
+  </section>
+
+  <section class="panel">
+    <h2 id="histTitle">History across maintenance periods</h2>
+    <div id="hist" style="height:300px;"></div>
+    <div class="legend" id="histLegend"></div>
+  </section>
+
+  <p class="note">Data: <code>data/&lt;period&gt;/*.json</code>, produced by <code>collect_maint.py</code> from
+    <code>/project/hpcadmins/am2455/maint/2026/&lt;month&gt;</code> on Wulver. Median and tolerance are computed per test and metric within the selected period.</p>
+</div>
 
 <script>
-  fetch('data/hpl_gflops_per_gpu.json')
-    .then(response => response.json())
-    .then(data => {
-      // Optional: sort by node number
-      data.sort((a, b) => {
-        return parseInt(a["Node Number"].slice(1), 10) -
-               parseInt(b["Node Number"].slice(1), 10);
-      });
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const state = {
+    index: null, cache: {}, period: null, compare: null,
+    test: null, metric: null, tol: 3, yzero: false, onlyFlag: false,
+    node: null, sort: { key: 'node', dir: 1 },
+  };
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const nodeNum = (n) => { const m = /^n(\d+)$/.exec(n || ''); return m ? +m[1] : 1e9; };
+  const fmt = (v, d) => {
+    if (v === null || v === undefined || Number.isNaN(v)) return '—';
+    if (typeof v !== 'number') return String(v);
+    if (Math.abs(v) >= 1000) return v.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    if (Number.isInteger(v)) return String(v);
+    return v.toFixed(d ?? (Math.abs(v) >= 100 ? 1 : Math.abs(v) >= 10 ? 2 : 3));
+  };
+  const pct = (v) => (v === null || v === undefined || Number.isNaN(v)) ? '—' : (v > 0 ? '+' : '') + v.toFixed(2) + ' %';
+  const median = (a) => { const s = a.filter(Number.isFinite).sort((x, y) => x - y); const n = s.length;
+    return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : null; };
 
-      const labels = data.map(d => d["Node Number"]);
-      const gflops = data.map(d => d["Gflops_per_GPU"]);
-
-      const ctx = document.getElementById('hplChart').getContext('2d');
-
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'GFLOPS/GPU',
-            data: gflops,
-            backgroundColor: '#d8272d',   // bar fill
-            borderColor: 'rgba(54, 162, 235, 1)', // bar outline
-            borderWidth: 1
-          }]
-        },
-        options: {
-          plugins: {
-            legend: {
-              labels: {
-                font: {
-                  size: 14   // legend text size
-                }
-              }
-            },
-          },
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: 'Node',
-                font: {
-                  size: 16,  // X-axis title size
-                  weight: 'bold'
-                }
-              },
-              ticks: {
-                font: {
-                  size: 14   // X-axis tick label size
-                }
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'GFLOPS/GPU',
-                font: {
-                  size: 16,
-                  weight: 'bold'
-                }
-              },
-              ticks: {
-                font: {
-                  size: 14
-                }
-              }
-            }
-          }
-        }
-      });
-    })
-    .catch(err => {
-      console.error('Error loading JSON:', err);
+  // ---------------------------------------------------------------- data loading
+  async function getJSON(p) { const r = await fetch(p); if (!r.ok) throw new Error(p + ': ' + r.status); return r.json(); }
+  async function loadPeriod(id) {
+    if (state.cache[id]) return state.cache[id];
+    const man = await getJSON(`data/${id}/manifest.json`);
+    const tests = {};
+    await Promise.all(man.tests.map(async (t) => { tests[t.key] = await getJSON(`data/${id}/${t.file}`); }));
+    // stable order: GROMACS, HPCG, NCCL, PyTorch, NVLink, HPL
+    const order = ['GROMACS', 'HPCG', 'NCCL', 'PyTorch', 'NVLink', 'HPL'];
+    const keys = Object.keys(tests).sort((a, b) => {
+      const ga = order.indexOf(tests[a].group), gb = order.indexOf(tests[b].group);
+      return (ga - gb) || a.localeCompare(b);
     });
-</script>
+    state.cache[id] = { manifest: man, tests, keys };
+    return state.cache[id];
+  }
 
+  // ---------------------------------------------------------------- analysis
+  function primaryMetric(t) { return (t.metrics.find((m) => m.primary) || t.metrics[0]).key; }
+  function analyze(t, mkey, tol) {
+    const m = t.metrics.find((x) => x.key === mkey) || t.metrics[0];
+    const vals = t.rows.map((r) => r[m.key]);
+    const med = median(vals);
+    const rows = t.rows.map((r) => {
+      const v = r[m.key];
+      let dev = null, status = 'ok', label = 'OK';
+      if (v === null || v === undefined) { status = 'missing'; label = 'missing'; }
+      else if (m.expect_zero) { if (v > 0) { status = 'bad'; label = 'non-zero'; } else label = 'zero'; dev = 0; }
+      else if (med) { dev = (v - med) / med * 100; if (Math.abs(dev) > tol) { status = 'bad'; label = (dev > 0 ? 'high ' : 'low ') + pct(dev); } }
+      return { node: r.node, value: v, dev, status, label, raw: r };
+    });
+    const nums = vals.filter(Number.isFinite);
+    return { metric: m, median: med, min: nums.length ? Math.min(...nums) : null, max: nums.length ? Math.max(...nums) : null,
+      mean: nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : null,
+      rows, flagged: rows.filter((r) => r.status !== 'ok') };
+  }
+
+  // ---------------------------------------------------------------- rendering
+  function plotlyBase() {
+    return {
+      paper_bgcolor: css('--surface-1'), plot_bgcolor: css('--surface-1'),
+      font: { family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif', size: 12, color: css('--text-secondary') },
+      margin: { l: 60, r: 16, t: 8, b: 56 },
+      hoverlabel: { bgcolor: css('--surface-2'), bordercolor: css('--border'), font: { color: css('--text-primary'), size: 12 } },
+      xaxis: { gridcolor: css('--grid'), zeroline: false, linecolor: css('--border'), tickfont: { size: 11 } },
+      yaxis: { gridcolor: css('--grid'), zeroline: false, linecolor: css('--border') },
+      showlegend: false,
+    };
+  }
+  const plotCfg = { displaylogo: false, responsive: true, modeBarButtonsToRemove: ['lasso2d', 'select2d'] };
+
+  function renderHeader() {
+    const p = state.index.periods.find((x) => x.id === state.period);
+    $('#hdrSub').textContent = p ? p.label : '';
+  }
+
+  function renderCards(cur) {
+    const wrap = $('#cards'); wrap.innerHTML = '';
+    let total = 0, flaggedTotal = 0;
+    for (const k of cur.keys) {
+      const t = cur.tests[k]; const a = analyze(t, primaryMetric(t), state.tol);
+      total += t.rows.length; flaggedTotal += a.flagged.length;
+      const el = document.createElement('div'); el.className = 'card' + (k === state.test ? ' active' : '');
+      const stat = a.flagged.length ? 'critical' : 'good';
+      const names = a.flagged.slice(0, 8).map((r) => `<b>${r.node}</b> ${r.label}`).join(', ') + (a.flagged.length > 8 ? ` … +${a.flagged.length - 8}` : '');
+      el.innerHTML = `<div class="t">${t.label}</div>
+        <div class="m">${t.rows.length} nodes · ${a.metric.label}</div>
+        <div class="big">${fmt(a.median)}<span>median</span></div>
+        <span class="status"><span class="dot ${stat}"></span>${a.flagged.length ? `${a.flagged.length} node${a.flagged.length > 1 ? 's' : ''} outside ±${state.tol}%` : `all within ±${state.tol}%`}</span>
+        ${a.flagged.length ? `<div class="nodes">${names}</div>` : ''}`;
+      el.onclick = () => { state.test = k; state.metric = null; state.node = null; renderAll(); };
+      wrap.appendChild(el);
+    }
+    $('#cardsSub').textContent = `${cur.keys.length} tests · ${total} node results · ${flaggedTotal} flagged at ±${state.tol}%`;
+  }
+
+  function renderTabs(cur) {
+    const wrap = $('#tabs'); wrap.innerHTML = '';
+    for (const k of cur.keys) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'tab' + (k === state.test ? ' active' : '');
+      b.innerHTML = `${cur.tests[k].label}<span class="n">${cur.tests[k].rows.length}</span>`;
+      b.onclick = () => { state.test = k; state.metric = null; state.node = null; renderAll(); };
+      wrap.appendChild(b);
+    }
+    const t = cur.tests[state.test];
+    const ms = $('#metricSel'); ms.innerHTML = '';
+    for (const m of t.metrics) { const o = document.createElement('option'); o.value = m.key; o.textContent = m.label; ms.appendChild(o); }
+    ms.value = state.metric;
+  }
+
+  function renderChart(cur, cmp) {
+    const t = cur.tests[state.test]; const a = analyze(t, state.metric, state.tol);
+    const ct = cmp && cmp.tests[state.test]; const ca = ct ? analyze(ct, state.metric, state.tol) : null;
+    const nodes = [...new Set([...a.rows.map((r) => r.node), ...(ca ? ca.rows.map((r) => r.node) : [])])].sort((x, y) => nodeNum(x) - nodeNum(y));
+    const byNode = Object.fromEntries(a.rows.map((r) => [r.node, r]));
+    const cByNode = ca ? Object.fromEntries(ca.rows.map((r) => [r.node, r])) : {};
+    const colOk = css('--series-1'), colBad = css('--critical'), colCmp = css('--series-2');
+
+    const cur_vals = nodes.map((n) => byNode[n] ? byNode[n].value : null);
+    const traces = [{
+      type: 'bar', name: 'current', x: nodes, y: cur_vals,
+      marker: { color: nodes.map((n) => byNode[n] && byNode[n].status !== 'ok' ? colBad : colOk), line: { width: 0 } },
+      width: ca ? 0.38 : 0.6, offset: ca ? -0.4 : undefined,
+      customdata: nodes.map((n) => byNode[n] ? [pct(byNode[n].dev), byNode[n].label, byNode[n].raw.from_log ? ' (from log)' : ''] : ['—', 'missing', '']),
+      hovertemplate: '<b>%{x}</b><br>' + a.metric.label + ': %{y}<br>vs median: %{customdata[0]} · %{customdata[1]}%{customdata[2]}<extra></extra>',
+    }];
+    if (ca) traces.push({
+      type: 'bar', name: 'compare', x: nodes, y: nodes.map((n) => cByNode[n] ? cByNode[n].value : null),
+      marker: { color: colCmp, line: { width: 0 } }, width: 0.38, offset: 0.02,
+      customdata: nodes.map((n) => cByNode[n] ? [pct(cByNode[n].dev), byNode[n] && cByNode[n].value ? pct((byNode[n].value - cByNode[n].value) / cByNode[n].value * 100) : '—'] : ['—', '—']),
+      hovertemplate: '<b>%{x}</b> (' + cmp.manifest.label + ')<br>' + a.metric.label + ': %{y}<br>vs its median: %{customdata[0]}<br>current vs this: %{customdata[1]}<extra></extra>',
+    });
+
+    const lay = plotlyBase();
+    lay.barmode = ca ? 'overlay' : 'relative'; lay.bargap = 0.25;
+    lay.xaxis.title = { text: 'Node', font: { size: 12 } }; lay.xaxis.tickangle = nodes.length > 24 ? -60 : 0; lay.xaxis.type = 'category';
+    lay.yaxis.title = { text: a.metric.label, font: { size: 12 } };
+    const allv = [...cur_vals, ...(ca ? ca.rows.map((r) => r.value) : [])].filter(Number.isFinite);
+    if (allv.length) {
+      if (state.yzero) lay.yaxis.rangemode = 'tozero';
+      else { const lo = Math.min(...allv), hi = Math.max(...allv); const pad = Math.max((hi - lo) * 0.25, Math.abs(hi) * 0.005, 1e-9);
+        lay.yaxis.range = [Math.min(lo - pad, a.median ? a.median * (1 - state.tol / 100) - pad : lo - pad), Math.max(hi + pad, a.median ? a.median * (1 + state.tol / 100) + pad : hi + pad)]; }
+    }
+    lay.shapes = []; lay.annotations = [];
+    if (a.median !== null && !a.metric.expect_zero) {
+      lay.shapes.push({ type: 'rect', xref: 'paper', x0: 0, x1: 1, y0: a.median * (1 - state.tol / 100), y1: a.median * (1 + state.tol / 100),
+        fillcolor: css('--series-1-soft'), line: { width: 0 }, layer: 'below' });
+      lay.shapes.push({ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: a.median, y1: a.median, line: { color: css('--text-secondary'), width: 1.5 } });
+      lay.annotations.push({ xref: 'paper', x: 1, y: a.median, xanchor: 'right', yanchor: 'bottom', text: 'median ' + fmt(a.median), showarrow: false,
+        font: { size: 11, color: css('--text-secondary') }, bgcolor: css('--surface-1') });
+    }
+    const wrapW = $('#chart').parentElement.clientWidth || 900;
+    lay.width = Math.max(wrapW, nodes.length * (ca ? 30 : 22) + 90); lay.height = 380;
+    Plotly.react('chart', traces, lay, plotCfg);
+    $('#chart').removeAllListeners && $('#chart').removeAllListeners('plotly_click');
+    $('#chart').on('plotly_click', (ev) => { if (ev.points && ev.points[0]) { state.node = ev.points[0].x; renderTable(cur, cmp); renderDetail(cur); renderHistory(); } });
+
+    $('#chartTitle').textContent = `${t.label} — ${a.metric.label}`;
+    $('#stats').innerHTML = `<span>nodes <b>${t.rows.length}</b></span><span>median <b>${fmt(a.median)}</b></span><span>mean <b>${fmt(a.mean)}</b></span>
+      <span>min <b>${fmt(a.min)}</b></span><span>max <b>${fmt(a.max)}</b></span><span>spread <b>${a.median ? pct((a.max - a.min) / a.median * 100).replace('+', '') : '—'}</b></span>
+      <span>flagged <b>${a.flagged.length}</b></span>${t.source ? `<span class="muted">source: ${t.source}</span>` : ''}`;
+    $('#chartLegend').innerHTML = `<span><span class="sw" style="background:${colOk}"></span>within ±${state.tol}% of median</span>
+      <span><span class="sw" style="background:${colBad}"></span>outside tolerance / missing / non-zero</span>
+      ${ca ? `<span><span class="sw" style="background:${colCmp}"></span>${cmp.manifest.label}</span>` : ''}
+      <span><span class="ln"></span>median</span><span><span class="bd"></span>±${state.tol}% band</span>`;
+  }
+
+  function renderHeat(cur) {
+    const keys = cur.keys; const rowsY = keys.map((k) => cur.tests[k].label);
+    const an = keys.map((k) => analyze(cur.tests[k], primaryMetric(cur.tests[k]), state.tol));
+    const clip = Math.max(5, 2 * state.tol);
+    const nodes = [...new Set(an.flatMap((a) => a.rows.map((r) => r.node)))].sort((x, y) => nodeNum(x) - nodeNum(y));
+    const z = an.map((a) => { const by = Object.fromEntries(a.rows.map((r) => [r.node, r]));
+      return nodes.map((n) => by[n] ? (by[n].dev === null ? (by[n].status === 'missing' ? null : 0) : Math.max(-clip, Math.min(clip, by[n].dev))) : null); });
+    const text = an.map((a) => { const by = Object.fromEntries(a.rows.map((r) => [r.node, r]));
+      return nodes.map((n) => by[n] ? `${fmt(by[n].value)} (${pct(by[n].dev)}) · ${by[n].label}` : 'not in test'); });
+    const lay = plotlyBase();
+    const lmar = Math.min(330, 40 + 6.4 * Math.max(...rowsY.map((r) => r.length)));
+    lay.margin = { l: lmar, r: 10, t: 8, b: 60 }; lay.xaxis.type = 'category'; lay.xaxis.tickangle = -60; lay.xaxis.showgrid = false; lay.yaxis.showgrid = false;
+    lay.yaxis.autorange = 'reversed';
+    const wrapW = $('#heat').parentElement.clientWidth || 900;
+    lay.width = Math.max(wrapW, nodes.length * 16 + lmar + 60); lay.height = 60 + keys.length * 30;
+    Plotly.react('heat', [{
+      type: 'heatmap', x: nodes, y: rowsY, z, text, hovertemplate: '<b>%{x}</b> · %{y}<br>%{text}<extra></extra>',
+      zmin: -clip, zmax: clip, zmid: 0, xgap: 2, ygap: 2, showscale: true,
+      colorscale: [[0, css('--div-neg')], [0.5, css('--div-mid')], [1, css('--div-pos')]],
+      colorbar: { title: { text: '% vs median', font: { size: 11 } }, thickness: 10, len: 0.9, tickfont: { size: 10 }, outlinewidth: 0 },
+      hoverongaps: false,
+    }], lay, plotCfg);
+    $('#heatClip').textContent = clip;
+    $('#heat').removeAllListeners && $('#heat').removeAllListeners('plotly_click');
+    $('#heat').on('plotly_click', (ev) => { const p = ev.points && ev.points[0]; if (!p) return;
+      state.test = keys[rowsY.indexOf(p.y)]; state.metric = null; state.node = p.x; renderAll(); });
+  }
+
+  function renderTable(cur, cmp) {
+    const t = cur.tests[state.test]; const a = analyze(t, state.metric, state.tol);
+    const ct = cmp && cmp.tests[state.test]; const ca = ct ? analyze(ct, state.metric, state.tol) : null;
+    const cBy = ca ? Object.fromEntries(ca.rows.map((r) => [r.node, r])) : {};
+    const extra = t.metrics.filter((m) => m.key !== a.metric.key);
+    let rows = a.rows.map((r) => ({ ...r, cmpv: cBy[r.node] ? cBy[r.node].value : null,
+      cmpd: cBy[r.node] && cBy[r.node].value && r.value !== null ? (r.value - cBy[r.node].value) / cBy[r.node].value * 100 : null }));
+    if (state.onlyFlag) rows = rows.filter((r) => r.status !== 'ok');
+    const cols = [{ key: 'node', label: 'Node' }, { key: 'value', label: a.metric.label, num: true }, { key: 'dev', label: 'Δ vs median', num: true }, { key: 'status', label: 'Status' }];
+    if (ca) cols.push({ key: 'cmpv', label: cmp.manifest.label.split(' — ')[0], num: true }, { key: 'cmpd', label: 'Δ vs compare', num: true });
+    for (const m of extra) cols.push({ key: 'x_' + m.key, label: m.label, num: true, get: (r) => r.raw[m.key] });
+    const sk = state.sort.key, sd = state.sort.dir;
+    const getv = (r, c) => c.get ? c.get(r) : r[c.key];
+    const sc = cols.find((c) => c.key === sk) || cols[0];
+    rows.sort((x, y) => { let vx = getv(x, sc), vy = getv(y, sc);
+      if (sc.key === 'node') return (nodeNum(vx) - nodeNum(vy)) * sd;
+      if (sc.key === 'status') { vx = x.status === 'ok' ? 0 : 1; vy = y.status === 'ok' ? 0 : 1; }
+      if (vx === null || vx === undefined) return 1; if (vy === null || vy === undefined) return -1;
+      return (vx < vy ? -1 : vx > vy ? 1 : 0) * sd; });
+    const th = $('#tbl thead'); th.innerHTML = '<tr>' + cols.map((c) => `<th class="${c.num ? 'num' : ''}${c.key === sk ? ' sorted' + (sd > 0 ? ' asc' : '') : ''}" data-k="${c.key}">${c.label}</th>`).join('') + '</tr>';
+    th.querySelectorAll('th').forEach((h) => h.onclick = () => { const k = h.dataset.k; state.sort = { key: k, dir: state.sort.key === k ? -state.sort.dir : 1 }; renderTable(cur, cmp); });
+    const tb = $('#tbl tbody');
+    tb.innerHTML = rows.map((r) => {
+      const dot = r.status === 'ok' ? 'good' : r.status === 'missing' ? 'muted' : 'critical';
+      return `<tr class="${r.status !== 'ok' ? 'flag' : ''}${r.node === state.node ? ' sel' : ''}" data-n="${r.node}">` + cols.map((c) => {
+        if (c.key === 'status') return `<td><span class="status"><span class="dot ${dot}"></span>${r.label}${r.raw.from_log ? ' · from log' : ''}</span></td>`;
+        const v = getv(r, c); return `<td class="${c.num ? 'num' : ''}">${c.key === 'dev' || c.key === 'cmpd' ? pct(v) : fmt(v)}</td>`; }).join('') + '</tr>';
+    }).join('') || `<tr><td colspan="${cols.length}" class="empty">No rows.</td></tr>`;
+    tb.querySelectorAll('tr[data-n]').forEach((tr) => tr.onclick = () => { state.node = tr.dataset.n; renderTable(cur, cmp); renderDetail(cur); renderHistory(); });
+    $('#tableTitle').textContent = `${t.label} — ${rows.length} rows`;
+    $('#tableNote').textContent = `median ${fmt(a.median)} · tolerance ±${state.tol}% · click a header to sort`;
+  }
+
+  function matrixHTML(title, mat, d) {
+    if (!mat) return '';
+    const n = mat.length;
+    return `<div><div class="note" style="margin:6px 0 2px">${title}</div><table class="mat"><thead><tr><th></th>${mat[0].map((_, j) => `<th class="num">GPU ${j}</th>`).join('')}</tr></thead><tbody>${
+      mat.map((row, i) => `<tr><th>GPU ${i}</th>${row.map((v, j) => `<td class="num ${i === j ? 'muted' : ''}">${fmt(v, d)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  }
+  function renderDetail(cur) {
+    const el = $('#detail'); const n = state.node;
+    if (!n) { el.className = 'empty'; el.textContent = 'No node selected.'; return; }
+    el.className = '';
+    let html = `<h3 style="margin:0 0 8px;font-size:15px">${n} <span class="sub note">in ${cur.manifest.label}</span></h3>`;
+    html += '<table><thead><tr><th>Test</th><th>Metric</th><th class="num">Value</th><th class="num">Median</th><th class="num">Δ</th><th>Status</th></tr></thead><tbody>';
+    let any = false; const extras = [];
+    for (const k of cur.keys) {
+      const t = cur.tests[k]; const raw = t.rows.find((r) => r.node === n); if (!raw) continue; any = true;
+      for (const m of t.metrics) {
+        const a = analyze(t, m.key, state.tol); const r = a.rows.find((x) => x.node === n);
+        const dot = r.status === 'ok' ? 'good' : r.status === 'missing' ? 'muted' : 'critical';
+        html += `<tr class="${r.status !== 'ok' ? 'flag' : ''}"><td>${t.label}</td><td>${m.label}</td><td class="num">${fmt(r.value)}</td><td class="num">${fmt(a.median)}</td><td class="num">${pct(r.dev)}</td><td><span class="status"><span class="dot ${dot}"></span>${r.label}</span></td></tr>`;
+      }
+      if (raw.pairs) {
+        extras.push(`<div><div class="note" style="margin:6px 0 2px">${t.label}: GPU pairs (${raw.gpu || ''}, overall ${raw.overall || '?'})</div>
+          <table class="mat"><thead><tr><th>Pair</th><th>Mode</th><th class="num">→ GB/s</th><th class="num">← GB/s</th><th class="num">1 GB →</th><th class="num">1 GB ←</th><th class="num">Bidir GB/s</th><th>Status</th></tr></thead><tbody>${
+          Object.entries(raw.pairs).map(([p, v]) => { const bad = v.status === 'FAIL' || v.sweep_ok === false || v.bidir_ok === false;
+            return `<tr class="${bad ? 'flag' : ''}"><td>cuda:${p.replace('-', ' ↔ cuda:')}</td><td>${v.mode || ''}</td><td class="num">${fmt(v.fwd)}</td><td class="num">${fmt(v.bwd)}</td><td class="num">${fmt(v.sweep_1g_fwd)}</td><td class="num">${fmt(v.sweep_1g_bwd)}</td><td class="num">${fmt(v.bidir)}</td><td>${bad ? '✗ FAIL' : '✓ PASS'}</td></tr>`; }).join('')}</tbody></table></div>`);
+      }
+      if (raw.uni_matrix) extras.push(matrixHTML(`${t.label}: unidirectional P2P bandwidth (GB/s)`, raw.uni_matrix, 1));
+      if (raw.bi_matrix) extras.push(matrixHTML(`${t.label}: bidirectional P2P bandwidth (GB/s)`, raw.bi_matrix, 1));
+      if (raw.lat_matrix) extras.push(matrixHTML(`${t.label}: P2P latency (µs)`, raw.lat_matrix, 2));
+      if (raw.error_tests && raw.error_tests.length) extras.push(`<div class="note">${t.label}: errors in ${raw.error_tests.join(', ')}</div>`);
+    }
+    html += '</tbody></table>';
+    if (!any) html += '<div class="empty">Node not present in any test of this period.</div>';
+    if (extras.length) html += `<div class="kv" style="margin-top:12px">${extras.join('')}</div>`;
+    el.innerHTML = html;
+  }
+
+  async function renderHistory() {
+    const t0 = state.cache[state.period].tests[state.test]; const mk = state.metric; const m = t0.metrics.find((x) => x.key === mk) || t0.metrics[0];
+    const pts = [];
+    for (const p of [...state.index.periods].sort((a, b) => a.date.localeCompare(b.date))) {
+      let c; try { c = await loadPeriod(p.id); } catch (e) { continue; }
+      const t = c.tests[state.test]; if (!t || !t.metrics.some((x) => x.key === m.key)) continue;
+      const a = analyze(t, m.key, state.tol); const r = state.node ? a.rows.find((x) => x.node === state.node) : null;
+      pts.push({ label: p.label, date: p.date, median: a.median, min: a.min, max: a.max, n: t.rows.length, node: r ? r.value : null, flagged: a.flagged.length });
+    }
+    const x = pts.map((p) => p.label.split(' — ')[0]);
+    const traces = [
+      { type: 'scatter', mode: 'lines', x, y: pts.map((p) => p.max), line: { width: 0 }, hoverinfo: 'skip', showlegend: false },
+      { type: 'scatter', mode: 'lines', x, y: pts.map((p) => p.min), fill: 'tonexty', fillcolor: css('--series-1-soft'), line: { width: 0 }, hoverinfo: 'skip', showlegend: false },
+      { type: 'scatter', mode: 'lines+markers', name: 'median of all nodes', x, y: pts.map((p) => p.median), line: { color: css('--series-1'), width: 2 }, marker: { size: 8 },
+        customdata: pts.map((p) => [p.n, fmt(p.min), fmt(p.max), p.flagged]), hovertemplate: '<b>%{x}</b><br>median %{y} · n=%{customdata[0]}<br>min %{customdata[1]} · max %{customdata[2]} · flagged %{customdata[3]}<extra></extra>' },
+    ];
+    if (state.node) traces.push({ type: 'scatter', mode: 'lines+markers', name: state.node, x, y: pts.map((p) => p.node), connectgaps: false,
+      line: { color: css('--series-2'), width: 2 }, marker: { size: 8, symbol: 'diamond' }, hovertemplate: '<b>%{x}</b><br>' + state.node + ': %{y}<extra></extra>' });
+    const lay = plotlyBase(); lay.yaxis.title = { text: m.label, font: { size: 12 } }; lay.xaxis.type = 'category'; lay.height = 300;
+    lay.margin.b = 40;
+    Plotly.react('hist', traces, lay, plotCfg);
+    $('#histTitle').textContent = `History — ${t0.label}, ${m.label}`;
+    $('#histLegend').innerHTML = `<span><span class="sw" style="background:${css('--series-1')}"></span>median of all nodes</span><span><span class="bd"></span>min–max across nodes</span>
+      ${state.node ? `<span><span class="sw" style="background:${css('--series-2')}"></span>${state.node}</span>` : '<span class="muted">select a node to overlay its history</span>'}`;
+  }
+
+  async function renderAll() {
+    const cur = state.cache[state.period]; if (!cur) return;
+    if (!state.test || !cur.tests[state.test]) state.test = cur.keys[0];
+    const t = cur.tests[state.test];
+    if (!state.metric || !t.metrics.some((m) => m.key === state.metric)) state.metric = primaryMetric(t);
+    const cmp = state.compare && state.compare !== state.period ? state.cache[state.compare] : null;
+    renderHeader(); renderCards(cur); renderTabs(cur); renderChart(cur, cmp); renderHeat(cur); renderTable(cur, cmp); renderDetail(cur);
+    renderHistory(); syncURL();
+  }
+
+  function syncURL() {
+    const q = new URLSearchParams();
+    q.set('period', state.period); if (state.compare) q.set('compare', state.compare);
+    q.set('test', state.test); q.set('metric', state.metric); if (state.node) q.set('node', state.node);
+    if (state.tol !== 3) q.set('tol', state.tol);
+    try { history.replaceState(null, '', location.pathname + '?' + q.toString()); } catch (e) {}
+  }
+
+  // ---------------------------------------------------------------- wiring
+  async function setPeriod(id, keepNode) { state.period = id; await loadPeriod(id); if (!keepNode) state.node = null; renderAll(); }
+  async function setCompare(id) { state.compare = id || null; if (id) await loadPeriod(id); renderAll(); }
+  function applyTheme(mode) {
+    if (mode) document.documentElement.setAttribute('data-theme', mode); else document.documentElement.removeAttribute('data-theme');
+    const dark = mode === 'dark' || (!mode && matchMedia('(prefers-color-scheme: dark)').matches);
+    $('#themeBtn').textContent = dark ? 'Light mode' : 'Dark mode';
+    try { if (mode) localStorage.setItem('theme', mode); else localStorage.removeItem('theme'); } catch (e) {}
+  }
+
+  async function init() {
+    let saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+    applyTheme(saved);
+    $('#themeBtn').onclick = () => { const dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+      (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches); applyTheme(dark ? 'light' : 'dark'); renderAll(); };
+    state.index = await getJSON('data/index.json');
+    const ps = $('#periodSel'), cs = $('#compareSel');
+    for (const p of state.index.periods) {
+      const o = document.createElement('option'); o.value = p.id; o.textContent = `${p.label} (${p.tests} tests)`; ps.appendChild(o);
+      const o2 = o.cloneNode(true); cs.appendChild(o2);
+    }
+    const q = new URLSearchParams(location.search);
+    const has = (id) => id && state.index.periods.some((p) => p.id === id);
+    const start = has(q.get('period')) ? q.get('period') : state.index.latest;
+    ps.value = start;
+    if (q.get('theme')) applyTheme(q.get('theme'));
+    if (q.get('tol')) { state.tol = Math.max(0.1, +q.get('tol') || 3); $('#tolInp').value = state.tol; }
+    if (q.get('test')) state.test = q.get('test');
+    if (q.get('metric')) state.metric = q.get('metric');
+    if (has(q.get('compare'))) { state.compare = q.get('compare'); cs.value = state.compare; await loadPeriod(state.compare); }
+    ps.onchange = () => setPeriod(ps.value);
+    cs.onchange = () => setCompare(cs.value);
+    $('#tolInp').onchange = () => { state.tol = Math.max(0.1, +$('#tolInp').value || 3); renderAll(); };
+    $('#yzero').onchange = () => { state.yzero = $('#yzero').checked; renderAll(); };
+    $('#onlyFlag').onchange = () => { state.onlyFlag = $('#onlyFlag').checked; renderAll(); };
+    $('#metricSel').onchange = () => { state.metric = $('#metricSel').value; renderAll(); };
+    window.addEventListener('resize', () => { clearTimeout(window.__rz); window.__rz = setTimeout(renderAll, 150); });
+    state.node = q.get('node') || null;
+    await setPeriod(start, true);
+  }
+  init().catch((e) => { $('#cards').innerHTML = `<div class="panel">Failed to load data: ${e.message}. Serve this folder over HTTP (e.g. <code>python3 -m http.server</code>) so <code>fetch()</code> can read <code>data/</code>.</div>`; console.error(e); });
+})();
+</script>
 </body>
 </html>

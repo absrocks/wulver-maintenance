@@ -1,0 +1,89 @@
+{
+ "test": "hpl_a100",
+ "label": "NVIDIA HPL (A100, per GPU)",
+ "group": "HPL",
+ "variant": "a100",
+ "metrics": [
+  {
+   "key": "gflops_per_gpu",
+   "label": "HPL GFLOP/s per GPU",
+   "higher_is_better": true,
+   "primary": true
+  }
+ ],
+ "source": "hpl_gflops_per_gpu.json",
+ "rows": [
+  {
+   "node": "n0003",
+   "gflops_per_gpu": 17990.0
+  },
+  {
+   "node": "n0004",
+   "gflops_per_gpu": 17920.0
+  },
+  {
+   "node": "n0005",
+   "gflops_per_gpu": 17940.0
+  },
+  {
+   "node": "n0024",
+   "gflops_per_gpu": 17930.0
+  },
+  {
+   "node": "n0025",
+   "gflops_per_gpu": 17850.0
+  },
+  {
+   "node": "n0027",
+   "gflops_per_gpu": 17860.0
+  },
+  {
+   "node": "n0028",
+   "gflops_per_gpu": 17810.0
+  },
+  {
+   "node": "n0045",
+   "gflops_per_gpu": 17800.0
+  },
+  {
+   "node": "n0046",
+   "gflops_per_gpu": 17950.0
+  },
+  {
+   "node": "n0047",
+   "gflops_per_gpu": 17880.0
+  },
+  {
+   "node": "n0048",
+   "gflops_per_gpu": 17790.0
+  },
+  {
+   "node": "n0049",
+   "gflops_per_gpu": 17830.0
+  },
+  {
+   "node": "n0066",
+   "gflops_per_gpu": 17840.0
+  },
+  {
+   "node": "n0067",
+   "gflops_per_gpu": 17900.0
+  },
+  {
+   "node": "n0068",
+   "gflops_per_gpu": 17810.0
+  },
+  {
+   "node": "n0069",
+   "gflops_per_gpu": 17840.0
+  },
+  {
+   "node": "n0090",
+   "gflops_per_gpu": 17950.0
+  },
+  {
+   "node": "n0092",
+   "gflops_per_gpu": 17850.0
+  }
+ ]
+}

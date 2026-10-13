@@ -1,0 +1,24 @@
+{
+ "id": "2026-03-10",
+ "label": "Mar 10, 2026 \u2014 Scheduled",
+ "date": "2026-03-10",
+ "source_folder": "March-maint",
+ "tests": [
+  {
+   "key": "hpcg_cpu",
+   "label": "HPCG (CPU nodes)",
+   "group": "HPCG",
+   "variant": "cpu",
+   "nodes": 97,
+   "file": "hpcg_cpu.json"
+  },
+  {
+   "key": "gromacs_a100",
+   "label": "GROMACS (A100)",
+   "group": "GROMACS",
+   "variant": "a100",
+   "nodes": 8,
+   "file": "gromacs_a100.json"
+  }
+ ]
+}

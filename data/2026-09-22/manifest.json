@@ -1,0 +1,72 @@
+{
+ "id": "2026-09-22",
+ "label": "Sep 22, 2026 \u2014 Emergency (Slurm)",
+ "date": "2026-09-22",
+ "source_folder": "Sep-Slurm",
+ "tests": [
+  {
+   "key": "gromacs_a100",
+   "label": "GROMACS (A100)",
+   "group": "GROMACS",
+   "variant": "a100",
+   "nodes": 18,
+   "file": "gromacs_a100.json"
+  },
+  {
+   "key": "nccl_a100",
+   "label": "NCCL all_reduce (A100)",
+   "group": "NCCL",
+   "variant": "a100",
+   "nodes": 18,
+   "file": "nccl_a100.json"
+  },
+  {
+   "key": "hpcg_cpu",
+   "label": "HPCG (CPU nodes)",
+   "group": "HPCG",
+   "variant": "cpu",
+   "nodes": 97,
+   "file": "hpcg_cpu.json"
+  },
+  {
+   "key": "torch_a100",
+   "label": "PyTorch P2P comm (A100)",
+   "group": "PyTorch",
+   "variant": "a100",
+   "nodes": 18,
+   "file": "torch_a100.json"
+  },
+  {
+   "key": "gromacs_mig_40g",
+   "label": "GROMACS (MIG 40G)",
+   "group": "GROMACS",
+   "variant": "mig_40g",
+   "nodes": 4,
+   "file": "gromacs_mig_40g.json"
+  },
+  {
+   "key": "gromacs_mig_10g",
+   "label": "GROMACS (MIG 10G)",
+   "group": "GROMACS",
+   "variant": "mig_10g",
+   "nodes": 4,
+   "file": "gromacs_mig_10g.json"
+  },
+  {
+   "key": "gromacs_mig_20g",
+   "label": "GROMACS (MIG 20G)",
+   "group": "GROMACS",
+   "variant": "mig_20g",
+   "nodes": 4,
+   "file": "gromacs_mig_20g.json"
+  },
+  {
+   "key": "gromacs_l40",
+   "label": "GROMACS (L40)",
+   "group": "GROMACS",
+   "variant": "l40",
+   "nodes": 4,
+   "file": "gromacs_l40.json"
+  }
+ ]
+}

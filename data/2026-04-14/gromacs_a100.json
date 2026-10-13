@@ -1,0 +1,136 @@
+{
+ "test": "gromacs_a100",
+ "label": "GROMACS (A100)",
+ "group": "GROMACS",
+ "variant": "a100",
+ "metrics": [
+  {
+   "key": "ns_per_day",
+   "label": "Performance (ns/day)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "hour_per_ns",
+   "label": "Hour / ns",
+   "higher_is_better": false
+  }
+ ],
+ "source": "gromacs_gpu/gmx_performance_results.json",
+ "rows": [
+  {
+   "node": "n0003",
+   "ns_per_day": 129.883,
+   "hour_per_ns": 0.185,
+   "from_log": true
+  },
+  {
+   "node": "n0004",
+   "ns_per_day": 133.621,
+   "hour_per_ns": 0.18,
+   "from_log": true
+  },
+  {
+   "node": "n0005",
+   "ns_per_day": 134.061,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0024",
+   "ns_per_day": 134.166,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0026",
+   "ns_per_day": 134.139,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0027",
+   "ns_per_day": 132.934,
+   "hour_per_ns": 0.181,
+   "from_log": true
+  },
+  {
+   "node": "n0028",
+   "ns_per_day": 134.275,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0045",
+   "ns_per_day": 134.129,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0046",
+   "ns_per_day": 134.044,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0047",
+   "ns_per_day": 134.09,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0048",
+   "ns_per_day": 134.061,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0049",
+   "ns_per_day": 133.771,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0066",
+   "ns_per_day": 133.708,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0067",
+   "ns_per_day": 134.085,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0068",
+   "ns_per_day": 133.967,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0069",
+   "ns_per_day": 133.613,
+   "hour_per_ns": 0.18,
+   "from_log": true
+  },
+  {
+   "node": "n0088",
+   "ns_per_day": 133.886,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0090",
+   "ns_per_day": 133.716,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  },
+  {
+   "node": "n0092",
+   "ns_per_day": 133.802,
+   "hour_per_ns": 0.179,
+   "from_log": true
+  }
+ ]
+}

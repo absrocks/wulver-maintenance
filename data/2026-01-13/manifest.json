@@ -1,0 +1,16 @@
+{
+ "id": "2026-01-13",
+ "label": "Jan 13, 2026 \u2014 Scheduled",
+ "date": "2026-01-13",
+ "source_folder": "Jan-maint",
+ "tests": [
+  {
+   "key": "gromacs_a100",
+   "label": "GROMACS (A100)",
+   "group": "GROMACS",
+   "variant": "a100",
+   "nodes": 18,
+   "file": "gromacs_a100.json"
+  }
+ ]
+}

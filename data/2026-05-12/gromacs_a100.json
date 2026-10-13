@@ -1,0 +1,117 @@
+{
+ "test": "gromacs_a100",
+ "label": "GROMACS (A100)",
+ "group": "GROMACS",
+ "variant": "a100",
+ "metrics": [
+  {
+   "key": "ns_per_day",
+   "label": "Performance (ns/day)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "hour_per_ns",
+   "label": "Hour / ns",
+   "higher_is_better": false
+  }
+ ],
+ "source": "gromacs/gromacs_a100/gmx_performance_results.json",
+ "rows": [
+  {
+   "node": "n0003",
+   "ns_per_day": 133.868,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0004",
+   "ns_per_day": 134.182,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0005",
+   "ns_per_day": 134.106,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0024",
+   "ns_per_day": 134.069,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0025",
+   "ns_per_day": 133.765,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0026",
+   "ns_per_day": 133.865,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0027",
+   "ns_per_day": 131.974,
+   "hour_per_ns": 0.182
+  },
+  {
+   "node": "n0028",
+   "ns_per_day": 133.987,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0045",
+   "ns_per_day": 133.853,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0046",
+   "ns_per_day": 134.0,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0047",
+   "ns_per_day": 133.717,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0048",
+   "ns_per_day": 133.966,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0049",
+   "ns_per_day": 132.801,
+   "hour_per_ns": 0.181
+  },
+  {
+   "node": "n0066",
+   "ns_per_day": 133.609,
+   "hour_per_ns": 0.18
+  },
+  {
+   "node": "n0068",
+   "ns_per_day": 133.992,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0069",
+   "ns_per_day": 134.093,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0088",
+   "ns_per_day": 134.082,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0090",
+   "ns_per_day": 133.724,
+   "hour_per_ns": 0.179
+  },
+  {
+   "node": "n0092",
+   "ns_per_day": 134.136,
+   "hour_per_ns": 0.179
+  }
+ ]
+}

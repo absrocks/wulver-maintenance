@@ -1,0 +1,223 @@
+{
+ "test": "nccl_a100",
+ "label": "NCCL all_reduce (A100)",
+ "group": "NCCL",
+ "variant": "a100",
+ "metrics": [
+  {
+   "key": "avg_busbw",
+   "label": "Avg bus BW (GB/s)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "busbw_1g",
+   "label": "Bus BW @1 GiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "algbw_1g",
+   "label": "Alg BW @1 GiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "busbw_512m",
+   "label": "Bus BW @512 MiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "time_us_1g",
+   "label": "Time @1 GiB (\u00b5s)",
+   "higher_is_better": false
+  },
+  {
+   "key": "wrong",
+   "label": "#wrong (sum)",
+   "higher_is_better": false,
+   "expect_zero": true
+  }
+ ],
+ "source": "nccl_a100",
+ "rows": [
+  {
+   "node": "n0003",
+   "task_id": "1",
+   "avg_busbw": 60.9129,
+   "busbw_1g": 221.2,
+   "algbw_1g": 147.46,
+   "time_us_1g": 7281.35,
+   "busbw_512m": 216.64,
+   "wrong": 0
+  },
+  {
+   "node": "n0004",
+   "task_id": "2",
+   "avg_busbw": 61.4045,
+   "busbw_1g": 221.33,
+   "algbw_1g": 147.55,
+   "time_us_1g": 7277.03,
+   "busbw_512m": 216.32,
+   "wrong": 0
+  },
+  {
+   "node": "n0005",
+   "task_id": "3",
+   "avg_busbw": 61.5723,
+   "busbw_1g": 221.63,
+   "algbw_1g": 147.75,
+   "time_us_1g": 7267.1,
+   "busbw_512m": 216.37,
+   "wrong": 0
+  },
+  {
+   "node": "n0024",
+   "task_id": "4",
+   "avg_busbw": 61.1722,
+   "busbw_1g": 221.04,
+   "algbw_1g": 147.36,
+   "time_us_1g": 7286.56,
+   "busbw_512m": 215.93,
+   "wrong": 0
+  },
+  {
+   "node": "n0025",
+   "task_id": "5",
+   "avg_busbw": 60.4972,
+   "busbw_1g": 221.89,
+   "algbw_1g": 147.93,
+   "time_us_1g": 7258.62,
+   "busbw_512m": 217.2,
+   "wrong": 0
+  },
+  {
+   "node": "n0026",
+   "task_id": "6",
+   "avg_busbw": 60.7764,
+   "busbw_1g": 221.41,
+   "algbw_1g": 147.61,
+   "time_us_1g": 7274.38,
+   "busbw_512m": 216.59,
+   "wrong": 0
+  },
+  {
+   "node": "n0027",
+   "task_id": "7",
+   "avg_busbw": 60.153,
+   "busbw_1g": 221.64,
+   "algbw_1g": 147.76,
+   "time_us_1g": 7266.65,
+   "busbw_512m": 216.75,
+   "wrong": 0
+  },
+  {
+   "node": "n0045",
+   "task_id": "8",
+   "avg_busbw": 60.5168,
+   "busbw_1g": 221.64,
+   "algbw_1g": 147.76,
+   "time_us_1g": 7266.7,
+   "busbw_512m": 216.54,
+   "wrong": 0
+  },
+  {
+   "node": "n0046",
+   "task_id": "9",
+   "avg_busbw": 59.4088,
+   "busbw_1g": 221.73,
+   "algbw_1g": 147.82,
+   "time_us_1g": 7263.96,
+   "busbw_512m": 216.51,
+   "wrong": 0
+  },
+  {
+   "node": "n0047",
+   "task_id": "10",
+   "avg_busbw": 59.7027,
+   "busbw_1g": 221.53,
+   "algbw_1g": 147.68,
+   "time_us_1g": 7270.53,
+   "busbw_512m": 216.47,
+   "wrong": 0
+  },
+  {
+   "node": "n0048",
+   "task_id": "11",
+   "avg_busbw": 60.3817,
+   "busbw_1g": 221.73,
+   "algbw_1g": 147.82,
+   "time_us_1g": 7263.88,
+   "busbw_512m": 216.34,
+   "wrong": 0
+  },
+  {
+   "node": "n0049",
+   "task_id": "12",
+   "avg_busbw": 61.4476,
+   "busbw_1g": 221.68,
+   "algbw_1g": 147.79,
+   "time_us_1g": 7265.53,
+   "busbw_512m": 216.44,
+   "wrong": 0
+  },
+  {
+   "node": "n0066",
+   "task_id": "13",
+   "avg_busbw": 60.8692,
+   "busbw_1g": 221.32,
+   "algbw_1g": 147.55,
+   "time_us_1g": 7277.15,
+   "busbw_512m": 216.64,
+   "wrong": 0
+  },
+  {
+   "node": "n0067",
+   "task_id": "14",
+   "avg_busbw": 59.9807,
+   "busbw_1g": 221.46,
+   "algbw_1g": 147.64,
+   "time_us_1g": 7272.56,
+   "busbw_512m": 216.35,
+   "wrong": 0
+  },
+  {
+   "node": "n0068",
+   "task_id": "15",
+   "avg_busbw": 61.1776,
+   "busbw_1g": 221.58,
+   "algbw_1g": 147.72,
+   "time_us_1g": 7268.78,
+   "busbw_512m": 216.2,
+   "wrong": 0
+  },
+  {
+   "node": "n0069",
+   "task_id": "16",
+   "avg_busbw": 61.4613,
+   "busbw_1g": 221.69,
+   "algbw_1g": 147.79,
+   "time_us_1g": 7265.14,
+   "busbw_512m": 216.86,
+   "wrong": 0
+  },
+  {
+   "node": "n0088",
+   "task_id": "17",
+   "avg_busbw": 61.1639,
+   "busbw_1g": 221.19,
+   "algbw_1g": 147.46,
+   "time_us_1g": 7281.49,
+   "busbw_512m": 216.59,
+   "wrong": 0
+  },
+  {
+   "node": "n0092",
+   "task_id": "18",
+   "avg_busbw": 61.1856,
+   "busbw_1g": 221.36,
+   "algbw_1g": 147.57,
+   "time_us_1g": 7275.95,
+   "busbw_512m": 216.18,
+   "wrong": 0
+  }
+ ]
+}

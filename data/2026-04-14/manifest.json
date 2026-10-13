@@ -1,0 +1,56 @@
+{
+ "id": "2026-04-14",
+ "label": "Apr 14, 2026 \u2014 Scheduled",
+ "date": "2026-04-14",
+ "source_folder": "Apr-maint",
+ "tests": [
+  {
+   "key": "nvbandwidth_a100",
+   "label": "nvbandwidth (A100)",
+   "group": "NVLink",
+   "variant": "a100",
+   "nodes": 23,
+   "file": "nvbandwidth_a100.json"
+  },
+  {
+   "key": "gromacs_a100",
+   "label": "GROMACS (A100)",
+   "group": "GROMACS",
+   "variant": "a100",
+   "nodes": 19,
+   "file": "gromacs_a100.json"
+  },
+  {
+   "key": "p2p_a100",
+   "label": "CUDA P2P bandwidth/latency (A100)",
+   "group": "NVLink",
+   "variant": "a100",
+   "nodes": 19,
+   "file": "p2p_a100.json"
+  },
+  {
+   "key": "gromacs_l40",
+   "label": "GROMACS (L40)",
+   "group": "GROMACS",
+   "variant": "l40",
+   "nodes": 4,
+   "file": "gromacs_l40.json"
+  },
+  {
+   "key": "p2p_a100_nvlink_a100",
+   "label": "CUDA P2P bandwidth/latency (A100) [nvlink_a100]",
+   "group": "NVLink",
+   "variant": "a100",
+   "nodes": 19,
+   "file": "p2p_a100_nvlink_a100.json"
+  },
+  {
+   "key": "nvbandwidth_l40",
+   "label": "nvbandwidth (L40)",
+   "group": "NVLink",
+   "variant": "l40",
+   "nodes": 4,
+   "file": "nvbandwidth_l40.json"
+  }
+ ]
+}

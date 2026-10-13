@@ -1,0 +1,64 @@
+{
+ "id": "2026-07-14",
+ "label": "Jul 14, 2026 \u2014 Scheduled",
+ "date": "2026-07-14",
+ "source_folder": "July-maint",
+ "tests": [
+  {
+   "key": "nccl_a100",
+   "label": "NCCL all_reduce (A100)",
+   "group": "NCCL",
+   "variant": "a100",
+   "nodes": 16,
+   "file": "nccl_a100.json"
+  },
+  {
+   "key": "torch_a100",
+   "label": "PyTorch P2P comm (A100)",
+   "group": "PyTorch",
+   "variant": "a100",
+   "nodes": 16,
+   "file": "torch_a100.json"
+  },
+  {
+   "key": "hpcg_cpu",
+   "label": "HPCG (CPU nodes)",
+   "group": "HPCG",
+   "variant": "cpu",
+   "nodes": 97,
+   "file": "hpcg_cpu.json"
+  },
+  {
+   "key": "gromacs_mig_40g",
+   "label": "GROMACS (MIG 40G)",
+   "group": "GROMACS",
+   "variant": "mig_40g",
+   "nodes": 4,
+   "file": "gromacs_mig_40g.json"
+  },
+  {
+   "key": "gromacs_mig_10g",
+   "label": "GROMACS (MIG 10G)",
+   "group": "GROMACS",
+   "variant": "mig_10g",
+   "nodes": 7,
+   "file": "gromacs_mig_10g.json"
+  },
+  {
+   "key": "gromacs_mig_20g",
+   "label": "GROMACS (MIG 20G)",
+   "group": "GROMACS",
+   "variant": "mig_20g",
+   "nodes": 4,
+   "file": "gromacs_mig_20g.json"
+  },
+  {
+   "key": "p2p_a100",
+   "label": "CUDA P2P bandwidth/latency (A100)",
+   "group": "NVLink",
+   "variant": "a100",
+   "nodes": 15,
+   "file": "p2p_a100.json"
+  }
+ ]
+}

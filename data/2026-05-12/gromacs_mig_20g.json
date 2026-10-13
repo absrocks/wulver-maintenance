@@ -1,0 +1,42 @@
+{
+ "test": "gromacs_mig_20g",
+ "label": "GROMACS (MIG 20G)",
+ "group": "GROMACS",
+ "variant": "mig_20g",
+ "metrics": [
+  {
+   "key": "ns_per_day",
+   "label": "Performance (ns/day)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "hour_per_ns",
+   "label": "Hour / ns",
+   "higher_is_better": false
+  }
+ ],
+ "source": "gromacs/gromacs_mig/20g/gmx_performance_mig_20g.json",
+ "rows": [
+  {
+   "node": "n0001",
+   "ns_per_day": 81.444,
+   "hour_per_ns": 0.295
+  },
+  {
+   "node": "n0002",
+   "ns_per_day": 81.216,
+   "hour_per_ns": 0.296
+  },
+  {
+   "node": "n0089",
+   "ns_per_day": 81.524,
+   "hour_per_ns": 0.294
+  },
+  {
+   "node": "n0091",
+   "ns_per_day": 81.329,
+   "hour_per_ns": 0.295
+  }
+ ]
+}

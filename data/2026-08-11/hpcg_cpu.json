@@ -1,0 +1,405 @@
+{
+ "test": "hpcg_cpu",
+ "label": "HPCG (CPU nodes)",
+ "group": "HPCG",
+ "variant": "cpu",
+ "metrics": [
+  {
+   "key": "gflops",
+   "label": "HPCG GFLOP/s",
+   "higher_is_better": true,
+   "primary": true
+  }
+ ],
+ "source": "HPCG/hpcg_gflops_results.json",
+ "rows": [
+  {
+   "node": "n0006",
+   "gflops": 42.2798
+  },
+  {
+   "node": "n0007",
+   "gflops": 42.2473
+  },
+  {
+   "node": "n0008",
+   "gflops": 42.3704
+  },
+  {
+   "node": "n0009",
+   "gflops": 42.3316
+  },
+  {
+   "node": "n0010",
+   "gflops": 42.2738
+  },
+  {
+   "node": "n0011",
+   "gflops": 42.3345
+  },
+  {
+   "node": "n0012",
+   "gflops": 42.2574
+  },
+  {
+   "node": "n0013",
+   "gflops": 42.2101
+  },
+  {
+   "node": "n0014",
+   "gflops": 42.2304
+  },
+  {
+   "node": "n0015",
+   "gflops": 42.2179
+  },
+  {
+   "node": "n0016",
+   "gflops": 42.2226
+  },
+  {
+   "node": "n0016",
+   "gflops": 42.2854
+  },
+  {
+   "node": "n0017",
+   "gflops": 42.3442
+  },
+  {
+   "node": "n0018",
+   "gflops": 42.116
+  },
+  {
+   "node": "n0019",
+   "gflops": 42.3531
+  },
+  {
+   "node": "n0020",
+   "gflops": 42.2224
+  },
+  {
+   "node": "n0021",
+   "gflops": 42.2402
+  },
+  {
+   "node": "n0022",
+   "gflops": 42.2719
+  },
+  {
+   "node": "n0023",
+   "gflops": 42.2472
+  },
+  {
+   "node": "n0029",
+   "gflops": 42.2774
+  },
+  {
+   "node": "n0030",
+   "gflops": 42.2474
+  },
+  {
+   "node": "n0031",
+   "gflops": 42.3126
+  },
+  {
+   "node": "n0032",
+   "gflops": 42.2457
+  },
+  {
+   "node": "n0033",
+   "gflops": 42.297
+  },
+  {
+   "node": "n0034",
+   "gflops": 42.2776
+  },
+  {
+   "node": "n0035",
+   "gflops": 42.3203
+  },
+  {
+   "node": "n0036",
+   "gflops": 42.271
+  },
+  {
+   "node": "n0037",
+   "gflops": 42.2319
+  },
+  {
+   "node": "n0038",
+   "gflops": 42.271
+  },
+  {
+   "node": "n0039",
+   "gflops": 42.2784
+  },
+  {
+   "node": "n0040",
+   "gflops": 42.2509
+  },
+  {
+   "node": "n0041",
+   "gflops": 42.2581
+  },
+  {
+   "node": "n0042",
+   "gflops": 42.3035
+  },
+  {
+   "node": "n0043",
+   "gflops": 42.21
+  },
+  {
+   "node": "n0044",
+   "gflops": 42.2571
+  },
+  {
+   "node": "n0050",
+   "gflops": 42.3039
+  },
+  {
+   "node": "n0051",
+   "gflops": 42.2728
+  },
+  {
+   "node": "n0052",
+   "gflops": 42.2885
+  },
+  {
+   "node": "n0053",
+   "gflops": 42.2351
+  },
+  {
+   "node": "n0054",
+   "gflops": 42.2808
+  },
+  {
+   "node": "n0055",
+   "gflops": 42.2973
+  },
+  {
+   "node": "n0056",
+   "gflops": 42.2981
+  },
+  {
+   "node": "n0057",
+   "gflops": 42.2726
+  },
+  {
+   "node": "n0058",
+   "gflops": 42.2648
+  },
+  {
+   "node": "n0059",
+   "gflops": 42.3132
+  },
+  {
+   "node": "n0060",
+   "gflops": 42.2556
+  },
+  {
+   "node": "n0061",
+   "gflops": 42.2834
+  },
+  {
+   "node": "n0062",
+   "gflops": 42.2343
+  },
+  {
+   "node": "n0063",
+   "gflops": 42.2701
+  },
+  {
+   "node": "n0064",
+   "gflops": 42.2426
+  },
+  {
+   "node": "n0065",
+   "gflops": 42.1859
+  },
+  {
+   "node": "n0070",
+   "gflops": 42.3091
+  },
+  {
+   "node": "n0071",
+   "gflops": 42.1634
+  },
+  {
+   "node": "n0072",
+   "gflops": 42.2593
+  },
+  {
+   "node": "n0073",
+   "gflops": 42.2514
+  },
+  {
+   "node": "n0074",
+   "gflops": 42.3322
+  },
+  {
+   "node": "n0075",
+   "gflops": 42.3574
+  },
+  {
+   "node": "n0077",
+   "gflops": 42.1779
+  },
+  {
+   "node": "n0078",
+   "gflops": 42.1704
+  },
+  {
+   "node": "n0079",
+   "gflops": 42.2716
+  },
+  {
+   "node": "n0080",
+   "gflops": 42.2655
+  },
+  {
+   "node": "n0081",
+   "gflops": 42.2326
+  },
+  {
+   "node": "n0082",
+   "gflops": 42.212
+  },
+  {
+   "node": "n0083",
+   "gflops": 42.0969
+  },
+  {
+   "node": "n0084",
+   "gflops": 42.3016
+  },
+  {
+   "node": "n0085",
+   "gflops": 42.2811
+  },
+  {
+   "node": "n0086",
+   "gflops": 42.3244
+  },
+  {
+   "node": "n0087",
+   "gflops": 42.2343
+  },
+  {
+   "node": "n0093",
+   "gflops": 42.2603
+  },
+  {
+   "node": "n0094",
+   "gflops": 42.2407
+  },
+  {
+   "node": "n0095",
+   "gflops": 42.2113
+  },
+  {
+   "node": "n0096",
+   "gflops": 42.1552
+  },
+  {
+   "node": "n0097",
+   "gflops": 42.3214
+  },
+  {
+   "node": "n0098",
+   "gflops": 42.2819
+  },
+  {
+   "node": "n0099",
+   "gflops": 42.1897
+  },
+  {
+   "node": "n0100",
+   "gflops": 42.2621
+  },
+  {
+   "node": "n0101",
+   "gflops": 42.2004
+  },
+  {
+   "node": "n0102",
+   "gflops": 42.0979
+  },
+  {
+   "node": "n0103",
+   "gflops": 42.2172
+  },
+  {
+   "node": "n0104",
+   "gflops": 42.2741
+  },
+  {
+   "node": "n0105",
+   "gflops": 37.1221
+  },
+  {
+   "node": "n0106",
+   "gflops": 42.2522
+  },
+  {
+   "node": "n0107",
+   "gflops": 42.2379
+  },
+  {
+   "node": "n0108",
+   "gflops": 42.2488
+  },
+  {
+   "node": "n0109",
+   "gflops": 42.278
+  },
+  {
+   "node": "n0110",
+   "gflops": 42.361
+  },
+  {
+   "node": "n0112",
+   "gflops": 42.2507
+  },
+  {
+   "node": "n0113",
+   "gflops": 42.2961
+  },
+  {
+   "node": "n0114",
+   "gflops": 42.2169
+  },
+  {
+   "node": "n0115",
+   "gflops": 42.2673
+  },
+  {
+   "node": "n0116",
+   "gflops": 42.2505
+  },
+  {
+   "node": "n0117",
+   "gflops": 42.1851
+  },
+  {
+   "node": "n0118",
+   "gflops": 42.2672
+  },
+  {
+   "node": "n0119",
+   "gflops": 42.3048
+  },
+  {
+   "node": "n0120",
+   "gflops": 42.256
+  },
+  {
+   "node": "n0121",
+   "gflops": 42.2152
+  },
+  {
+   "node": "n0122",
+   "gflops": 42.2469
+  }
+ ]
+}

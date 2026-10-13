@@ -1,0 +1,48 @@
+{
+ "id": "2026-06-09",
+ "label": "Jun 9, 2026 \u2014 Scheduled",
+ "date": "2026-06-09",
+ "source_folder": "Jun-maint",
+ "tests": [
+  {
+   "key": "nvbandwidth_a100",
+   "label": "nvbandwidth (A100)",
+   "group": "NVLink",
+   "variant": "a100",
+   "nodes": 19,
+   "file": "nvbandwidth_a100.json"
+  },
+  {
+   "key": "hpcg_cpu",
+   "label": "HPCG (CPU nodes)",
+   "group": "HPCG",
+   "variant": "cpu",
+   "nodes": 95,
+   "file": "hpcg_cpu.json"
+  },
+  {
+   "key": "gromacs_a100",
+   "label": "GROMACS (A100)",
+   "group": "GROMACS",
+   "variant": "a100",
+   "nodes": 19,
+   "file": "gromacs_a100.json"
+  },
+  {
+   "key": "gromacs_mig_20g",
+   "label": "GROMACS (MIG 20G)",
+   "group": "GROMACS",
+   "variant": "mig_20g",
+   "nodes": 4,
+   "file": "gromacs_mig_20g.json"
+  },
+  {
+   "key": "nccl_mig_40g",
+   "label": "NCCL all_reduce (MIG 40G)",
+   "group": "NCCL",
+   "variant": "mig_40g",
+   "nodes": 4,
+   "file": "nccl_mig_40g.json"
+  }
+ ]
+}

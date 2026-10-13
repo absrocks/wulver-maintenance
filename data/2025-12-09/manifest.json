@@ -1,0 +1,24 @@
+{
+ "id": "2025-12-09",
+ "label": "Dec 9, 2025 \u2014 Scheduled (legacy)",
+ "date": "2025-12-09",
+ "source_folder": "legacy data/",
+ "tests": [
+  {
+   "key": "gromacs_a100",
+   "label": "GROMACS (A100)",
+   "group": "GROMACS",
+   "variant": "a100",
+   "nodes": 21,
+   "file": "gromacs_a100.json"
+  },
+  {
+   "key": "hpl_a100",
+   "label": "NVIDIA HPL (A100, per GPU)",
+   "group": "HPL",
+   "variant": "a100",
+   "nodes": 18,
+   "file": "hpl_a100.json"
+  }
+ ]
+}

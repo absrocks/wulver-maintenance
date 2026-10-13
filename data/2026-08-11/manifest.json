@@ -1,0 +1,24 @@
+{
+ "id": "2026-08-11",
+ "label": "Aug 11, 2026 \u2014 Scheduled",
+ "date": "2026-08-11",
+ "source_folder": "Aug-maint",
+ "tests": [
+  {
+   "key": "hpcg_cpu",
+   "label": "HPCG (CPU nodes)",
+   "group": "HPCG",
+   "variant": "cpu",
+   "nodes": 97,
+   "file": "hpcg_cpu.json"
+  },
+  {
+   "key": "gromacs_l40",
+   "label": "GROMACS (L40)",
+   "group": "GROMACS",
+   "variant": "l40",
+   "nodes": 2,
+   "file": "gromacs_l40.json"
+  }
+ ]
+}

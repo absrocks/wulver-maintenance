@@ -1,0 +1,42 @@
+{
+ "test": "gromacs_l40",
+ "label": "GROMACS (L40)",
+ "group": "GROMACS",
+ "variant": "l40",
+ "metrics": [
+  {
+   "key": "ns_per_day",
+   "label": "Performance (ns/day)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "hour_per_ns",
+   "label": "Hour / ns",
+   "higher_is_better": false
+  }
+ ],
+ "source": "gromacs_l40/gmx_performance_results.json",
+ "rows": [
+  {
+   "node": "n1541",
+   "ns_per_day": 63.754,
+   "hour_per_ns": 0.376
+  },
+  {
+   "node": "n1543",
+   "ns_per_day": 63.573,
+   "hour_per_ns": 0.378
+  },
+  {
+   "node": "n1545",
+   "ns_per_day": 64.251,
+   "hour_per_ns": 0.374
+  },
+  {
+   "node": "n1547",
+   "ns_per_day": 64.117,
+   "hour_per_ns": 0.374
+  }
+ ]
+}

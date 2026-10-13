@@ -1,0 +1,1386 @@
+{
+ "test": "torch_a100",
+ "label": "PyTorch P2P comm (A100)",
+ "group": "PyTorch",
+ "variant": "a100",
+ "metrics": [
+  {
+   "key": "sweep_1g_fwd_min",
+   "label": "Sweep 1 GB \u2192 min over pairs (GB/s)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "sweep_1g_bwd_min",
+   "label": "Sweep 1 GB \u2190 min over pairs (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "fail_pairs",
+   "label": "Failed pairs",
+   "higher_is_better": false,
+   "expect_zero": true
+  },
+  {
+   "key": "bidir_min",
+   "label": "Bidirectional concurrent min (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "bidir_max",
+   "label": "Bidirectional concurrent max (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "p2p_fwd_min",
+   "label": "Test 1 P2P \u2192 min (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "p2p_fwd_mean",
+   "label": "Test 1 P2P \u2192 mean (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "p2p_bwd_min",
+   "label": "Test 1 P2P \u2190 min (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "p2p_bwd_mean",
+   "label": "Test 1 P2P \u2190 mean (GB/s)",
+   "higher_is_better": true
+  }
+ ],
+ "source": "torchcomm/torch_a100",
+ "rows": [
+  {
+   "node": "n0003",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 27.97,
+   "p2p_fwd_mean": 37.45,
+   "p2p_bwd_min": 10.63,
+   "p2p_bwd_mean": 10.97,
+   "sweep_1g_fwd_min": 93.81,
+   "sweep_1g_bwd_min": 90.63,
+   "bidir_min": 170.03,
+   "bidir_max": 2513.9,
+   "pairs": {
+    "0-1": {
+     "fwd": 30.59,
+     "bwd": 10.63,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 174.36,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 27.97,
+     "bwd": 10.73,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.66,
+     "sweep_ok": true,
+     "bidir": 173.84,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 39.52,
+     "bwd": 11.07,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 170.03,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.55,
+     "bwd": 10.93,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.81,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 1445.03,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 40.39,
+     "bwd": 11.17,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 2513.9,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 41.66,
+     "bwd": 11.28,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.33,
+     "sweep_ok": true,
+     "bidir": 1422.03,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0004",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 27.09,
+   "p2p_fwd_mean": 38.74,
+   "p2p_bwd_min": 9.0,
+   "p2p_bwd_mean": 10.57,
+   "sweep_1g_fwd_min": 93.81,
+   "sweep_1g_bwd_min": 90.61,
+   "bidir_min": 169.79,
+   "bidir_max": 2449.99,
+   "pairs": {
+    "0-1": {
+     "fwd": 27.09,
+     "bwd": 9.0,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.82,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 173.75,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 29.21,
+     "bwd": 10.67,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.81,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 173.4,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 39.29,
+     "bwd": 10.93,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 90.61,
+     "sweep_ok": true,
+     "bidir": 169.79,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 45.23,
+     "bwd": 10.49,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.24,
+     "sweep_ok": true,
+     "bidir": 1439.51,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.07,
+     "bwd": 11.18,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 90.62,
+     "sweep_ok": true,
+     "bidir": 2449.99,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.57,
+     "bwd": 11.17,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.32,
+     "sweep_ok": true,
+     "bidir": 1788.93,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0005",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 28.84,
+   "p2p_fwd_mean": 39.19,
+   "p2p_bwd_min": 8.2,
+   "p2p_bwd_mean": 10.44,
+   "sweep_1g_fwd_min": 93.82,
+   "sweep_1g_bwd_min": 88.91,
+   "bidir_min": 169.41,
+   "bidir_max": 2450.92,
+   "pairs": {
+    "0-1": {
+     "fwd": 28.84,
+     "bwd": 8.2,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.82,
+     "sweep_1g_bwd": 90.6,
+     "sweep_ok": true,
+     "bidir": 174.1,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 36.93,
+     "bwd": 10.71,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 88.91,
+     "sweep_ok": true,
+     "bidir": 173.28,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 34.52,
+     "bwd": 10.75,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.04,
+     "sweep_ok": true,
+     "bidir": 169.41,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.21,
+     "bwd": 10.75,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 1446.48,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.29,
+     "bwd": 10.96,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.6,
+     "sweep_ok": true,
+     "bidir": 2450.92,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 45.35,
+     "bwd": 11.25,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.33,
+     "sweep_ok": true,
+     "bidir": 1788.8,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0024",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 27.37,
+   "p2p_fwd_mean": 39.66,
+   "p2p_bwd_min": 9.38,
+   "p2p_bwd_mean": 10.69,
+   "sweep_1g_fwd_min": 93.83,
+   "sweep_1g_bwd_min": 90.6,
+   "bidir_min": 169.88,
+   "bidir_max": 2475.37,
+   "pairs": {
+    "0-1": {
+     "fwd": 27.37,
+     "bwd": 9.38,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.24,
+     "sweep_ok": true,
+     "bidir": 173.73,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 36.71,
+     "bwd": 10.54,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.62,
+     "sweep_ok": true,
+     "bidir": 173.35,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 38.42,
+     "bwd": 11.04,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 169.88,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.46,
+     "bwd": 10.96,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.22,
+     "sweep_ok": true,
+     "bidir": 1432.61,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.05,
+     "bwd": 11.27,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.6,
+     "sweep_ok": true,
+     "bidir": 2475.37,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 45.93,
+     "bwd": 10.96,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.33,
+     "sweep_ok": true,
+     "bidir": 1418.86,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0025",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 26.86,
+   "p2p_fwd_mean": 37.55,
+   "p2p_bwd_min": 9.45,
+   "p2p_bwd_mean": 10.63,
+   "sweep_1g_fwd_min": 93.84,
+   "sweep_1g_bwd_min": 89.91,
+   "bidir_min": 169.76,
+   "bidir_max": 2407.5,
+   "pairs": {
+    "0-1": {
+     "fwd": 26.86,
+     "bwd": 9.45,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.18,
+     "sweep_ok": true,
+     "bidir": 174.07,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 30.4,
+     "bwd": 10.65,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 173.01,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 31.48,
+     "bwd": 10.81,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.65,
+     "sweep_ok": true,
+     "bidir": 169.76,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.98,
+     "bwd": 10.65,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.86,
+     "sweep_1g_bwd": 92.22,
+     "sweep_ok": true,
+     "bidir": 1436.03,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 44.99,
+     "bwd": 11.23,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 89.91,
+     "sweep_ok": true,
+     "bidir": 2407.5,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.61,
+     "bwd": 10.97,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.86,
+     "sweep_1g_bwd": 92.31,
+     "sweep_ok": true,
+     "bidir": 1784.91,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0026",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 22.15,
+   "p2p_fwd_mean": 40.13,
+   "p2p_bwd_min": 9.56,
+   "p2p_bwd_mean": 10.75,
+   "sweep_1g_fwd_min": 93.83,
+   "sweep_1g_bwd_min": 90.59,
+   "bidir_min": 169.69,
+   "bidir_max": 2444.49,
+   "pairs": {
+    "0-1": {
+     "fwd": 22.15,
+     "bwd": 9.56,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.18,
+     "sweep_ok": true,
+     "bidir": 174.09,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 37.6,
+     "bwd": 10.79,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.6,
+     "sweep_ok": true,
+     "bidir": 172.46,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 43.27,
+     "bwd": 10.64,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.61,
+     "sweep_ok": true,
+     "bidir": 169.69,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 45.56,
+     "bwd": 10.94,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.22,
+     "sweep_ok": true,
+     "bidir": 1433.47,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.83,
+     "bwd": 11.25,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 90.59,
+     "sweep_ok": true,
+     "bidir": 2444.49,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.36,
+     "bwd": 11.34,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.86,
+     "sweep_1g_bwd": 92.31,
+     "sweep_ok": true,
+     "bidir": 1787.78,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0028",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 23.85,
+   "p2p_fwd_mean": 38.84,
+   "p2p_bwd_min": 3.69,
+   "p2p_bwd_mean": 9.75,
+   "sweep_1g_fwd_min": 93.83,
+   "sweep_1g_bwd_min": 90.63,
+   "bidir_min": 169.64,
+   "bidir_max": 2471.07,
+   "pairs": {
+    "0-1": {
+     "fwd": 23.85,
+     "bwd": 3.69,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.24,
+     "sweep_ok": true,
+     "bidir": 174.0,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 36.77,
+     "bwd": 10.4,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 173.87,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 39.58,
+     "bwd": 11.16,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 169.64,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 40.63,
+     "bwd": 10.83,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 1157.01,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.38,
+     "bwd": 11.27,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 90.65,
+     "sweep_ok": true,
+     "bidir": 2471.07,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.85,
+     "bwd": 11.15,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.31,
+     "sweep_ok": true,
+     "bidir": 1792.02,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0045",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 22.98,
+   "p2p_fwd_mean": 39.68,
+   "p2p_bwd_min": 8.2,
+   "p2p_bwd_mean": 10.48,
+   "sweep_1g_fwd_min": 93.82,
+   "sweep_1g_bwd_min": 90.57,
+   "bidir_min": 169.81,
+   "bidir_max": 2466.75,
+   "pairs": {
+    "0-1": {
+     "fwd": 22.98,
+     "bwd": 8.2,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.82,
+     "sweep_1g_bwd": 92.22,
+     "sweep_ok": true,
+     "bidir": 174.18,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 39.13,
+     "bwd": 10.47,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.57,
+     "sweep_ok": true,
+     "bidir": 173.2,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 40.77,
+     "bwd": 10.88,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.64,
+     "sweep_ok": true,
+     "bidir": 169.81,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.44,
+     "bwd": 10.84,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 1449.68,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 44.95,
+     "bwd": 11.23,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.82,
+     "sweep_1g_bwd": 90.59,
+     "sweep_ok": true,
+     "bidir": 2466.75,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 45.82,
+     "bwd": 11.25,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.32,
+     "sweep_ok": true,
+     "bidir": 1415.95,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0047",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 28.32,
+   "p2p_fwd_mean": 41.5,
+   "p2p_bwd_min": 8.9,
+   "p2p_bwd_mean": 10.51,
+   "sweep_1g_fwd_min": 93.84,
+   "sweep_1g_bwd_min": 90.58,
+   "bidir_min": 169.28,
+   "bidir_max": 2452.5,
+   "pairs": {
+    "0-1": {
+     "fwd": 28.32,
+     "bwd": 8.9,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 174.09,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 40.93,
+     "bwd": 10.78,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 90.61,
+     "sweep_ok": true,
+     "bidir": 173.59,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 43.21,
+     "bwd": 10.84,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.62,
+     "sweep_ok": true,
+     "bidir": 169.28,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 45.13,
+     "bwd": 10.81,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.22,
+     "sweep_ok": true,
+     "bidir": 1439.52,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.17,
+     "bwd": 10.79,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.58,
+     "sweep_ok": true,
+     "bidir": 2452.5,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.23,
+     "bwd": 10.91,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.86,
+     "sweep_1g_bwd": 92.31,
+     "sweep_ok": true,
+     "bidir": 1786.39,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0048",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 30.79,
+   "p2p_fwd_mean": 42.01,
+   "p2p_bwd_min": 7.7,
+   "p2p_bwd_mean": 10.42,
+   "sweep_1g_fwd_min": 93.83,
+   "sweep_1g_bwd_min": 90.58,
+   "bidir_min": 169.87,
+   "bidir_max": 2430.36,
+   "pairs": {
+    "0-1": {
+     "fwd": 30.79,
+     "bwd": 7.7,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.24,
+     "sweep_ok": true,
+     "bidir": 173.96,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 41.56,
+     "bwd": 10.51,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 90.59,
+     "sweep_ok": true,
+     "bidir": 173.23,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 42.75,
+     "bwd": 10.86,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.64,
+     "sweep_ok": true,
+     "bidir": 169.87,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.82,
+     "bwd": 10.98,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.24,
+     "sweep_ok": true,
+     "bidir": 1436.25,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.46,
+     "bwd": 11.21,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.58,
+     "sweep_ok": true,
+     "bidir": 2430.36,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.7,
+     "bwd": 11.24,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.31,
+     "sweep_ok": true,
+     "bidir": 1414.84,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0049",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 24.37,
+   "p2p_fwd_mean": 38.28,
+   "p2p_bwd_min": 7.85,
+   "p2p_bwd_mean": 10.38,
+   "sweep_1g_fwd_min": 93.82,
+   "sweep_1g_bwd_min": 90.63,
+   "bidir_min": 169.86,
+   "bidir_max": 2481.52,
+   "pairs": {
+    "0-1": {
+     "fwd": 24.37,
+     "bwd": 7.85,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 174.33,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 31.16,
+     "bwd": 10.71,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 173.39,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 38.0,
+     "bwd": 10.88,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 90.65,
+     "sweep_ok": true,
+     "bidir": 169.86,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.53,
+     "bwd": 10.58,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.21,
+     "sweep_ok": true,
+     "bidir": 1448.3,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.48,
+     "bwd": 11.26,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.82,
+     "sweep_1g_bwd": 90.63,
+     "sweep_ok": true,
+     "bidir": 2481.52,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.14,
+     "bwd": 11.02,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.35,
+     "sweep_ok": true,
+     "bidir": 1423.73,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0068",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 21.58,
+   "p2p_fwd_mean": 37.93,
+   "p2p_bwd_min": 9.12,
+   "p2p_bwd_mean": 10.59,
+   "sweep_1g_fwd_min": 93.84,
+   "sweep_1g_bwd_min": 90.7,
+   "bidir_min": 169.96,
+   "bidir_max": 2481.45,
+   "pairs": {
+    "0-1": {
+     "fwd": 21.58,
+     "bwd": 9.12,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.34,
+     "sweep_ok": true,
+     "bidir": 174.46,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 37.88,
+     "bwd": 10.8,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 90.71,
+     "sweep_ok": true,
+     "bidir": 173.36,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 34.68,
+     "bwd": 10.98,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.72,
+     "sweep_ok": true,
+     "bidir": 169.96,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.38,
+     "bwd": 10.78,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.3,
+     "sweep_ok": true,
+     "bidir": 1440.57,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 44.39,
+     "bwd": 11.0,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.7,
+     "sweep_ok": true,
+     "bidir": 2481.45,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 44.64,
+     "bwd": 10.86,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 1787.8,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0069",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 29.63,
+   "p2p_fwd_mean": 40.59,
+   "p2p_bwd_min": 9.62,
+   "p2p_bwd_mean": 10.69,
+   "sweep_1g_fwd_min": 93.84,
+   "sweep_1g_bwd_min": 90.66,
+   "bidir_min": 169.69,
+   "bidir_max": 2492.12,
+   "pairs": {
+    "0-1": {
+     "fwd": 29.63,
+     "bwd": 9.62,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.34,
+     "sweep_ok": true,
+     "bidir": 174.46,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 36.98,
+     "bwd": 10.43,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 90.74,
+     "sweep_ok": true,
+     "bidir": 174.03,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 42.88,
+     "bwd": 11.04,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.76,
+     "sweep_ok": true,
+     "bidir": 169.69,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.89,
+     "bwd": 10.76,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.31,
+     "sweep_ok": true,
+     "bidir": 1444.16,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 44.93,
+     "bwd": 11.15,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.66,
+     "sweep_ok": true,
+     "bidir": 2492.12,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 44.25,
+     "bwd": 11.15,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.24,
+     "sweep_ok": true,
+     "bidir": 1424.34,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0088",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 30.8,
+   "p2p_fwd_mean": 41.52,
+   "p2p_bwd_min": 8.02,
+   "p2p_bwd_mean": 10.46,
+   "sweep_1g_fwd_min": 93.82,
+   "sweep_1g_bwd_min": 90.58,
+   "bidir_min": 169.9,
+   "bidir_max": 2453.08,
+   "pairs": {
+    "0-1": {
+     "fwd": 30.8,
+     "bwd": 8.02,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.22,
+     "sweep_ok": true,
+     "bidir": 174.27,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 38.33,
+     "bwd": 10.71,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.58,
+     "sweep_ok": true,
+     "bidir": 173.2,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 42.81,
+     "bwd": 11.01,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.64,
+     "sweep_ok": true,
+     "bidir": 169.9,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 45.13,
+     "bwd": 10.75,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.19,
+     "sweep_ok": true,
+     "bidir": 1442.05,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.07,
+     "bwd": 11.03,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.82,
+     "sweep_1g_bwd": 90.61,
+     "sweep_ok": true,
+     "bidir": 2453.08,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.95,
+     "bwd": 11.21,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.86,
+     "sweep_1g_bwd": 92.33,
+     "sweep_ok": true,
+     "bidir": 1425.64,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0090",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 26.03,
+   "p2p_fwd_mean": 40.56,
+   "p2p_bwd_min": 8.03,
+   "p2p_bwd_mean": 10.57,
+   "sweep_1g_fwd_min": 93.83,
+   "sweep_1g_bwd_min": 90.61,
+   "bidir_min": 169.94,
+   "bidir_max": 2472.69,
+   "pairs": {
+    "0-1": {
+     "fwd": 26.03,
+     "bwd": 8.03,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.22,
+     "sweep_ok": true,
+     "bidir": 173.89,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 37.51,
+     "bwd": 10.81,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.61,
+     "sweep_ok": true,
+     "bidir": 173.58,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 42.92,
+     "bwd": 11.04,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.66,
+     "sweep_ok": true,
+     "bidir": 169.94,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.68,
+     "bwd": 10.68,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.25,
+     "sweep_ok": true,
+     "bidir": 1443.81,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.53,
+     "bwd": 11.37,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 90.65,
+     "sweep_ok": true,
+     "bidir": 2472.69,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.68,
+     "bwd": 11.49,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.85,
+     "sweep_1g_bwd": 92.34,
+     "sweep_ok": true,
+     "bidir": 1426.16,
+     "bidir_ok": true
+    }
+   }
+  },
+  {
+   "node": "n0092",
+   "gpu": "NVIDIA A100-SXM4-80GB",
+   "n_gpus": 4,
+   "overall": "PASS",
+   "fail_pairs": 0,
+   "p2p_fwd_min": 30.7,
+   "p2p_fwd_mean": 41.16,
+   "p2p_bwd_min": 7.33,
+   "p2p_bwd_mean": 10.33,
+   "sweep_1g_fwd_min": 93.83,
+   "sweep_1g_bwd_min": 90.57,
+   "bidir_min": 169.75,
+   "bidir_max": 2427.96,
+   "pairs": {
+    "0-1": {
+     "fwd": 30.7,
+     "bwd": 7.33,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 92.21,
+     "sweep_ok": true,
+     "bidir": 173.73,
+     "bidir_ok": true
+    },
+    "0-2": {
+     "fwd": 37.67,
+     "bwd": 10.71,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.57,
+     "sweep_ok": true,
+     "bidir": 173.11,
+     "bidir_ok": true
+    },
+    "0-3": {
+     "fwd": 42.61,
+     "bwd": 10.68,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 90.61,
+     "sweep_ok": true,
+     "bidir": 169.75,
+     "bidir_ok": true
+    },
+    "1-2": {
+     "fwd": 44.76,
+     "bwd": 10.9,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.83,
+     "sweep_1g_bwd": 92.23,
+     "sweep_ok": true,
+     "bidir": 1439.77,
+     "bidir_ok": true
+    },
+    "1-3": {
+     "fwd": 45.06,
+     "bwd": 11.22,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.84,
+     "sweep_1g_bwd": 90.59,
+     "sweep_ok": true,
+     "bidir": 2427.96,
+     "bidir_ok": true
+    },
+    "2-3": {
+     "fwd": 46.13,
+     "bwd": 11.15,
+     "status": "PASS",
+     "mode": "NVLink/P2P",
+     "sweep_1g_fwd": 93.87,
+     "sweep_1g_bwd": 92.34,
+     "sweep_ok": true,
+     "bidir": 1411.28,
+     "bidir_ok": true
+    }
+   }
+  }
+ ]
+}

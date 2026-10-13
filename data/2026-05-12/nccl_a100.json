@@ -1,0 +1,223 @@
+{
+ "test": "nccl_a100",
+ "label": "NCCL all_reduce (A100)",
+ "group": "NCCL",
+ "variant": "a100",
+ "metrics": [
+  {
+   "key": "avg_busbw",
+   "label": "Avg bus BW (GB/s)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "busbw_1g",
+   "label": "Bus BW @1 GiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "algbw_1g",
+   "label": "Alg BW @1 GiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "busbw_512m",
+   "label": "Bus BW @512 MiB in-place (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "time_us_1g",
+   "label": "Time @1 GiB (\u00b5s)",
+   "higher_is_better": false
+  },
+  {
+   "key": "wrong",
+   "label": "#wrong (sum)",
+   "higher_is_better": false,
+   "expect_zero": true
+  }
+ ],
+ "source": "nccl_a100",
+ "rows": [
+  {
+   "node": "n0003",
+   "task_id": "11",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0004",
+   "task_id": "12",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0005",
+   "task_id": "13",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0024",
+   "task_id": "14",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0025",
+   "task_id": "15",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0026",
+   "task_id": "16",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0027",
+   "task_id": "17",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0028",
+   "task_id": "18",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0045",
+   "task_id": "4",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0046",
+   "task_id": "5",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0047",
+   "task_id": "6",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0048",
+   "task_id": "7",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0049",
+   "task_id": "8",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0066",
+   "task_id": "9",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0068",
+   "task_id": "10",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0088",
+   "task_id": "1",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0090",
+   "task_id": "2",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  },
+  {
+   "node": "n0092",
+   "task_id": "3",
+   "avg_busbw": null,
+   "busbw_1g": null,
+   "algbw_1g": null,
+   "time_us_1g": null,
+   "busbw_512m": null,
+   "wrong": null
+  }
+ ]
+}

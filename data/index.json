@@ -1,0 +1,82 @@
+{
+ "periods": [
+  {
+   "id": "2026-10-13",
+   "label": "Oct 13, 2026 \u2014 Scheduled",
+   "date": "2026-10-13",
+   "tests": 8,
+   "nodes": 166
+  },
+  {
+   "id": "2026-09-22",
+   "label": "Sep 22, 2026 \u2014 Emergency (Slurm)",
+   "date": "2026-09-22",
+   "tests": 8,
+   "nodes": 167
+  },
+  {
+   "id": "2026-09-08",
+   "label": "Sep 8, 2026 \u2014 Scheduled",
+   "date": "2026-09-08",
+   "tests": 7,
+   "nodes": 160
+  },
+  {
+   "id": "2026-08-11",
+   "label": "Aug 11, 2026 \u2014 Scheduled",
+   "date": "2026-08-11",
+   "tests": 2,
+   "nodes": 99
+  },
+  {
+   "id": "2026-07-14",
+   "label": "Jul 14, 2026 \u2014 Scheduled",
+   "date": "2026-07-14",
+   "tests": 7,
+   "nodes": 159
+  },
+  {
+   "id": "2026-06-09",
+   "label": "Jun 9, 2026 \u2014 Scheduled",
+   "date": "2026-06-09",
+   "tests": 5,
+   "nodes": 141
+  },
+  {
+   "id": "2026-05-12",
+   "label": "May 12, 2026 \u2014 Scheduled",
+   "date": "2026-05-12",
+   "tests": 10,
+   "nodes": 185
+  },
+  {
+   "id": "2026-04-14",
+   "label": "Apr 14, 2026 \u2014 Scheduled",
+   "date": "2026-04-14",
+   "tests": 6,
+   "nodes": 88
+  },
+  {
+   "id": "2026-03-10",
+   "label": "Mar 10, 2026 \u2014 Scheduled",
+   "date": "2026-03-10",
+   "tests": 2,
+   "nodes": 105
+  },
+  {
+   "id": "2026-01-13",
+   "label": "Jan 13, 2026 \u2014 Scheduled",
+   "date": "2026-01-13",
+   "tests": 1,
+   "nodes": 18
+  },
+  {
+   "id": "2025-12-09",
+   "label": "Dec 9, 2025 \u2014 Scheduled (legacy)",
+   "date": "2025-12-09",
+   "tests": 2,
+   "nodes": 39
+  }
+ ],
+ "latest": "2026-10-13"
+}
