@@ -65,6 +65,19 @@
   .ctl input[type=number] { min-width: 80px; width: 90px; }
   .ctl label.chk { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-primary); padding: 7px 0; }
   .spacer { flex: 1; }
+  details.multi { position: relative; }
+  details.multi > summary { list-style: none; cursor: pointer; font-size: 14px; color: var(--text-primary); background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 6px; padding: 6px 28px 6px 8px; min-width: 190px; white-space: nowrap; position: relative; }
+  details.multi > summary::-webkit-details-marker { display: none; }
+  details.multi > summary::after { content: "▾"; position: absolute; right: 9px; top: 6px; color: var(--text-secondary); font-size: 12px; }
+  details.multi[open] > summary { border-color: var(--accent); }
+  details.multi .menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 20; min-width: 300px; max-height: 360px; overflow: auto;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.18); }
+  details.multi .menu-actions { display: flex; gap: 6px; padding-bottom: 6px; margin-bottom: 4px; border-bottom: 1px solid var(--grid); }
+  details.multi label.opt { display: flex; align-items: center; gap: 8px; padding: 5px 6px; border-radius: 6px; font-size: 13px; color: var(--text-primary); cursor: pointer; white-space: nowrap; }
+  details.multi label.opt:hover { background: var(--surface-2); }
+  details.multi label.opt.dis { color: var(--text-muted); cursor: default; }
+  button.ghost.sm { font-size: 12px; padding: 3px 8px; }
   button.ghost { font: inherit; font-size: 13px; background: transparent; color: var(--text-primary); border: 1px solid var(--border);
     border-radius: 6px; padding: 6px 10px; cursor: pointer; }
   button.ghost:hover { background: var(--surface-2); }
@@ -131,7 +144,18 @@
 
   <div class="controls">
     <div class="ctl"><span>Maintenance period</span><select id="periodSel"></select></div>
-    <div class="ctl"><span>Compare with</span><select id="compareSel"><option value="">— none —</option></select></div>
+    <div class="ctl"><span>Compare with (one or more)</span>
+      <details class="multi" id="cmpBox"><summary id="cmpSummary">— none —</summary>
+        <div class="menu">
+          <div class="menu-actions">
+            <button type="button" class="ghost sm" data-act="prev3">Previous 3</button>
+            <button type="button" class="ghost sm" data-act="all">All</button>
+            <button type="button" class="ghost sm" data-act="none">Clear</button>
+          </div>
+          <div id="cmpList"></div>
+        </div>
+      </details>
+    </div>
     <div class="ctl"><span>Tolerance (± % of median)</span><input id="tolInp" type="number" min="0.1" step="0.5" value="3" /></div>
     <div class="ctl"><label class="chk"><input id="yzero" type="checkbox" /> Start y-axis at zero</label></div>
     <div class="ctl"><label class="chk"><input id="onlyFlag" type="checkbox" /> Table: flagged only</label></div>
@@ -152,6 +176,20 @@
     <div class="stats" id="stats"></div>
     <div class="scrollx"><div id="chart" style="height:380px;"></div></div>
     <div class="legend" id="chartLegend"></div>
+    <div class="note" id="chartNote" style="margin-top:6px"></div>
+  </section>
+
+  <section class="panel" id="matrixPanel" hidden>
+    <div class="panel-head">
+      <h2 id="matrixTitle">Selected periods × nodes</h2>
+      <div class="spacer"></div>
+      <div class="ctl"><span>Color by</span><select id="matrixMode">
+        <option value="own">Deviation from each period's own median</option>
+        <option value="rel">Selected period vs each period (same node)</option>
+      </select></div>
+    </div>
+    <div class="scrollx"><div id="matrix"></div></div>
+    <div class="legend" id="matrixLegend"></div>
   </section>
 
   <section class="panel">
@@ -187,7 +225,7 @@
 (() => {
   const $ = (s) => document.querySelector(s);
   const state = {
-    index: null, cache: {}, period: null, compare: null,
+    index: null, cache: {}, period: null, compare: [], matrixMode: 'own',
     test: null, metric: null, tol: 3, yzero: false, onlyFlag: false,
     node: null, sort: { key: 'node', dir: 1 },
   };
@@ -294,34 +332,61 @@
     ms.value = state.metric;
   }
 
-  function renderChart(cur, cmp) {
-    const t = cur.tests[state.test]; const a = analyze(t, state.metric, state.tol);
-    const ct = cmp && cmp.tests[state.test]; const ca = ct ? analyze(ct, state.metric, state.tol) : null;
-    const nodes = [...new Set([...a.rows.map((r) => r.node), ...(ca ? ca.rows.map((r) => r.node) : [])])].sort((x, y) => nodeNum(x) - nodeNum(y));
-    const byNode = Object.fromEntries(a.rows.map((r) => [r.node, r]));
-    const cByNode = ca ? Object.fromEntries(ca.rows.map((r) => [r.node, r])) : {};
-    const colOk = css('--series-1'), colBad = css('--critical'), colCmp = css('--series-2');
+  // Blue ramp steps 100..700. Periods are ordered in time, so they take one hue with monotone lightness
+  // (oldest nearest the surface, newest farthest). Validated for up to MAX_SERIES steps in both themes.
+  const RAMP = ['#cde2fb', '#b7d3f6', '#9ec5f4', '#86b6ef', '#6da7ec', '#5598e7', '#3987e5', '#2a78d6', '#256abf', '#1c5cab', '#184f95', '#104281', '#0d366b'];
+  const MAX_SERIES = 5;
+  const isDark = () => css('--surface-1').toLowerCase() === '#1a1a19';
+  function rampColors(n) {
+    const dark = isDark(); const lo = dark ? 0 : 3, hi = dark ? 10 : 12;
+    const cols = Array.from({ length: n }, (_, i) => RAMP[Math.round(lo + (hi - lo) * i / (n - 1))]);
+    return dark ? cols.reverse() : cols;
+  }
+  const shortLabel = (c) => c.manifest.label.split(' — ')[0];
+  const hasMetric = (c, mkey) => { const t = c.tests[state.test]; return !!(t && t.metrics.some((m) => m.key === mkey)); };
+  function cmpList() { return state.compare.filter((id) => id !== state.period && state.cache[id]).sort().map((id) => state.cache[id]); }
+  function selectNode(n) { state.node = n; const cur = state.cache[state.period]; renderTable(cur); renderDetail(cur); renderHistory(); syncURL(); }
 
-    const cur_vals = nodes.map((n) => byNode[n] ? byNode[n].value : null);
-    const traces = [{
-      type: 'bar', name: 'current', x: nodes, y: cur_vals,
-      marker: { color: nodes.map((n) => byNode[n] && byNode[n].status !== 'ok' ? colBad : colOk), line: { width: 0 } },
-      width: ca ? 0.38 : 0.6, offset: ca ? -0.4 : undefined,
-      customdata: nodes.map((n) => byNode[n] ? [pct(byNode[n].dev), byNode[n].label, byNode[n].raw.from_log ? ' (from log)' : ''] : ['—', 'missing', '']),
-      hovertemplate: '<b>%{x}</b><br>' + a.metric.label + ': %{y}<br>vs median: %{customdata[0]} · %{customdata[1]}%{customdata[2]}<extra></extra>',
-    }];
-    if (ca) traces.push({
-      type: 'bar', name: 'compare', x: nodes, y: nodes.map((n) => cByNode[n] ? cByNode[n].value : null),
-      marker: { color: colCmp, line: { width: 0 } }, width: 0.38, offset: 0.02,
-      customdata: nodes.map((n) => cByNode[n] ? [pct(cByNode[n].dev), byNode[n] && cByNode[n].value ? pct((byNode[n].value - cByNode[n].value) / cByNode[n].value * 100) : '—'] : ['—', '—']),
-      hovertemplate: '<b>%{x}</b> (' + cmp.manifest.label + ')<br>' + a.metric.label + ': %{y}<br>vs its median: %{customdata[0]}<br>current vs this: %{customdata[1]}<extra></extra>',
+  function renderChart(cur) {
+    const t = cur.tests[state.test]; const a = analyze(t, state.metric, state.tol);
+    const cmps = cmpList();
+    const usable = cmps.filter((c) => hasMetric(c, a.metric.key));
+    const notRun = cmps.filter((c) => !hasMetric(c, a.metric.key));
+    let shown = usable;
+    if (usable.length > MAX_SERIES - 1) {
+      const d0 = Date.parse(cur.manifest.date);
+      shown = [...usable].sort((x, y) => Math.abs(Date.parse(x.manifest.date) - d0) - Math.abs(Date.parse(y.manifest.date) - d0)).slice(0, MAX_SERIES - 1);
+    }
+    const series = [...shown.map((c) => ({ c, a: analyze(c.tests[state.test], a.metric.key, state.tol), sel: false })), { c: cur, a, sel: true }]
+      .sort((x, y) => x.c.manifest.date.localeCompare(y.c.manifest.date));
+    const multi = series.length > 1;
+    const nodes = [...new Set(series.flatMap((s) => s.a.rows.map((r) => r.node)))].sort((x, y) => nodeNum(x) - nodeNum(y));
+    const byNode = Object.fromEntries(a.rows.map((r) => [r.node, r]));
+    const colOk = css('--series-1'), colBad = css('--critical');
+    const cols = multi ? rampColors(series.length) : [colOk];
+
+    const traces = series.map((s, i) => {
+      const by = s.sel ? byNode : Object.fromEntries(s.a.rows.map((r) => [r.node, r]));
+      const tr = { type: 'bar', name: shortLabel(s.c), x: nodes, y: nodes.map((n) => by[n] ? by[n].value : null), marker: { line: { width: 0 } } };
+      if (!multi) tr.width = 0.6;
+      if (s.sel) {
+        tr.marker.color = nodes.map((n) => by[n] && by[n].status !== 'ok' ? colBad : cols[i]);
+        tr.customdata = nodes.map((n) => by[n] ? [pct(by[n].dev), by[n].label, by[n].raw.from_log ? ' (from log)' : ''] : ['—', 'missing', '']);
+        tr.hovertemplate = '<b>%{x}</b>' + (multi ? ' · ' + shortLabel(s.c) + ' (selected)' : '') + '<br>' + a.metric.label + ': %{y}<br>vs median: %{customdata[0]} · %{customdata[1]}%{customdata[2]}<extra></extra>';
+      } else {
+        tr.marker.color = cols[i];
+        tr.customdata = nodes.map((n) => by[n] ? [pct(by[n].dev), byNode[n] && by[n].value && byNode[n].value !== null && byNode[n].value !== undefined
+          ? pct((byNode[n].value - by[n].value) / by[n].value * 100) : '—'] : ['—', '—']);
+        tr.hovertemplate = '<b>%{x}</b> · ' + shortLabel(s.c) + '<br>' + a.metric.label + ': %{y}<br>vs its own median: %{customdata[0]}<br>selected period vs this: %{customdata[1]}<extra></extra>';
+      }
+      return tr;
     });
 
     const lay = plotlyBase();
-    lay.barmode = ca ? 'overlay' : 'relative'; lay.bargap = 0.25;
+    lay.barmode = multi ? 'group' : 'relative'; lay.bargap = multi ? 0.22 : 0.25; if (multi) lay.bargroupgap = 0.08;
     lay.xaxis.title = { text: 'Node', font: { size: 12 } }; lay.xaxis.tickangle = nodes.length > 24 ? -60 : 0; lay.xaxis.type = 'category';
     lay.yaxis.title = { text: a.metric.label, font: { size: 12 } };
-    const allv = [...cur_vals, ...(ca ? ca.rows.map((r) => r.value) : [])].filter(Number.isFinite);
+    const allv = series.flatMap((s) => s.a.rows.map((r) => r.value)).filter(Number.isFinite);
     if (allv.length) {
       if (state.yzero) lay.yaxis.rangemode = 'tozero';
       else { const lo = Math.min(...allv), hi = Math.max(...allv); const pad = Math.max((hi - lo) * 0.25, Math.abs(hi) * 0.005, 1e-9);
@@ -332,23 +397,72 @@
       lay.shapes.push({ type: 'rect', xref: 'paper', x0: 0, x1: 1, y0: a.median * (1 - state.tol / 100), y1: a.median * (1 + state.tol / 100),
         fillcolor: css('--series-1-soft'), line: { width: 0 }, layer: 'below' });
       lay.shapes.push({ type: 'line', xref: 'paper', x0: 0, x1: 1, y0: a.median, y1: a.median, line: { color: css('--text-secondary'), width: 1.5 } });
-      lay.annotations.push({ xref: 'paper', x: 1, y: a.median, xanchor: 'right', yanchor: 'bottom', text: 'median ' + fmt(a.median), showarrow: false,
+      lay.annotations.push({ xref: 'paper', x: 1, y: a.median, xanchor: 'right', yanchor: 'bottom', text: 'median ' + fmt(a.median) + (multi ? ' (' + shortLabel(cur) + ')' : ''), showarrow: false,
         font: { size: 11, color: css('--text-secondary') }, bgcolor: css('--surface-1') });
     }
     const wrapW = $('#chart').parentElement.clientWidth || 900;
-    lay.width = Math.max(wrapW, nodes.length * (ca ? 30 : 22) + 90); lay.height = 380;
+    lay.width = Math.max(wrapW, nodes.length * (multi ? series.length * 11 + 14 : 22) + 90); lay.height = 380;
     Plotly.react('chart', traces, lay, plotCfg);
     $('#chart').removeAllListeners && $('#chart').removeAllListeners('plotly_click');
-    $('#chart').on('plotly_click', (ev) => { if (ev.points && ev.points[0]) { state.node = ev.points[0].x; renderTable(cur, cmp); renderDetail(cur); renderHistory(); } });
+    $('#chart').on('plotly_click', (ev) => { if (ev.points && ev.points[0]) selectNode(ev.points[0].x); });
 
     $('#chartTitle').textContent = `${t.label} — ${a.metric.label}`;
     $('#stats').innerHTML = `<span>nodes <b>${t.rows.length}</b></span><span>median <b>${fmt(a.median)}</b></span><span>mean <b>${fmt(a.mean)}</b></span>
       <span>min <b>${fmt(a.min)}</b></span><span>max <b>${fmt(a.max)}</b></span><span>spread <b>${a.median ? pct((a.max - a.min) / a.median * 100).replace('+', '') : '—'}</b></span>
       <span>flagged <b>${a.flagged.length}</b></span>${t.source ? `<span class="muted">source: ${t.source}</span>` : ''}`;
-    $('#chartLegend').innerHTML = `<span><span class="sw" style="background:${colOk}"></span>within ±${state.tol}% of median</span>
-      <span><span class="sw" style="background:${colBad}"></span>outside tolerance / missing / non-zero</span>
-      ${ca ? `<span><span class="sw" style="background:${colCmp}"></span>${cmp.manifest.label}</span>` : ''}
-      <span><span class="ln"></span>median</span><span><span class="bd"></span>±${state.tol}% band</span>`;
+    const sw = (c, txt) => `<span><span class="sw" style="background:${c}"></span>${txt}</span>`;
+    $('#chartLegend').innerHTML = (multi
+      ? series.map((s, i) => sw(cols[i], shortLabel(s.c) + (s.sel ? ' (selected)' : ''))).join('') + sw(colBad, `selected period outside ±${state.tol}% / missing / non-zero`)
+      : sw(colOk, `within ±${state.tol}% of median`) + sw(colBad, 'outside tolerance / missing / non-zero'))
+      + `<span><span class="ln"></span>median${multi ? ' of selected period' : ''}</span><span><span class="bd"></span>±${state.tol}% band</span>`;
+    const notes = [];
+    if (usable.length > shown.length) notes.push(`Bars show the selected period plus the ${shown.length} nearest in time of the ${usable.length} compared periods that ran this test. The matrix and table below include all of them.`);
+    if (notRun.length) notes.push(`This test or metric was not recorded in: ${notRun.map(shortLabel).join(', ')}.`);
+    $('#chartNote').textContent = notes.join(' ');
+  }
+
+  function renderMatrix(cur) {
+    const cmps = cmpList(); const panel = $('#matrixPanel');
+    if (!cmps.length) { panel.hidden = true; return; }
+    panel.hidden = false;
+    const t = cur.tests[state.test]; const m = t.metrics.find((x) => x.key === state.metric) || t.metrics[0];
+    const rowsP = [...cmps, cur].sort((x, y) => x.manifest.date.localeCompare(y.manifest.date))
+      .map((c) => ({ c, a: hasMetric(c, m.key) ? analyze(c.tests[state.test], m.key, state.tol) : null }));
+    const nodes = [...new Set(rowsP.flatMap((r) => r.a ? r.a.rows.map((x) => x.node) : []))].sort((x, y) => nodeNum(x) - nodeNum(y));
+    const selBy = Object.fromEntries(rowsP.find((r) => r.c === cur).a.rows.map((r) => [r.node, r]));
+    const clip = Math.max(5, 2 * state.tol); const clamp = (v) => Math.max(-clip, Math.min(clip, v));
+    const rel = (r, n) => { const sv = selBy[n]; return sv && Number.isFinite(sv.value) && r && Number.isFinite(r.value) && r.value ? (sv.value - r.value) / r.value * 100 : null; };
+    const ylab = rowsP.map((r) => shortLabel(r.c) + (r.c === cur ? ' ◀ selected' : '') + (r.a ? '' : ' (not run)'));
+    const z = [], text = [];
+    for (const r of rowsP) {
+      const by = r.a ? Object.fromEntries(r.a.rows.map((x) => [x.node, x])) : {};
+      z.push(nodes.map((n) => { const x = by[n]; if (!x || x.value === null || x.value === undefined) return null;
+        if (state.matrixMode === 'rel') { const v = rel(x, n); return v === null ? null : clamp(v); }
+        if (m.expect_zero) return x.status === 'bad' ? clip : 0;
+        return x.dev === null ? null : clamp(x.dev); }));
+      text.push(nodes.map((n) => { const x = by[n]; if (!x) return 'not in this run';
+        return `${m.label}: ${fmt(x.value)}<br>vs own median: ${pct(x.dev)} · ${x.label}` + (r.c === cur ? '' : `<br>selected period vs this: ${pct(rel(x, n))}`); }));
+    }
+    const lay = plotlyBase();
+    const lmar = Math.min(330, 40 + 6.6 * Math.max(...ylab.map((l) => l.length)));
+    lay.margin = { l: lmar, r: 10, t: 8, b: 60 }; lay.xaxis.type = 'category'; lay.xaxis.tickangle = -60; lay.xaxis.showgrid = false; lay.yaxis.showgrid = false;
+    lay.yaxis.autorange = 'reversed'; lay.yaxis.type = 'category';
+    const wrapW = $('#matrix').parentElement.clientWidth || 900;
+    lay.width = Math.max(wrapW, nodes.length * 16 + lmar + 60); lay.height = 70 + rowsP.length * 30;
+    Plotly.react('matrix', [{
+      type: 'heatmap', x: nodes, y: ylab, z, text, hovertemplate: '<b>%{x}</b> · %{y}<br>%{text}<extra></extra>',
+      zmin: -clip, zmax: clip, zmid: 0, xgap: 2, ygap: 2, hoverongaps: false,
+      colorscale: [[0, css('--div-neg')], [0.5, css('--div-mid')], [1, css('--div-pos')]],
+      colorbar: { title: { text: '%', font: { size: 11 } }, thickness: 10, len: 0.9, tickfont: { size: 10 }, outlinewidth: 0 },
+    }], lay, plotCfg);
+    $('#matrix').removeAllListeners && $('#matrix').removeAllListeners('plotly_click');
+    $('#matrix').on('plotly_click', (ev) => { const p = ev.points && ev.points[0]; if (p) selectNode(p.x); });
+    $('#matrixTitle').textContent = `${rowsP.length} periods × nodes — ${t.label}, ${m.label}`;
+    const own = state.matrixMode !== 'rel';
+    $('#matrixLegend').innerHTML = `<span><span class="sw" style="background:var(--div-neg)"></span>${own ? "below that period's median" : 'selected period is lower than that period'}</span>
+      <span><span class="sw" style="background:var(--div-mid); border:1px solid var(--border)"></span>${own ? 'at median' : 'no change'}</span>
+      <span><span class="sw" style="background:var(--div-pos)"></span>${own ? "above that period's median" : 'selected period is higher than that period'}</span>
+      <span class="muted">color range clipped at ±${clip} %; blank = node not in that run. Click a cell to inspect the node.</span>`;
   }
 
   function renderHeat(cur) {
@@ -379,16 +493,20 @@
       state.test = keys[rowsY.indexOf(p.y)]; state.metric = null; state.node = p.x; renderAll(); });
   }
 
-  function renderTable(cur, cmp) {
+  function renderTable(cur) {
     const t = cur.tests[state.test]; const a = analyze(t, state.metric, state.tol);
-    const ct = cmp && cmp.tests[state.test]; const ca = ct ? analyze(ct, state.metric, state.tol) : null;
-    const cBy = ca ? Object.fromEntries(ca.rows.map((r) => [r.node, r])) : {};
+    const cas = cmpList().filter((c) => hasMetric(c, a.metric.key))
+      .map((c) => ({ c, by: Object.fromEntries(analyze(c.tests[state.test], a.metric.key, state.tol).rows.map((r) => [r.node, r])) }));
     const extra = t.metrics.filter((m) => m.key !== a.metric.key);
-    let rows = a.rows.map((r) => ({ ...r, cmpv: cBy[r.node] ? cBy[r.node].value : null,
-      cmpd: cBy[r.node] && cBy[r.node].value && r.value !== null ? (r.value - cBy[r.node].value) / cBy[r.node].value * 100 : null }));
+    let rows = a.rows.map((r) => { const o = { ...r };
+      for (const s of cas) { const cr = s.by[r.node]; const id = s.c.manifest.id;
+        o['c_' + id] = cr ? cr.value : null;
+        o['d_' + id] = cr && cr.value && r.value !== null && r.value !== undefined ? (r.value - cr.value) / cr.value * 100 : null; }
+      return o; });
     if (state.onlyFlag) rows = rows.filter((r) => r.status !== 'ok');
-    const cols = [{ key: 'node', label: 'Node' }, { key: 'value', label: a.metric.label, num: true }, { key: 'dev', label: 'Δ vs median', num: true }, { key: 'status', label: 'Status' }];
-    if (ca) cols.push({ key: 'cmpv', label: cmp.manifest.label.split(' — ')[0], num: true }, { key: 'cmpd', label: 'Δ vs compare', num: true });
+    const cols = [{ key: 'node', label: 'Node' }, { key: 'value', label: a.metric.label, num: true }, { key: 'dev', label: 'Δ vs median', num: true, pct: true }, { key: 'status', label: 'Status' }];
+    for (const s of cas) { const id = s.c.manifest.id; const sl = shortLabel(s.c);
+      cols.push({ key: 'c_' + id, label: sl, num: true }, { key: 'd_' + id, label: 'Δ vs ' + sl.replace(/, \d{4}$/, ''), num: true, pct: true }); }
     for (const m of extra) cols.push({ key: 'x_' + m.key, label: m.label, num: true, get: (r) => r.raw[m.key] });
     const sk = state.sort.key, sd = state.sort.dir;
     const getv = (r, c) => c.get ? c.get(r) : r[c.key];
@@ -398,18 +516,18 @@
       if (sc.key === 'status') { vx = x.status === 'ok' ? 0 : 1; vy = y.status === 'ok' ? 0 : 1; }
       if (vx === null || vx === undefined) return 1; if (vy === null || vy === undefined) return -1;
       return (vx < vy ? -1 : vx > vy ? 1 : 0) * sd; });
-    const th = $('#tbl thead'); th.innerHTML = '<tr>' + cols.map((c) => `<th class="${c.num ? 'num' : ''}${c.key === sk ? ' sorted' + (sd > 0 ? ' asc' : '') : ''}" data-k="${c.key}">${c.label}</th>`).join('') + '</tr>';
-    th.querySelectorAll('th').forEach((h) => h.onclick = () => { const k = h.dataset.k; state.sort = { key: k, dir: state.sort.key === k ? -state.sort.dir : 1 }; renderTable(cur, cmp); });
+    const th = $('#tbl thead'); th.innerHTML = '<tr>' + cols.map((c) => `<th class="${c.num ? 'num' : ''}${c.key === sc.key ? ' sorted' + (sd > 0 ? ' asc' : '') : ''}" data-k="${c.key}">${c.label}</th>`).join('') + '</tr>';
+    th.querySelectorAll('th').forEach((h) => h.onclick = () => { const k = h.dataset.k; state.sort = { key: k, dir: state.sort.key === k ? -state.sort.dir : 1 }; renderTable(cur); });
     const tb = $('#tbl tbody');
     tb.innerHTML = rows.map((r) => {
       const dot = r.status === 'ok' ? 'good' : r.status === 'missing' ? 'muted' : 'critical';
       return `<tr class="${r.status !== 'ok' ? 'flag' : ''}${r.node === state.node ? ' sel' : ''}" data-n="${r.node}">` + cols.map((c) => {
         if (c.key === 'status') return `<td><span class="status"><span class="dot ${dot}"></span>${r.label}${r.raw.from_log ? ' · from log' : ''}</span></td>`;
-        const v = getv(r, c); return `<td class="${c.num ? 'num' : ''}">${c.key === 'dev' || c.key === 'cmpd' ? pct(v) : fmt(v)}</td>`; }).join('') + '</tr>';
+        const v = getv(r, c); return `<td class="${c.num ? 'num' : ''}">${c.pct ? pct(v) : fmt(v)}</td>`; }).join('') + '</tr>';
     }).join('') || `<tr><td colspan="${cols.length}" class="empty">No rows.</td></tr>`;
-    tb.querySelectorAll('tr[data-n]').forEach((tr) => tr.onclick = () => { state.node = tr.dataset.n; renderTable(cur, cmp); renderDetail(cur); renderHistory(); });
+    tb.querySelectorAll('tr[data-n]').forEach((tr) => tr.onclick = () => selectNode(tr.dataset.n));
     $('#tableTitle').textContent = `${t.label} — ${rows.length} rows`;
-    $('#tableNote').textContent = `median ${fmt(a.median)} · tolerance ±${state.tol}% · click a header to sort`;
+    $('#tableNote').textContent = `median ${fmt(a.median)} · tolerance ±${state.tol}%${cas.length ? ' · Δ vs a period = selected period relative to it' : ''} · click a header to sort`;
   }
 
   function matrixHTML(title, mat, d) {
@@ -480,22 +598,46 @@
     if (!state.test || !cur.tests[state.test]) state.test = cur.keys[0];
     const t = cur.tests[state.test];
     if (!state.metric || !t.metrics.some((m) => m.key === state.metric)) state.metric = primaryMetric(t);
-    const cmp = state.compare && state.compare !== state.period ? state.cache[state.compare] : null;
-    renderHeader(); renderCards(cur); renderTabs(cur); renderChart(cur, cmp); renderHeat(cur); renderTable(cur, cmp); renderDetail(cur);
+    renderHeader(); renderCards(cur); renderTabs(cur); renderChart(cur); renderMatrix(cur); renderHeat(cur); renderTable(cur); renderDetail(cur);
     renderHistory(); syncURL();
   }
 
   function syncURL() {
     const q = new URLSearchParams();
-    q.set('period', state.period); if (state.compare) q.set('compare', state.compare);
+    q.set('period', state.period); if (state.compare.length) q.set('compare', state.compare.join(','));
     q.set('test', state.test); q.set('metric', state.metric); if (state.node) q.set('node', state.node);
     if (state.tol !== 3) q.set('tol', state.tol);
+    if (state.matrixMode === 'rel' && state.compare.length) q.set('matrix', 'rel');
     try { history.replaceState(null, '', location.pathname + '?' + q.toString()); } catch (e) {}
   }
 
   // ---------------------------------------------------------------- wiring
-  async function setPeriod(id, keepNode) { state.period = id; await loadPeriod(id); if (!keepNode) state.node = null; renderAll(); }
-  async function setCompare(id) { state.compare = id || null; if (id) await loadPeriod(id); renderAll(); }
+  async function setPeriod(id, keepNode) {
+    state.period = id; await loadPeriod(id); if (!keepNode) state.node = null;
+    state.compare = state.compare.filter((x) => x !== id); updateCmpUI(); renderAll();
+  }
+  async function setCompare(ids) {
+    const ok = [];
+    for (const id of [...new Set(ids)].filter((x) => x !== state.period)) { try { await loadPeriod(id); ok.push(id); } catch (e) { console.warn(e); } }
+    state.compare = ok.sort(); updateCmpUI(); renderAll();
+  }
+  function updateCmpUI() {
+    document.querySelectorAll('#cmpList input').forEach((i) => { const dis = i.value === state.period;
+      i.disabled = dis; i.checked = !dis && state.compare.includes(i.value); i.parentElement.classList.toggle('dis', dis); });
+    const n = state.compare.length; const one = n === 1 && state.index.periods.find((p) => p.id === state.compare[0]);
+    $('#cmpSummary').textContent = n === 0 ? '— none —' : n === 1 ? one.label.split(' — ')[0] : `${n} periods`;
+  }
+  function buildCmpUI() {
+    const box = $('#cmpList'); box.innerHTML = '';
+    for (const p of state.index.periods) { const lab = document.createElement('label'); lab.className = 'opt';
+      lab.innerHTML = `<input type="checkbox" value="${p.id}" /> ${p.label} <span class="muted">(${p.tests} tests)</span>`; box.appendChild(lab); }
+    const checked = () => [...box.querySelectorAll('input:checked')].map((i) => i.value);
+    box.querySelectorAll('input').forEach((i) => i.onchange = () => setCompare(checked()));
+    $('#cmpBox').querySelectorAll('button[data-act]').forEach((b) => b.onclick = () => {
+      const older = state.index.periods.filter((p) => p.date < state.cache[state.period].manifest.date).sort((x, y) => y.date.localeCompare(x.date));
+      setCompare(b.dataset.act === 'none' ? [] : b.dataset.act === 'all' ? state.index.periods.map((p) => p.id) : older.slice(0, 3).map((p) => p.id)); });
+    document.addEventListener('click', (e) => { if (!$('#cmpBox').contains(e.target)) $('#cmpBox').removeAttribute('open'); });
+  }
   function applyTheme(mode) {
     if (mode) document.documentElement.setAttribute('data-theme', mode); else document.documentElement.removeAttribute('data-theme');
     const dark = mode === 'dark' || (!mode && matchMedia('(prefers-color-scheme: dark)').matches);
@@ -509,11 +651,11 @@
     $('#themeBtn').onclick = () => { const dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
       (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches); applyTheme(dark ? 'light' : 'dark'); renderAll(); };
     state.index = await getJSON('data/index.json');
-    const ps = $('#periodSel'), cs = $('#compareSel');
+    const ps = $('#periodSel');
     for (const p of state.index.periods) {
       const o = document.createElement('option'); o.value = p.id; o.textContent = `${p.label} (${p.tests} tests)`; ps.appendChild(o);
-      const o2 = o.cloneNode(true); cs.appendChild(o2);
     }
+    buildCmpUI();
     const q = new URLSearchParams(location.search);
     const has = (id) => id && state.index.periods.some((p) => p.id === id);
     const start = has(q.get('period')) ? q.get('period') : state.index.latest;
@@ -522,9 +664,11 @@
     if (q.get('tol')) { state.tol = Math.max(0.1, +q.get('tol') || 3); $('#tolInp').value = state.tol; }
     if (q.get('test')) state.test = q.get('test');
     if (q.get('metric')) state.metric = q.get('metric');
-    if (has(q.get('compare'))) { state.compare = q.get('compare'); cs.value = state.compare; await loadPeriod(state.compare); }
+    if (q.get('compare')) { const ids = q.get('compare').split(',').filter((id) => has(id) && id !== start);
+      for (const id of ids) { try { await loadPeriod(id); state.compare.push(id); } catch (e) { console.warn(e); } } }
+    if (q.get('matrix') === 'rel') { state.matrixMode = 'rel'; $('#matrixMode').value = 'rel'; }
     ps.onchange = () => setPeriod(ps.value);
-    cs.onchange = () => setCompare(cs.value);
+    $('#matrixMode').onchange = () => { state.matrixMode = $('#matrixMode').value; renderMatrix(state.cache[state.period]); syncURL(); };
     $('#tolInp').onchange = () => { state.tol = Math.max(0.1, +$('#tolInp').value || 3); renderAll(); };
     $('#yzero').onchange = () => { state.yzero = $('#yzero').checked; renderAll(); };
     $('#onlyFlag').onchange = () => { state.onlyFlag = $('#onlyFlag').checked; renderAll(); };

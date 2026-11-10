@@ -15,7 +15,8 @@ node that is available. The dashboard loads one maintenance period at a time
 | Section | Purpose |
 |---|---|
 | Node health cards | One card per test: node count, median of the primary metric, and which nodes fall outside the tolerance band. |
-| Per-node chart | Bar per node for the selected test and metric, with the median line and a ±tolerance band. Off nodes are red. Optionally overlay a second maintenance period for comparison. |
+| Per-node chart | Bar per node for the selected test and metric, with the median line and a ±tolerance band. Off nodes are red. Pick one or more periods under "Compare with" to get grouped bars per node, ordered oldest to newest (up to five periods in the bars). |
+| Periods × nodes matrix | Appears when periods are compared. One row per period, one column per node, for any number of periods. Color by each period's own median, or by how the selected period changed relative to each earlier one. |
 | Deviation heatmap | Node × test grid of percent deviation from the median, so a node that is weak in several tests stands out. |
 | Values table | Sortable table of every node with all metrics for the test. |
 | Node detail | Everything recorded for one node in the period, including per-GPU-pair results for the PyTorch and P2P tests. |
@@ -24,7 +25,7 @@ node that is available. The dashboard loads one maintenance period at a time
 The tolerance (default ±3 % of the per-test median) is adjustable. The view
 state is kept in the URL so a specific node or comparison can be shared as a
 link, for example
-`?period=2026-10-13&test=nccl_a100&node=n0092&compare=2026-09-22`.
+`?period=2026-10-13&test=nccl_a100&node=n0092&compare=2026-07-14,2026-09-08,2026-09-22`.
 
 ## Benchmarks
 
