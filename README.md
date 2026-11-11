@@ -33,6 +33,7 @@ link, for example
 |---|---|---|---|
 | GROMACS | A100, L40, MIG 10g/20g/40g | ns/day | `gmx_performance_*.json` / `.csv`, GROMACS logs as fallback |
 | HPCG | CPU nodes | GFLOP/s | `hpcg_gflops_results.json` |
+| NUMA / STREAM | CPU nodes | STREAM Triad of the weakest NUMA domain (GB/s), whole-node Triad, per-domain memory size, topology and kernel-setting mismatches | `numa_stream_results.json` |
 | NCCL `all_reduce_perf` | A100, L40, MIG | average bus bandwidth (GB/s), plus 512 MiB / 1 GiB rows | `nccl_performance_*.json` or raw `nccl*.out` |
 | PyTorch P2P comm (`torch-comm.py`) | A100 | min 1 GB sweep bandwidth over GPU pairs, failed pairs | raw `torch*.out` |
 | nvbandwidth | A100, L40 | per-test summed bandwidth | `nvlink_results.json` |
@@ -40,7 +41,16 @@ link, for example
 | NVIDIA HPL (legacy, Dec 2025) | A100 | GFLOP/s per GPU | `hpl_gflops_per_gpu.json` |
 
 The benchmarks themselves are launched by `maint_main.py` as Slurm job arrays
-inside the maintenance reservation.
+inside the maintenance reservation, for example `python maint_main.py hpcg` or
+`python maint_main.py numa`.
+
+The NUMA test records `numactl --hardware` on every CPU node, then runs
+[STREAM](https://www.cs.virginia.edu/stream/) once per NUMA domain with CPUs and
+memory both bound to that domain, and once across the whole node. A weak DIMM or
+memory channel shows up as one domain with a low Triad rate, which a whole-node
+benchmark such as HPCG averages away. Nodes whose domain count, cores or memory
+per domain, distance table, `numa_balancing` or transparent-hugepage setting
+differ from the majority are listed as issues. It takes about a minute per node.
 
 ## Repository layout
 

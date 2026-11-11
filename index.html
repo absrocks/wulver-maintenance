@@ -250,7 +250,7 @@
     const tests = {};
     await Promise.all(man.tests.map(async (t) => { tests[t.key] = await getJSON(`data/${id}/${t.file}`); }));
     // stable order: GROMACS, HPCG, NCCL, PyTorch, NVLink, HPL
-    const order = ['GROMACS', 'HPCG', 'NCCL', 'PyTorch', 'NVLink', 'HPL'];
+    const order = ['GROMACS', 'HPCG', 'NUMA', 'NCCL', 'PyTorch', 'NVLink', 'HPL'];
     const keys = Object.keys(tests).sort((a, b) => {
       const ga = order.indexOf(tests[a].group), gb = order.indexOf(tests[b].group);
       return (ga - gb) || a.localeCompare(b);
@@ -270,6 +270,7 @@
       let dev = null, status = 'ok', label = 'OK';
       if (v === null || v === undefined) { status = 'missing'; label = 'missing'; }
       else if (m.expect_zero) { if (v > 0) { status = 'bad'; label = 'non-zero'; } else label = 'zero'; dev = 0; }
+      else if (m.abs_tol && med !== null) { dev = v - med; if (Math.abs(dev) > tol) { status = 'bad'; label = (dev > 0 ? 'high ' : 'low ') + pct(dev) + ' points'; } }  // metric is already a percentage
       else if (med) { dev = (v - med) / med * 100; if (Math.abs(dev) > tol) { status = 'bad'; label = (dev > 0 ? 'high ' : 'low ') + pct(dev); } }
       return { node: r.node, value: v, dev, status, label, raw: r };
     });
@@ -477,9 +478,9 @@
     const lay = plotlyBase();
     const lmar = Math.min(330, 40 + 6.4 * Math.max(...rowsY.map((r) => r.length)));
     lay.margin = { l: lmar, r: 10, t: 8, b: 60 }; lay.xaxis.type = 'category'; lay.xaxis.tickangle = -60; lay.xaxis.showgrid = false; lay.yaxis.showgrid = false;
-    lay.yaxis.autorange = 'reversed';
+    lay.yaxis.type = 'category'; if (keys.length > 1) lay.yaxis.autorange = 'reversed'; else lay.yaxis.range = [-0.5, 0.5];
     const wrapW = $('#heat').parentElement.clientWidth || 900;
-    lay.width = Math.max(wrapW, nodes.length * 16 + lmar + 60); lay.height = 60 + keys.length * 30;
+    lay.width = Math.max(wrapW, nodes.length * 16 + lmar + 60); lay.height = Math.max(170, 60 + keys.length * 30);
     Plotly.react('heat', [{
       type: 'heatmap', x: nodes, y: rowsY, z, text, hovertemplate: '<b>%{x}</b> · %{y}<br>%{text}<extra></extra>',
       zmin: -clip, zmax: clip, zmid: 0, xgap: 2, ygap: 2, showscale: true,
@@ -556,6 +557,14 @@
           Object.entries(raw.pairs).map(([p, v]) => { const bad = v.status === 'FAIL' || v.sweep_ok === false || v.bidir_ok === false;
             return `<tr class="${bad ? 'flag' : ''}"><td>cuda:${p.replace('-', ' ↔ cuda:')}</td><td>${v.mode || ''}</td><td class="num">${fmt(v.fwd)}</td><td class="num">${fmt(v.bwd)}</td><td class="num">${fmt(v.sweep_1g_fwd)}</td><td class="num">${fmt(v.sweep_1g_bwd)}</td><td class="num">${fmt(v.bidir)}</td><td>${bad ? '✗ FAIL' : '✓ PASS'}</td></tr>`; }).join('')}</tbody></table></div>`);
       }
+      if (raw.numa_domains && raw.numa_domains.length) {
+        const tv = raw.numa_domains.map((d) => d.triad_gbps).filter(Number.isFinite); const tmed = median(tv);
+        extras.push(`<div><div class="note" style="margin:6px 0 2px">${t.label}: per NUMA domain (THP ${raw.thp || '?'}, numa_balancing ${raw.numa_balancing ?? '?'})</div>
+          <table class="mat"><thead><tr><th>Domain</th><th class="num">CPUs</th><th class="num">Memory GB</th><th class="num">Triad GB/s</th><th class="num">Δ vs node median</th><th class="num">Copy GB/s</th></tr></thead><tbody>${
+          raw.numa_domains.map((d) => { const dv = Number.isFinite(d.triad_gbps) && tmed ? (d.triad_gbps - tmed) / tmed * 100 : null; const bad = dv === null ? d.cpus > 0 : Math.abs(dv) > state.tol;
+            return `<tr class="${bad ? 'flag' : ''}"><td>${d.id}</td><td class="num">${d.cpus}</td><td class="num">${fmt(d.mem_gb, 1)}</td><td class="num">${fmt(d.triad_gbps, 1)}</td><td class="num">${pct(dv)}</td><td class="num">${fmt(d.copy_gbps, 1)}</td></tr>`; }).join('')}</tbody></table></div>`);
+      }
+      if (raw.issue_list && raw.issue_list.length) extras.push(`<div class="note"><b>${t.label} issues:</b><br>${raw.issue_list.join('<br>')}</div>`);
       if (raw.uni_matrix) extras.push(matrixHTML(`${t.label}: unidirectional P2P bandwidth (GB/s)`, raw.uni_matrix, 1));
       if (raw.bi_matrix) extras.push(matrixHTML(`${t.label}: bidirectional P2P bandwidth (GB/s)`, raw.bi_matrix, 1));
       if (raw.lat_matrix) extras.push(matrixHTML(`${t.label}: P2P latency (µs)`, raw.lat_matrix, 2));
@@ -598,8 +607,11 @@
     if (!state.test || !cur.tests[state.test]) state.test = cur.keys[0];
     const t = cur.tests[state.test];
     if (!state.metric || !t.metrics.some((m) => m.key === state.metric)) state.metric = primaryMetric(t);
-    renderHeader(); renderCards(cur); renderTabs(cur); renderChart(cur); renderMatrix(cur); renderHeat(cur); renderTable(cur); renderDetail(cur);
-    renderHistory(); syncURL();
+    const safe = (name, fn) => { try { fn(); } catch (e) { console.error('render ' + name + ' failed', e); } };
+    renderHeader(); renderCards(cur); renderTabs(cur);
+    safe('chart', () => renderChart(cur)); safe('matrix', () => renderMatrix(cur)); safe('heat', () => renderHeat(cur));
+    safe('table', () => renderTable(cur)); safe('detail', () => renderDetail(cur));
+    renderHistory().catch((e) => console.error('render history failed', e)); syncURL();
   }
 
   function syncURL() {
