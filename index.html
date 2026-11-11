@@ -129,6 +129,8 @@
   .muted { color: var(--text-muted); }
   .note { font-size: 12.5px; color: var(--text-secondary); }
   .kv { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .kv > div { min-width: 0; overflow-x: auto; }
+  .kv > div.wide { grid-column: 1 / -1; }
   .mat { font-size: 12px; } .mat td, .mat th { padding: 3px 8px; }
   .empty { color: var(--text-muted); padding: 18px 0; text-align: center; }
   @media (max-width: 700px) { .ctl select { min-width: 120px; } h1 { font-size: 17px; } }
@@ -559,12 +561,12 @@
       }
       if (raw.numa_domains && raw.numa_domains.length) {
         const tv = raw.numa_domains.map((d) => d.triad_gbps).filter(Number.isFinite); const tmed = median(tv);
-        extras.push(`<div><div class="note" style="margin:6px 0 2px">${t.label}: per NUMA domain (THP ${raw.thp || '?'}, numa_balancing ${raw.numa_balancing ?? '?'})</div>
+        extras.push(`<div class="wide"><div class="note" style="margin:6px 0 2px">${t.label}: per NUMA domain (THP ${raw.thp || '?'}, numa_balancing ${raw.numa_balancing ?? '?'})</div>
           <table class="mat"><thead><tr><th>Domain</th><th class="num">CPUs</th><th class="num">Memory GB</th><th class="num">Triad GB/s</th><th class="num">Δ vs node median</th><th class="num">Copy GB/s</th></tr></thead><tbody>${
           raw.numa_domains.map((d) => { const dv = Number.isFinite(d.triad_gbps) && tmed ? (d.triad_gbps - tmed) / tmed * 100 : null; const bad = dv === null ? d.cpus > 0 : Math.abs(dv) > state.tol;
             return `<tr class="${bad ? 'flag' : ''}"><td>${d.id}</td><td class="num">${d.cpus}</td><td class="num">${fmt(d.mem_gb, 1)}</td><td class="num">${fmt(d.triad_gbps, 1)}</td><td class="num">${pct(dv)}</td><td class="num">${fmt(d.copy_gbps, 1)}</td></tr>`; }).join('')}</tbody></table></div>`);
       }
-      if (raw.issue_list && raw.issue_list.length) extras.push(`<div class="note"><b>${t.label} issues:</b><br>${raw.issue_list.join('<br>')}</div>`);
+      if (raw.issue_list && raw.issue_list.length) extras.unshift(`<div class="note wide"><b>${t.label} issues:</b><br>${raw.issue_list.join('<br>')}</div>`);
       if (raw.uni_matrix) extras.push(matrixHTML(`${t.label}: unidirectional P2P bandwidth (GB/s)`, raw.uni_matrix, 1));
       if (raw.bi_matrix) extras.push(matrixHTML(`${t.label}: bidirectional P2P bandwidth (GB/s)`, raw.bi_matrix, 1));
       if (raw.lat_matrix) extras.push(matrixHTML(`${t.label}: P2P latency (µs)`, raw.lat_matrix, 2));

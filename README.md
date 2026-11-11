@@ -33,7 +33,7 @@ link, for example
 |---|---|---|---|
 | GROMACS | A100, L40, MIG 10g/20g/40g | ns/day | `gmx_performance_*.json` / `.csv`, GROMACS logs as fallback |
 | HPCG | CPU nodes | GFLOP/s | `hpcg_gflops_results.json` |
-| NUMA / STREAM | CPU nodes | STREAM Triad of the weakest NUMA domain (GB/s), whole-node Triad, per-domain memory size, topology and kernel-setting mismatches | `numa_stream_results.json` |
+| NUMA / STREAM | CPU nodes | STREAM Triad per core of the weakest NUMA domain (GB/s), whole-node Triad, per-domain memory size, topology and kernel-setting mismatches | `numa_stream_results.json` |
 | NCCL `all_reduce_perf` | A100, L40, MIG | average bus bandwidth (GB/s), plus 512 MiB / 1 GiB rows | `nccl_performance_*.json` or raw `nccl*.out` |
 | PyTorch P2P comm (`torch-comm.py`) | A100 | min 1 GB sweep bandwidth over GPU pairs, failed pairs | raw `torch*.out` |
 | nvbandwidth | A100, L40 | per-test summed bandwidth | `nvlink_results.json` |
@@ -91,6 +91,9 @@ the metrics and rows generically.
      wulver:/project/hpcadmins/am2455/maint/2026/ raw/2026/
    python3 collect_maint.py --raw raw/2026 --out data
    ```
+
+   Only the new month needs to be in `raw/2026/`. Periods that already have a
+   folder under `data/` are kept and stay in the dropdown.
 
 4. Commit and push to `main`. GitHub Pages redeploys in about a minute.
 

@@ -9,6 +9,7 @@ Usage:
 Input layout (per maintenance month, any nesting):
     gromacs*/.../gmx_performance*.json | gmx_performance*.csv
     hpcg*/hpcg_gflops_results.json
+    numa*/numa_stream_results.json           (topology + STREAM per NUMA domain, CPU nodes)
     nccl*/nccl_performance*.json  (+ nccl<job>_<node>_<task>.err for node mapping)
                                   or raw nccl*.out files
     torch*/torch<job>_<node>_<task>.out        (torch-comm.py output)
@@ -35,6 +36,7 @@ PERIODS = [
     ("Sep",         "2026-09-08", "Sep 8, 2026 — Scheduled",       "2026-09-08"),
     ("Sep-Slurm",   "2026-09-22", "Sep 22, 2026 — Emergency (Slurm)", "2026-09-22"),
     ("Oct-maint",   "2026-10-13", "Oct 13, 2026 — Scheduled",      "2026-10-13"),
+    ("Nov-maint",   "2026-11-10", "Nov 10, 2026 — Scheduled",      "2026-11-10"),
 ]
 
 NODE_RE = re.compile(r"_(n\d{4})_(\d+)\.(out|err)$")
@@ -99,6 +101,33 @@ def load_gromacs(path):
 def load_hpcg(path):
     return [{"node": r["Node Number"], "gflops": float(r["GFLOPS"])}
             for r in json.load(open(path))]
+
+
+# ---------------------------------------------------------------- NUMA / STREAM
+def load_numa(path):
+    rows = []
+    for r in json.load(open(path)):
+        doms = r.get("domains") or []
+        mems = [d["mem_gb"] for d in doms if d.get("mem_gb")]
+        # Per core, so nodes with a different NUMA layout (2x64 instead of 8x16) compare fairly
+        per_core = [d["triad_gbps"] / d["cpus"] for d in doms if d.get("triad_gbps") is not None and d.get("cpus")]
+        rows.append({
+            "node": r["node"],
+            "triad_core_min": round(min(per_core), 4) if per_core else None,
+            "triad_min": r.get("triad_min_gbps"),
+            "triad_mean": r.get("triad_mean_gbps"),
+            "triad_spread_pct": r.get("triad_spread_pct"),
+            "triad_node": r.get("triad_node_gbps"),
+            "copy_node": r.get("copy_node_gbps"),
+            "numa_nodes": r.get("numa_nodes"),
+            "mem_min_gb": min(mems) if mems else None,
+            "issues": len(r.get("issues") or []),
+            "issue_list": r.get("issues") or [],
+            "numa_domains": doms,
+            "numa_balancing": r.get("numa_balancing"),
+            "thp": r.get("thp"),
+        })
+    return rows
 
 
 # ---------------------------------------------------------------- NCCL
@@ -382,6 +411,7 @@ def load_nvbandwidth_json(path):
 # ---------------------------------------------------------------- driver
 def add_test(period_tests, key, label, metrics, rows, variant=None, source=None, group=None):
     rows = [r for r in rows if r and r.get("node")]
+    rows = list({r["node"]: r for r in rows}.values())  # a job array can run one node twice: keep the last result
     rows.sort(key=lambda r: node_key(r["node"]))
     if not rows:
         return
@@ -396,6 +426,17 @@ GMX_METRICS = [
     {"key": "hour_per_ns", "label": "Hour / ns", "higher_is_better": False},
 ]
 HPCG_METRICS = [{"key": "gflops", "label": "HPCG GFLOP/s", "higher_is_better": True, "primary": True}]
+NUMA_METRICS = [
+    {"key": "triad_core_min", "label": "STREAM Triad per core, weakest NUMA domain (GB/s)", "higher_is_better": True, "primary": True},
+    {"key": "triad_min", "label": "STREAM Triad, weakest NUMA domain (GB/s)", "higher_is_better": True},
+    {"key": "triad_mean", "label": "STREAM Triad, mean over NUMA domains (GB/s)", "higher_is_better": True},
+    {"key": "triad_node", "label": "STREAM Triad, whole node (GB/s)", "higher_is_better": True},
+    {"key": "copy_node", "label": "STREAM Copy, whole node (GB/s)", "higher_is_better": True},
+    {"key": "triad_spread_pct", "label": "Triad spread across domains (%)", "higher_is_better": False, "abs_tol": True},
+    {"key": "mem_min_gb", "label": "Smallest NUMA domain memory (GB)", "higher_is_better": True},
+    {"key": "numa_nodes", "label": "NUMA domains", "higher_is_better": True},
+    {"key": "issues", "label": "Topology / run issues", "higher_is_better": False, "expect_zero": True},
+]
 NCCL_METRICS = [
     {"key": "avg_busbw", "label": "Avg bus BW (GB/s)", "higher_is_better": True, "primary": True},
     {"key": "busbw_1g", "label": "Bus BW @1 GiB in-place (GB/s)", "higher_is_better": True},
@@ -473,6 +514,14 @@ def collect_period(folder, pid):
             src = os.path.join(root, hj[0])
             add_test(tests, "hpcg_cpu", "HPCG (CPU nodes)", HPCG_METRICS, load_hpcg(src),
                      variant="cpu", source=os.path.relpath(src, folder), group="HPCG")
+            continue
+
+        # NUMA / STREAM
+        mj = [f for f in fjson if f.startswith("numa_stream")]
+        if mj:
+            src = os.path.join(root, mj[0])
+            add_test(tests, "numa_cpu", "NUMA / STREAM (CPU nodes)", NUMA_METRICS, load_numa(src),
+                     variant="cpu", source=os.path.relpath(src, folder), group="NUMA")
             continue
 
         # NCCL
@@ -576,6 +625,13 @@ def main():
         index.append({"id": pid, "label": label, "date": date, "tests": len(tests),
                       "nodes": sum(len(t["rows"]) for t in tests.values())})
         print(f"{pid:12s} {label:36s} " + ", ".join(f"{k}({len(t['rows'])})" for k, t in tests.items()))
+    # The dropdown lists every period that has a folder under the output directory, not only the
+    # ones parsed in this run, so a refresh can be given just the newest month.
+    index = []
+    for man_path in glob.glob(os.path.join(args.out, "*", "manifest.json")):
+        man = json.load(open(man_path))
+        index.append({"id": man["id"], "label": man["label"], "date": man["date"], "tests": len(man["tests"]),
+                      "nodes": sum(t["nodes"] for t in man["tests"])})
     index.sort(key=lambda p: p["date"], reverse=True)
     with open(os.path.join(args.out, "index.json"), "w") as f:
         json.dump({"periods": index, "latest": index[0]["id"] if index else None}, f, indent=1)

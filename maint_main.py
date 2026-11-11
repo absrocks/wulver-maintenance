@@ -1004,6 +1004,7 @@ class numa:
         #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=1
         #SBATCH --cpus-per-task={cores}
+        #SBATCH --mem=0                    # all of the node's memory, whatever its size
         #SBATCH --partition={partition}
         #SBATCH --qos=standard
         #SBATCH --reservation={res}
@@ -1057,8 +1058,16 @@ class numa:
         # while another node is never tested.
         job_ids = []
         for node in expected_nodes:
-            job_output = submit_job(f"--nodelist={node} maint_job.slurm").splitlines()
-            job_ids.append(job_output[0].strip().split()[-1])
+            result = subprocess.run(f"sbatch --nodelist={node} maint_job.slurm", shell=True, stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE, universal_newlines=True)
+            if result.returncode != 0 or not result.stdout.strip():
+                # Keep going: one node Slurm will not schedule should not stop the others
+                print(f"  {node}: sbatch refused the job: {result.stderr.strip() or 'no output'}")
+                continue
+            job_ids.append(result.stdout.strip().split()[-1])
+
+        if not job_ids:
+            sys.exit("No jobs could be submitted")
         print(f"Submitted {len(job_ids)} jobs, one per node ({job_ids[0]} to {job_ids[-1]})")
         print("Waiting for the jobs to complete...")
 

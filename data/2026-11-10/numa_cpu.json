@@ -1,0 +1,7790 @@
+{
+ "test": "numa_cpu",
+ "label": "NUMA / STREAM (CPU nodes)",
+ "group": "NUMA",
+ "variant": "cpu",
+ "metrics": [
+  {
+   "key": "triad_core_min",
+   "label": "STREAM Triad per core, weakest NUMA domain (GB/s)",
+   "higher_is_better": true,
+   "primary": true
+  },
+  {
+   "key": "triad_min",
+   "label": "STREAM Triad, weakest NUMA domain (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "triad_mean",
+   "label": "STREAM Triad, mean over NUMA domains (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "triad_node",
+   "label": "STREAM Triad, whole node (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "copy_node",
+   "label": "STREAM Copy, whole node (GB/s)",
+   "higher_is_better": true
+  },
+  {
+   "key": "triad_spread_pct",
+   "label": "Triad spread across domains (%)",
+   "higher_is_better": false,
+   "abs_tol": true
+  },
+  {
+   "key": "mem_min_gb",
+   "label": "Smallest NUMA domain memory (GB)",
+   "higher_is_better": true
+  },
+  {
+   "key": "numa_nodes",
+   "label": "NUMA domains",
+   "higher_is_better": true
+  },
+  {
+   "key": "issues",
+   "label": "Topology / run issues",
+   "higher_is_better": false,
+   "expect_zero": true
+  }
+ ],
+ "source": "numa/numa_stream_results.json",
+ "rows": [
+  {
+   "node": "n0006",
+   "triad_core_min": 1.8226,
+   "triad_min": 29.161,
+   "triad_mean": 29.219,
+   "triad_spread_pct": 0.4,
+   "triad_node": 233.101,
+   "copy_node": 319.665,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.161,
+     "copy_gbps": 40.572,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.171,
+     "copy_gbps": 40.47,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.231,
+     "copy_gbps": 40.352,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.164,
+     "copy_gbps": 40.549,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.277,
+     "copy_gbps": 40.544,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.266,
+     "copy_gbps": 40.49,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.227,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.254,
+     "copy_gbps": 40.503,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0007",
+   "triad_core_min": 1.8209,
+   "triad_min": 29.135,
+   "triad_mean": 29.183,
+   "triad_spread_pct": 0.26,
+   "triad_node": 233.557,
+   "copy_node": 319.33,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.195,
+     "copy_gbps": 40.474,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.135,
+     "copy_gbps": 40.451,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.193,
+     "copy_gbps": 40.26,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.489,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.41,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.21,
+     "copy_gbps": 40.404,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.17,
+     "copy_gbps": 40.408,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.442,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0008",
+   "triad_core_min": 1.8225,
+   "triad_min": 29.16,
+   "triad_mean": 29.194,
+   "triad_spread_pct": 0.34,
+   "triad_node": 233.324,
+   "copy_node": 319.568,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.193,
+     "copy_gbps": 40.482,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.18,
+     "copy_gbps": 40.319,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.16,
+     "copy_gbps": 40.45,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.259,
+     "copy_gbps": 40.321,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.405,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.417,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0009",
+   "triad_core_min": 1.8227,
+   "triad_min": 29.163,
+   "triad_mean": 29.208,
+   "triad_spread_pct": 0.34,
+   "triad_node": 232.959,
+   "copy_node": 319.48,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.552,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.411,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.172,
+     "copy_gbps": 40.447,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.177,
+     "copy_gbps": 40.374,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.247,
+     "copy_gbps": 40.504,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.263,
+     "copy_gbps": 40.48,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.225,
+     "copy_gbps": 40.484,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.217,
+     "copy_gbps": 40.487,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0010",
+   "triad_core_min": 1.8214,
+   "triad_min": 29.142,
+   "triad_mean": 29.197,
+   "triad_spread_pct": 0.35,
+   "triad_node": 233.602,
+   "copy_node": 319.648,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.49,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.142,
+     "copy_gbps": 40.497,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.286,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.43,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.245,
+     "copy_gbps": 40.436,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.374,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.398,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.386,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0011",
+   "triad_core_min": 1.8189,
+   "triad_min": 29.102,
+   "triad_mean": 29.181,
+   "triad_spread_pct": 0.4,
+   "triad_node": 233.715,
+   "copy_node": 319.41,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.102,
+     "copy_gbps": 40.48,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.297,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.219,
+     "copy_gbps": 40.358,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.21,
+     "copy_gbps": 40.506,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.158,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.408,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.367,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.177,
+     "copy_gbps": 40.428,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0012",
+   "triad_core_min": 1.8201,
+   "triad_min": 29.122,
+   "triad_mean": 29.17,
+   "triad_spread_pct": 0.31,
+   "triad_node": 233.256,
+   "copy_node": 319.528,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.122,
+     "copy_gbps": 40.54,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.192,
+     "copy_gbps": 40.446,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.137,
+     "copy_gbps": 40.483,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.213,
+     "copy_gbps": 40.53,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.536,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.155,
+     "copy_gbps": 40.519,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.155,
+     "copy_gbps": 40.45,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.185,
+     "copy_gbps": 40.421,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0013",
+   "triad_core_min": 1.8217,
+   "triad_min": 29.147,
+   "triad_mean": 29.198,
+   "triad_spread_pct": 0.32,
+   "triad_node": 233.724,
+   "copy_node": 319.577,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.227,
+     "copy_gbps": 40.39,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.227,
+     "copy_gbps": 40.424,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.414,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.166,
+     "copy_gbps": 40.381,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.433,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.147,
+     "copy_gbps": 40.39,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.229,
+     "copy_gbps": 40.246,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.24,
+     "copy_gbps": 40.389,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0014",
+   "triad_core_min": 1.8219,
+   "triad_min": 29.15,
+   "triad_mean": 29.194,
+   "triad_spread_pct": 0.22,
+   "triad_node": 233.298,
+   "copy_node": 319.385,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.175,
+     "copy_gbps": 40.49,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.297,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.342,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.206,
+     "copy_gbps": 40.387,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.15,
+     "copy_gbps": 40.438,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.397,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.213,
+     "copy_gbps": 40.421,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0015",
+   "triad_core_min": 1.8214,
+   "triad_min": 29.142,
+   "triad_mean": 29.208,
+   "triad_spread_pct": 0.48,
+   "triad_node": 233.46,
+   "copy_node": 319.752,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.151,
+     "copy_gbps": 40.532,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.481,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.142,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.529,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.266,
+     "copy_gbps": 40.511,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.244,
+     "copy_gbps": 40.48,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.283,
+     "copy_gbps": 40.433,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.229,
+     "copy_gbps": 40.473,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0016",
+   "triad_core_min": 1.8193,
+   "triad_min": 29.109,
+   "triad_mean": 29.153,
+   "triad_spread_pct": 0.3,
+   "triad_node": 233.395,
+   "copy_node": 319.84,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.112,
+     "copy_gbps": 40.508,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.109,
+     "copy_gbps": 40.455,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.394,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.158,
+     "copy_gbps": 40.52,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.126,
+     "copy_gbps": 40.536,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.148,
+     "copy_gbps": 40.486,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.187,
+     "copy_gbps": 40.291,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.404,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0017",
+   "triad_core_min": 1.8223,
+   "triad_min": 29.157,
+   "triad_mean": 29.216,
+   "triad_spread_pct": 0.44,
+   "triad_node": 233.179,
+   "copy_node": 319.538,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.497,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.157,
+     "copy_gbps": 40.305,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.428,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.211,
+     "copy_gbps": 40.38,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.232,
+     "copy_gbps": 40.464,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.286,
+     "copy_gbps": 40.436,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.228,
+     "copy_gbps": 40.401,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.24,
+     "copy_gbps": 40.502,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0018",
+   "triad_core_min": 1.8226,
+   "triad_min": 29.161,
+   "triad_mean": 29.224,
+   "triad_spread_pct": 0.36,
+   "triad_node": 233.465,
+   "copy_node": 319.505,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.462,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.162,
+     "copy_gbps": 40.346,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.161,
+     "copy_gbps": 40.437,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.266,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.261,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.263,
+     "copy_gbps": 40.396,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.263,
+     "copy_gbps": 40.464,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0019",
+   "triad_core_min": 1.8214,
+   "triad_min": 29.143,
+   "triad_mean": 29.184,
+   "triad_spread_pct": 0.28,
+   "triad_node": 233.384,
+   "copy_node": 319.593,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.224,
+     "copy_gbps": 40.382,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.188,
+     "copy_gbps": 40.357,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.191,
+     "copy_gbps": 40.474,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.177,
+     "copy_gbps": 40.471,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.143,
+     "copy_gbps": 40.445,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.374,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.363,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.518,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0020",
+   "triad_core_min": 1.8229,
+   "triad_min": 29.167,
+   "triad_mean": 29.177,
+   "triad_spread_pct": 0.05,
+   "triad_node": 233.457,
+   "copy_node": 319.393,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.181,
+     "copy_gbps": 40.431,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.167,
+     "copy_gbps": 40.4,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.381,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.413,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.442,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.377,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.18,
+     "copy_gbps": 40.298,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.394,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0021",
+   "triad_core_min": 1.8222,
+   "triad_min": 29.156,
+   "triad_mean": 29.224,
+   "triad_spread_pct": 0.36,
+   "triad_node": 233.81,
+   "copy_node": 319.823,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.214,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.156,
+     "copy_gbps": 40.484,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.42,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.227,
+     "copy_gbps": 40.377,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.23,
+     "copy_gbps": 40.487,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.252,
+     "copy_gbps": 40.428,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.261,
+     "copy_gbps": 40.424,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.259,
+     "copy_gbps": 40.503,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0022",
+   "triad_core_min": 1.8201,
+   "triad_min": 29.121,
+   "triad_mean": 29.179,
+   "triad_spread_pct": 0.4,
+   "triad_node": 233.273,
+   "copy_node": 319.186,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.178,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.121,
+     "copy_gbps": 40.399,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.238,
+     "copy_gbps": 40.302,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.316,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.502,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.126,
+     "copy_gbps": 40.417,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.18,
+     "copy_gbps": 40.41,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.218,
+     "copy_gbps": 40.426,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0023",
+   "triad_core_min": 1.8223,
+   "triad_min": 29.157,
+   "triad_mean": 29.187,
+   "triad_spread_pct": 0.22,
+   "triad_node": 233.253,
+   "copy_node": 319.663,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.175,
+     "copy_gbps": 40.48,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.313,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.188,
+     "copy_gbps": 40.333,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.203,
+     "copy_gbps": 40.502,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.462,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.221,
+     "copy_gbps": 40.377,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.157,
+     "copy_gbps": 40.422,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.192,
+     "copy_gbps": 40.459,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0029",
+   "triad_core_min": 1.8203,
+   "triad_min": 29.125,
+   "triad_mean": 29.206,
+   "triad_spread_pct": 0.53,
+   "triad_node": 233.406,
+   "copy_node": 319.568,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.125,
+     "copy_gbps": 40.547,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.423,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.491,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.512,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.281,
+     "copy_gbps": 40.36,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.266,
+     "copy_gbps": 40.409,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.211,
+     "copy_gbps": 40.493,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0030",
+   "triad_core_min": 1.8183,
+   "triad_min": 29.093,
+   "triad_mean": 29.151,
+   "triad_spread_pct": 0.32,
+   "triad_node": 233.197,
+   "copy_node": 319.513,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.139,
+     "copy_gbps": 40.548,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.167,
+     "copy_gbps": 40.421,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.151,
+     "copy_gbps": 40.337,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.093,
+     "copy_gbps": 40.551,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.178,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.185,
+     "copy_gbps": 40.437,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.149,
+     "copy_gbps": 40.433,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.149,
+     "copy_gbps": 40.425,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0031",
+   "triad_core_min": 1.8216,
+   "triad_min": 29.145,
+   "triad_mean": 29.215,
+   "triad_spread_pct": 0.42,
+   "triad_node": 233.4,
+   "copy_node": 319.72,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.174,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.323,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.145,
+     "copy_gbps": 40.516,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.37,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.265,
+     "copy_gbps": 40.524,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.23,
+     "copy_gbps": 40.513,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.267,
+     "copy_gbps": 40.463,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.226,
+     "copy_gbps": 40.524,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0032",
+   "triad_core_min": 1.8239,
+   "triad_min": 29.183,
+   "triad_mean": 29.192,
+   "triad_spread_pct": 0.09,
+   "triad_node": 233.344,
+   "copy_node": 319.543,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.484,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.284,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.362,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.503,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.277,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.188,
+     "copy_gbps": 40.362,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.187,
+     "copy_gbps": 40.449,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0033",
+   "triad_core_min": 1.8201,
+   "triad_min": 29.122,
+   "triad_mean": 29.206,
+   "triad_spread_pct": 0.43,
+   "triad_node": 233.298,
+   "copy_node": 319.361,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.419,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.122,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.234,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.247,
+     "copy_gbps": 40.238,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.207,
+     "copy_gbps": 40.298,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.242,
+     "copy_gbps": 40.35,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.224,
+     "copy_gbps": 40.249,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0034",
+   "triad_core_min": 1.8194,
+   "triad_min": 29.111,
+   "triad_mean": 29.194,
+   "triad_spread_pct": 0.52,
+   "triad_node": 233.219,
+   "copy_node": 319.154,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.365,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.161,
+     "copy_gbps": 40.42,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.436,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.171,
+     "copy_gbps": 40.449,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.264,
+     "copy_gbps": 40.455,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.261,
+     "copy_gbps": 40.384,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.312,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.111,
+     "copy_gbps": 40.42,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0035",
+   "triad_core_min": 1.8216,
+   "triad_min": 29.146,
+   "triad_mean": 29.211,
+   "triad_spread_pct": 0.44,
+   "triad_node": 233.54,
+   "copy_node": 319.585,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.18,
+     "copy_gbps": 40.469,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.149,
+     "copy_gbps": 40.386,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.146,
+     "copy_gbps": 40.409,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.166,
+     "copy_gbps": 40.504,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.275,
+     "copy_gbps": 40.422,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.255,
+     "copy_gbps": 40.449,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.259,
+     "copy_gbps": 40.436,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.255,
+     "copy_gbps": 40.455,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0036",
+   "triad_core_min": 1.8211,
+   "triad_min": 29.138,
+   "triad_mean": 29.174,
+   "triad_spread_pct": 0.2,
+   "triad_node": 233.055,
+   "copy_node": 319.65,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.138,
+     "copy_gbps": 40.495,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.42,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.31,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.184,
+     "copy_gbps": 40.433,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.164,
+     "copy_gbps": 40.485,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.192,
+     "copy_gbps": 40.42,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.484,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.165,
+     "copy_gbps": 40.408,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0037",
+   "triad_core_min": 1.823,
+   "triad_min": 29.168,
+   "triad_mean": 29.211,
+   "triad_spread_pct": 0.31,
+   "triad_node": 233.742,
+   "copy_node": 319.56,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.234,
+     "copy_gbps": 40.316,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.403,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.204,
+     "copy_gbps": 40.419,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.224,
+     "copy_gbps": 40.509,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.259,
+     "copy_gbps": 40.449,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.41,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.22,
+     "copy_gbps": 40.444,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.203,
+     "copy_gbps": 40.429,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0038",
+   "triad_core_min": 1.8241,
+   "triad_min": 29.186,
+   "triad_mean": 29.21,
+   "triad_spread_pct": 0.16,
+   "triad_node": 233.14,
+   "copy_node": 319.067,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.234,
+     "copy_gbps": 40.384,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.392,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.223,
+     "copy_gbps": 40.444,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.226,
+     "copy_gbps": 40.403,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.434,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.384,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.434,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.227,
+     "copy_gbps": 40.415,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0039",
+   "triad_core_min": 1.8213,
+   "triad_min": 29.141,
+   "triad_mean": 29.227,
+   "triad_spread_pct": 0.66,
+   "triad_node": 233.486,
+   "copy_node": 319.273,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.398,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.141,
+     "copy_gbps": 40.407,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.203,
+     "copy_gbps": 40.276,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.337,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.252,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.334,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.228,
+     "copy_gbps": 40.487,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.309,
+     "copy_gbps": 40.418,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0040",
+   "triad_core_min": 1.8222,
+   "triad_min": 29.155,
+   "triad_mean": 29.222,
+   "triad_spread_pct": 0.48,
+   "triad_node": 233.554,
+   "copy_node": 319.513,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.155,
+     "copy_gbps": 40.511,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.174,
+     "copy_gbps": 40.362,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.429,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.162,
+     "copy_gbps": 40.428,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.236,
+     "copy_gbps": 40.471,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.26,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.296,
+     "copy_gbps": 40.433,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.295,
+     "copy_gbps": 40.428,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0041",
+   "triad_core_min": 1.8216,
+   "triad_min": 29.145,
+   "triad_mean": 29.162,
+   "triad_spread_pct": 0.19,
+   "triad_node": 233.196,
+   "copy_node": 319.88,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.488,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.434,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.162,
+     "copy_gbps": 40.417,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.164,
+     "copy_gbps": 40.473,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.154,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.145,
+     "copy_gbps": 40.427,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.15,
+     "copy_gbps": 40.42,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.152,
+     "copy_gbps": 40.493,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0042",
+   "triad_core_min": 1.8231,
+   "triad_min": 29.169,
+   "triad_mean": 29.228,
+   "triad_spread_pct": 0.37,
+   "triad_node": 233.631,
+   "copy_node": 319.577,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.203,
+     "copy_gbps": 40.397,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.363,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.33,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.428,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.278,
+     "copy_gbps": 40.511,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.276,
+     "copy_gbps": 40.401,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.269,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.26,
+     "copy_gbps": 40.46,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0043",
+   "triad_core_min": 1.8194,
+   "triad_min": 29.111,
+   "triad_mean": 29.155,
+   "triad_spread_pct": 0.33,
+   "triad_node": 233.452,
+   "copy_node": 319.817,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.147,
+     "copy_gbps": 40.481,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.151,
+     "copy_gbps": 40.4,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.111,
+     "copy_gbps": 40.389,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.151,
+     "copy_gbps": 40.492,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.18,
+     "copy_gbps": 40.488,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.157,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.134,
+     "copy_gbps": 40.406,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.208,
+     "copy_gbps": 40.463,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0044",
+   "triad_core_min": 1.8196,
+   "triad_min": 29.113,
+   "triad_mean": 29.186,
+   "triad_spread_pct": 0.37,
+   "triad_node": 233.233,
+   "copy_node": 319.53,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.216,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.455,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.22,
+     "copy_gbps": 40.264,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.174,
+     "copy_gbps": 40.456,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.113,
+     "copy_gbps": 40.48,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.156,
+     "copy_gbps": 40.395,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.204,
+     "copy_gbps": 40.426,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.208,
+     "copy_gbps": 40.462,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0050",
+   "triad_core_min": 1.8203,
+   "triad_min": 29.125,
+   "triad_mean": 29.169,
+   "triad_spread_pct": 0.31,
+   "triad_node": 233.058,
+   "copy_node": 319.935,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.125,
+     "copy_gbps": 40.533,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.478,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.177,
+     "copy_gbps": 40.458,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.154,
+     "copy_gbps": 40.485,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.493,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.162,
+     "copy_gbps": 40.447,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.216,
+     "copy_gbps": 40.398,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.161,
+     "copy_gbps": 40.512,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0051",
+   "triad_core_min": 1.8209,
+   "triad_min": 29.134,
+   "triad_mean": 29.21,
+   "triad_spread_pct": 0.57,
+   "triad_node": 233.333,
+   "copy_node": 319.48,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.207,
+     "copy_gbps": 40.503,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.134,
+     "copy_gbps": 40.409,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.153,
+     "copy_gbps": 40.399,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.49,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.279,
+     "copy_gbps": 40.495,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.302,
+     "copy_gbps": 40.443,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.241,
+     "copy_gbps": 40.431,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.517,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0052",
+   "triad_core_min": 1.8207,
+   "triad_min": 29.131,
+   "triad_mean": 29.186,
+   "triad_spread_pct": 0.38,
+   "triad_node": 233.429,
+   "copy_node": 319.448,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.223,
+     "copy_gbps": 40.507,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.131,
+     "copy_gbps": 40.456,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.133,
+     "copy_gbps": 40.446,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.52,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.21,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.181,
+     "copy_gbps": 40.425,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.242,
+     "copy_gbps": 40.39,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.45,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0053",
+   "triad_core_min": 1.8207,
+   "triad_min": 29.131,
+   "triad_mean": 29.169,
+   "triad_spread_pct": 0.22,
+   "triad_node": 233.313,
+   "copy_node": 319.608,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.481,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.152,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.461,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.457,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.131,
+     "copy_gbps": 40.457,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.154,
+     "copy_gbps": 40.42,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.16,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.433,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0054",
+   "triad_core_min": 1.8217,
+   "triad_min": 29.148,
+   "triad_mean": 29.175,
+   "triad_spread_pct": 0.21,
+   "triad_node": 233.248,
+   "copy_node": 319.273,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.195,
+     "copy_gbps": 40.404,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.15,
+     "copy_gbps": 40.474,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.341,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.185,
+     "copy_gbps": 40.416,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.208,
+     "copy_gbps": 40.412,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.154,
+     "copy_gbps": 40.395,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.148,
+     "copy_gbps": 40.413,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0055",
+   "triad_core_min": 1.82,
+   "triad_min": 29.12,
+   "triad_mean": 29.173,
+   "triad_spread_pct": 0.45,
+   "triad_node": 233.35,
+   "copy_node": 319.543,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.12,
+     "copy_gbps": 40.288,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.139,
+     "copy_gbps": 40.438,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.142,
+     "copy_gbps": 40.445,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.252,
+     "copy_gbps": 40.506,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.185,
+     "copy_gbps": 40.401,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.175,
+     "copy_gbps": 40.396,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.415,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0056",
+   "triad_core_min": 1.8228,
+   "triad_min": 29.164,
+   "triad_mean": 29.206,
+   "triad_spread_pct": 0.29,
+   "triad_node": 233.429,
+   "copy_node": 319.402,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.243,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.164,
+     "copy_gbps": 40.298,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.242,
+     "copy_gbps": 40.435,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.361,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.234,
+     "copy_gbps": 40.471,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.167,
+     "copy_gbps": 40.408,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.395,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.249,
+     "copy_gbps": 40.428,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0057",
+   "triad_core_min": 1.8217,
+   "triad_min": 29.148,
+   "triad_mean": 29.195,
+   "triad_spread_pct": 0.32,
+   "triad_node": 233.092,
+   "copy_node": 319.593,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.178,
+     "copy_gbps": 40.478,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.419,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.148,
+     "copy_gbps": 40.349,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.157,
+     "copy_gbps": 40.491,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.228,
+     "copy_gbps": 40.531,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.241,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.243,
+     "copy_gbps": 40.413,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.472,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0058",
+   "triad_core_min": 1.8194,
+   "triad_min": 29.111,
+   "triad_mean": 29.195,
+   "triad_spread_pct": 0.54,
+   "triad_node": 233.338,
+   "copy_node": 319.785,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.558,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.192,
+     "copy_gbps": 40.412,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.111,
+     "copy_gbps": 40.428,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.126,
+     "copy_gbps": 40.425,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.218,
+     "copy_gbps": 40.501,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.269,
+     "copy_gbps": 40.433,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.232,
+     "copy_gbps": 40.469,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.244,
+     "copy_gbps": 40.48,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0059",
+   "triad_core_min": 1.8211,
+   "triad_min": 29.138,
+   "triad_mean": 29.224,
+   "triad_spread_pct": 0.74,
+   "triad_node": 233.44,
+   "copy_node": 319.097,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.15,
+     "copy_gbps": 40.489,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.175,
+     "copy_gbps": 40.248,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.138,
+     "copy_gbps": 40.421,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.462,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.356,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.241,
+     "copy_gbps": 40.474,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.261,
+     "copy_gbps": 40.412,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.27,
+     "copy_gbps": 40.406,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0060",
+   "triad_core_min": 1.8201,
+   "triad_min": 29.121,
+   "triad_mean": 29.222,
+   "triad_spread_pct": 0.55,
+   "triad_node": 233.455,
+   "copy_node": 319.258,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.187,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.121,
+     "copy_gbps": 40.433,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.306,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.415,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.28,
+     "copy_gbps": 40.523,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.258,
+     "copy_gbps": 40.465,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.245,
+     "copy_gbps": 40.422,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.282,
+     "copy_gbps": 40.432,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0061",
+   "triad_core_min": 1.8219,
+   "triad_min": 29.15,
+   "triad_mean": 29.19,
+   "triad_spread_pct": 0.25,
+   "triad_node": 233.319,
+   "copy_node": 319.306,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.223,
+     "copy_gbps": 40.395,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.218,
+     "copy_gbps": 40.271,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.15,
+     "copy_gbps": 40.403,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.177,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.491,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.171,
+     "copy_gbps": 40.344,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.211,
+     "copy_gbps": 40.322,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.202,
+     "copy_gbps": 40.391,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0062",
+   "triad_core_min": 1.821,
+   "triad_min": 29.136,
+   "triad_mean": 29.2,
+   "triad_spread_pct": 0.38,
+   "triad_node": 233.639,
+   "copy_node": 319.735,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.361,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.341,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.161,
+     "copy_gbps": 40.423,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.221,
+     "copy_gbps": 40.471,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.248,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.136,
+     "copy_gbps": 40.428,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.305,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.227,
+     "copy_gbps": 40.354,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0063",
+   "triad_core_min": 1.8209,
+   "triad_min": 29.134,
+   "triad_mean": 29.202,
+   "triad_spread_pct": 0.38,
+   "triad_node": 233.676,
+   "copy_node": 319.697,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.134,
+     "copy_gbps": 40.542,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.325,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.174,
+     "copy_gbps": 40.299,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.202,
+     "copy_gbps": 40.511,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.496,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.231,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.237,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.244,
+     "copy_gbps": 40.491,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0064",
+   "triad_core_min": 1.8229,
+   "triad_min": 29.167,
+   "triad_mean": 29.225,
+   "triad_spread_pct": 0.42,
+   "triad_node": 233.46,
+   "copy_node": 319.553,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.167,
+     "copy_gbps": 40.384,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.264,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.172,
+     "copy_gbps": 40.517,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.248,
+     "copy_gbps": 40.525,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.259,
+     "copy_gbps": 40.456,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.289,
+     "copy_gbps": 40.411,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.291,
+     "copy_gbps": 40.45,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0065",
+   "triad_core_min": 1.8239,
+   "triad_min": 29.182,
+   "triad_mean": 29.231,
+   "triad_spread_pct": 0.35,
+   "triad_node": 233.895,
+   "copy_node": 319.48,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.253,
+     "copy_gbps": 40.347,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.224,
+     "copy_gbps": 40.242,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.25,
+     "copy_gbps": 40.425,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.227,
+     "copy_gbps": 40.377,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.226,
+     "copy_gbps": 40.404,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.391,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.395,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.284,
+     "copy_gbps": 40.416,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0070",
+   "triad_core_min": 1.821,
+   "triad_min": 29.136,
+   "triad_mean": 29.18,
+   "triad_spread_pct": 0.34,
+   "triad_node": 233.497,
+   "copy_node": 320.096,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.496,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.136,
+     "copy_gbps": 40.364,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.177,
+     "copy_gbps": 40.502,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.494,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.148,
+     "copy_gbps": 40.518,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.228,
+     "copy_gbps": 40.397,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.179,
+     "copy_gbps": 40.451,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.235,
+     "copy_gbps": 40.44,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0071",
+   "triad_core_min": 1.8228,
+   "triad_min": 29.164,
+   "triad_mean": 29.22,
+   "triad_spread_pct": 0.32,
+   "triad_node": 233.506,
+   "copy_node": 319.194,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.164,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.325,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.371,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.455,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.259,
+     "copy_gbps": 40.486,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.234,
+     "copy_gbps": 40.425,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.252,
+     "copy_gbps": 40.405,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.253,
+     "copy_gbps": 40.413,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0072",
+   "triad_core_min": 1.8236,
+   "triad_min": 29.178,
+   "triad_mean": 29.226,
+   "triad_spread_pct": 0.35,
+   "triad_node": 233.659,
+   "copy_node": 319.657,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.178,
+     "copy_gbps": 40.535,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.216,
+     "copy_gbps": 40.417,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.214,
+     "copy_gbps": 40.278,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.224,
+     "copy_gbps": 40.388,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.238,
+     "copy_gbps": 40.513,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.195,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.265,
+     "copy_gbps": 40.409,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.281,
+     "copy_gbps": 40.488,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0073",
+   "triad_core_min": 1.8229,
+   "triad_min": 29.166,
+   "triad_mean": 29.205,
+   "triad_spread_pct": 0.27,
+   "triad_node": 233.128,
+   "copy_node": 319.817,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.222,
+     "copy_gbps": 40.555,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.188,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.453,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.166,
+     "copy_gbps": 40.419,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.218,
+     "copy_gbps": 40.511,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.219,
+     "copy_gbps": 40.482,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.45,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.246,
+     "copy_gbps": 40.482,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0074",
+   "triad_core_min": 1.8196,
+   "triad_min": 29.114,
+   "triad_mean": 29.199,
+   "triad_spread_pct": 0.51,
+   "triad_node": 233.793,
+   "copy_node": 319.673,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.178,
+     "copy_gbps": 40.489,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.114,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.229,
+     "copy_gbps": 40.29,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.158,
+     "copy_gbps": 40.449,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.333,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.235,
+     "copy_gbps": 40.402,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.262,
+     "copy_gbps": 40.45,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0075",
+   "triad_core_min": 1.8229,
+   "triad_min": 29.166,
+   "triad_mean": 29.238,
+   "triad_spread_pct": 0.41,
+   "triad_node": 233.4,
+   "copy_node": 319.458,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.241,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.166,
+     "copy_gbps": 40.362,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.188,
+     "copy_gbps": 40.339,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.248,
+     "copy_gbps": 40.435,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.285,
+     "copy_gbps": 40.462,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.257,
+     "copy_gbps": 40.438,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.257,
+     "copy_gbps": 40.421,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.26,
+     "copy_gbps": 40.433,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0077",
+   "triad_core_min": 1.8213,
+   "triad_min": 29.14,
+   "triad_mean": 29.169,
+   "triad_spread_pct": 0.25,
+   "triad_node": 233.6,
+   "copy_node": 319.528,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.174,
+     "copy_gbps": 40.525,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.188,
+     "copy_gbps": 40.435,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.147,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.14,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.15,
+     "copy_gbps": 40.493,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.167,
+     "copy_gbps": 40.344,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.174,
+     "copy_gbps": 40.44,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0078",
+   "triad_core_min": 1.8202,
+   "triad_min": 29.123,
+   "triad_mean": 29.191,
+   "triad_spread_pct": 0.41,
+   "triad_node": 233.032,
+   "copy_node": 319.522,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.143,
+     "copy_gbps": 40.48,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.222,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.413,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.123,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.178,
+     "copy_gbps": 40.453,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.242,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.476,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.223,
+     "copy_gbps": 40.442,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0079",
+   "triad_core_min": 1.8231,
+   "triad_min": 29.17,
+   "triad_mean": 29.195,
+   "triad_spread_pct": 0.14,
+   "triad_node": 233.12,
+   "copy_node": 319.545,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.348,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.211,
+     "copy_gbps": 40.395,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.437,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.211,
+     "copy_gbps": 40.316,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.17,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.387,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.206,
+     "copy_gbps": 40.445,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.371,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0080",
+   "triad_core_min": 1.8197,
+   "triad_min": 29.115,
+   "triad_mean": 29.192,
+   "triad_spread_pct": 0.43,
+   "triad_node": 233.063,
+   "copy_node": 319.458,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.371,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.206,
+     "copy_gbps": 40.354,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.115,
+     "copy_gbps": 40.403,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.198,
+     "copy_gbps": 40.503,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.503,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.204,
+     "copy_gbps": 40.359,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.181,
+     "copy_gbps": 40.473,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.24,
+     "copy_gbps": 40.435,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0081",
+   "triad_core_min": 1.8207,
+   "triad_min": 29.131,
+   "triad_mean": 29.215,
+   "triad_spread_pct": 0.56,
+   "triad_node": 233.265,
+   "copy_node": 319.084,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.214,
+     "copy_gbps": 40.412,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.38,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.131,
+     "copy_gbps": 40.384,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.175,
+     "copy_gbps": 40.495,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.242,
+     "copy_gbps": 40.521,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.228,
+     "copy_gbps": 40.421,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.247,
+     "copy_gbps": 40.401,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.294,
+     "copy_gbps": 40.45,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0082",
+   "triad_core_min": 1.8216,
+   "triad_min": 29.146,
+   "triad_mean": 29.183,
+   "triad_spread_pct": 0.24,
+   "triad_node": 233.545,
+   "copy_node": 319.513,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.491,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.418,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.216,
+     "copy_gbps": 40.406,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.498,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.146,
+     "copy_gbps": 40.339,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.393,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.354,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.184,
+     "copy_gbps": 40.44,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0083",
+   "triad_core_min": 1.8226,
+   "triad_min": 29.161,
+   "triad_mean": 29.225,
+   "triad_spread_pct": 0.41,
+   "triad_node": 233.44,
+   "copy_node": 319.203,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.161,
+     "copy_gbps": 40.512,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.184,
+     "copy_gbps": 40.292,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.397,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.191,
+     "copy_gbps": 40.357,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.282,
+     "copy_gbps": 40.47,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.244,
+     "copy_gbps": 40.409,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.257,
+     "copy_gbps": 40.463,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.268,
+     "copy_gbps": 40.505,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0084",
+   "triad_core_min": 1.8204,
+   "triad_min": 29.127,
+   "triad_mean": 29.165,
+   "triad_spread_pct": 0.27,
+   "triad_node": 233.369,
+   "copy_node": 319.831,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.144,
+     "copy_gbps": 40.543,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.147,
+     "copy_gbps": 40.455,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.127,
+     "copy_gbps": 40.491,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.372,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.206,
+     "copy_gbps": 40.476,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.172,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.172,
+     "copy_gbps": 40.419,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.174,
+     "copy_gbps": 40.457,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0085",
+   "triad_core_min": 1.8201,
+   "triad_min": 29.122,
+   "triad_mean": 29.175,
+   "triad_spread_pct": 0.29,
+   "triad_node": 233.157,
+   "copy_node": 319.713,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.181,
+     "copy_gbps": 40.346,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.122,
+     "copy_gbps": 40.455,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.418,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.374,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.148,
+     "copy_gbps": 40.456,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.416,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.208,
+     "copy_gbps": 40.372,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.461,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0086",
+   "triad_core_min": 1.8229,
+   "triad_min": 29.167,
+   "triad_mean": 29.185,
+   "triad_spread_pct": 0.12,
+   "triad_node": 233.478,
+   "copy_node": 319.361,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.503,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.177,
+     "copy_gbps": 40.425,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.167,
+     "copy_gbps": 40.395,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.203,
+     "copy_gbps": 40.421,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.472,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.179,
+     "copy_gbps": 40.4,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.456,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0087",
+   "triad_core_min": 1.8212,
+   "triad_min": 29.139,
+   "triad_mean": 29.199,
+   "triad_spread_pct": 0.43,
+   "triad_node": 233.472,
+   "copy_node": 319.593,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.191,
+     "copy_gbps": 40.429,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.202,
+     "copy_gbps": 40.272,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.408,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.139,
+     "copy_gbps": 40.404,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.266,
+     "copy_gbps": 40.512,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.409,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.169,
+     "copy_gbps": 40.405,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.246,
+     "copy_gbps": 40.488,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0093",
+   "triad_core_min": 1.8212,
+   "triad_min": 29.139,
+   "triad_mean": 29.193,
+   "triad_spread_pct": 0.34,
+   "triad_node": 233.273,
+   "copy_node": 319.545,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.217,
+     "copy_gbps": 40.418,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.211,
+     "copy_gbps": 40.299,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.405,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.139,
+     "copy_gbps": 40.375,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.181,
+     "copy_gbps": 40.509,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.207,
+     "copy_gbps": 40.396,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.158,
+     "copy_gbps": 40.417,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.239,
+     "copy_gbps": 40.506,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0094",
+   "triad_core_min": 1.8199,
+   "triad_min": 29.119,
+   "triad_mean": 29.189,
+   "triad_spread_pct": 0.34,
+   "triad_node": 233.335,
+   "copy_node": 319.266,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.206,
+     "copy_gbps": 40.449,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.119,
+     "copy_gbps": 40.428,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.253,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.474,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.436,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.179,
+     "copy_gbps": 40.407,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.216,
+     "copy_gbps": 40.436,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.218,
+     "copy_gbps": 40.44,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0095",
+   "triad_core_min": 1.8228,
+   "triad_min": 29.165,
+   "triad_mean": 29.227,
+   "triad_spread_pct": 0.37,
+   "triad_node": 233.298,
+   "copy_node": 319.713,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.477,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.253,
+     "copy_gbps": 40.424,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.165,
+     "copy_gbps": 40.333,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.244,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.242,
+     "copy_gbps": 40.486,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.206,
+     "copy_gbps": 40.493,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.273,
+     "copy_gbps": 40.533,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.248,
+     "copy_gbps": 40.494,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0096",
+   "triad_core_min": 1.8223,
+   "triad_min": 29.157,
+   "triad_mean": 29.192,
+   "triad_spread_pct": 0.25,
+   "triad_node": 233.183,
+   "copy_node": 319.321,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.198,
+     "copy_gbps": 40.445,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.172,
+     "copy_gbps": 40.485,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.265,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.208,
+     "copy_gbps": 40.348,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.206,
+     "copy_gbps": 40.404,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.157,
+     "copy_gbps": 40.387,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.229,
+     "copy_gbps": 40.43,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.346,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0097",
+   "triad_core_min": 1.8222,
+   "triad_min": 29.155,
+   "triad_mean": 29.2,
+   "triad_spread_pct": 0.34,
+   "triad_node": 233.018,
+   "copy_node": 319.743,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.531,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.219,
+     "copy_gbps": 40.47,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.216,
+     "copy_gbps": 40.423,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.155,
+     "copy_gbps": 40.507,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.548,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.175,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.203,
+     "copy_gbps": 40.45,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.253,
+     "copy_gbps": 40.469,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0098",
+   "triad_core_min": 1.8223,
+   "triad_min": 29.157,
+   "triad_mean": 29.206,
+   "triad_spread_pct": 0.35,
+   "triad_node": 233.103,
+   "copy_node": 319.713,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.228,
+     "copy_gbps": 40.495,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.417,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.157,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.259,
+     "copy_gbps": 40.496,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.297,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.22,
+     "copy_gbps": 40.402,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.199,
+     "copy_gbps": 40.402,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.172,
+     "copy_gbps": 40.463,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0099",
+   "triad_core_min": 1.8204,
+   "triad_min": 29.126,
+   "triad_mean": 29.211,
+   "triad_spread_pct": 0.56,
+   "triad_node": 233.318,
+   "copy_node": 319.53,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.184,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.126,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.188,
+     "copy_gbps": 40.359,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.5,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.243,
+     "copy_gbps": 40.513,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.242,
+     "copy_gbps": 40.481,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.291,
+     "copy_gbps": 40.486,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.249,
+     "copy_gbps": 40.504,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0100",
+   "triad_core_min": 1.8247,
+   "triad_min": 29.195,
+   "triad_mean": 29.216,
+   "triad_spread_pct": 0.16,
+   "triad_node": 233.287,
+   "copy_node": 319.448,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.411,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.329,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.245,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.237,
+     "copy_gbps": 40.495,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.195,
+     "copy_gbps": 40.448,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.241,
+     "copy_gbps": 40.431,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.22,
+     "copy_gbps": 40.429,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.207,
+     "copy_gbps": 40.37,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0101",
+   "triad_core_min": 1.8214,
+   "triad_min": 29.142,
+   "triad_mean": 29.194,
+   "triad_spread_pct": 0.35,
+   "triad_node": 233.531,
+   "copy_node": 319.258,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.171,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.302,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.142,
+     "copy_gbps": 40.315,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.168,
+     "copy_gbps": 40.443,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.232,
+     "copy_gbps": 40.438,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.181,
+     "copy_gbps": 40.37,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.243,
+     "copy_gbps": 40.402,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.382,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0102",
+   "triad_core_min": 1.8189,
+   "triad_min": 29.102,
+   "triad_mean": 29.169,
+   "triad_spread_pct": 0.41,
+   "triad_node": 233.568,
+   "copy_node": 319.376,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.203,
+     "copy_gbps": 40.301,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.123,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.125,
+     "copy_gbps": 40.401,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.378,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.184,
+     "copy_gbps": 40.425,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.193,
+     "copy_gbps": 40.382,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.102,
+     "copy_gbps": 40.442,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.222,
+     "copy_gbps": 40.446,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0103",
+   "triad_core_min": 1.8208,
+   "triad_min": 29.132,
+   "triad_mean": 29.191,
+   "triad_spread_pct": 0.47,
+   "triad_node": 233.205,
+   "copy_node": 319.393,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.132,
+     "copy_gbps": 40.467,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.27,
+     "copy_gbps": 40.385,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.213,
+     "copy_gbps": 40.436,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.158,
+     "copy_gbps": 40.482,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.504,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.152,
+     "copy_gbps": 40.449,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.228,
+     "copy_gbps": 40.438,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.179,
+     "copy_gbps": 40.475,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0104",
+   "triad_core_min": 1.8219,
+   "triad_min": 29.15,
+   "triad_mean": 29.221,
+   "triad_spread_pct": 0.45,
+   "triad_node": 233.457,
+   "copy_node": 319.266,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.506,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.198,
+     "copy_gbps": 40.391,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.15,
+     "copy_gbps": 40.389,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.397,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.272,
+     "copy_gbps": 40.431,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.281,
+     "copy_gbps": 40.409,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.238,
+     "copy_gbps": 40.432,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.25,
+     "copy_gbps": 40.452,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0105",
+   "triad_core_min": 1.7474,
+   "triad_min": 111.833,
+   "triad_mean": 111.942,
+   "triad_spread_pct": 0.2,
+   "triad_node": 222.407,
+   "copy_node": 293.289,
+   "numa_nodes": 2,
+   "mem_min_gb": 251.5,
+   "issues": 2,
+   "issue_list": [
+    "2 NUMA domains with [64, 64] cpus, most nodes have 8 with [16, 16, 16, 16, 16, 16, 16, 16]",
+    "NUMA distance table differs from most nodes"
+   ],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 64,
+     "mem_gb": 251.5,
+     "triad_gbps": 111.833,
+     "copy_gbps": 101.824,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 64,
+     "mem_gb": 252.0,
+     "triad_gbps": 112.052,
+     "copy_gbps": 102.145,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0106",
+   "triad_core_min": 1.8219,
+   "triad_min": 29.151,
+   "triad_mean": 29.2,
+   "triad_spread_pct": 0.27,
+   "triad_node": 233.049,
+   "copy_node": 319.433,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.204,
+     "copy_gbps": 40.43,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.312,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.215,
+     "copy_gbps": 40.417,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.151,
+     "copy_gbps": 40.466,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.213,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.202,
+     "copy_gbps": 40.435,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.23,
+     "copy_gbps": 40.464,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.419,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0107",
+   "triad_core_min": 1.8202,
+   "triad_min": 29.124,
+   "triad_mean": 29.199,
+   "triad_spread_pct": 0.44,
+   "triad_node": 233.31,
+   "copy_node": 319.831,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.208,
+     "copy_gbps": 40.48,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.124,
+     "copy_gbps": 40.431,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.228,
+     "copy_gbps": 40.409,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.329,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.21,
+     "copy_gbps": 40.425,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.253,
+     "copy_gbps": 40.401,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.154,
+     "copy_gbps": 40.463,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.469,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0108",
+   "triad_core_min": 1.8233,
+   "triad_min": 29.173,
+   "triad_mean": 29.206,
+   "triad_spread_pct": 0.17,
+   "triad_node": 233.477,
+   "copy_node": 319.52,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.218,
+     "copy_gbps": 40.291,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.223,
+     "copy_gbps": 40.372,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.173,
+     "copy_gbps": 40.255,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.218,
+     "copy_gbps": 40.417,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.212,
+     "copy_gbps": 40.441,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.198,
+     "copy_gbps": 40.373,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.216,
+     "copy_gbps": 40.344,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 62.9,
+     "triad_gbps": 29.188,
+     "copy_gbps": 40.44,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0109",
+   "triad_core_min": 1.8217,
+   "triad_min": 29.147,
+   "triad_mean": 29.178,
+   "triad_spread_pct": 0.35,
+   "triad_node": 233.191,
+   "copy_node": 319.433,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.158,
+     "copy_gbps": 40.498,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.147,
+     "copy_gbps": 40.413,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.178,
+     "copy_gbps": 40.261,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.165,
+     "copy_gbps": 40.431,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.164,
+     "copy_gbps": 40.418,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.248,
+     "copy_gbps": 40.377,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.161,
+     "copy_gbps": 40.352,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.2,
+     "copy_gbps": 40.379,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0110",
+   "triad_core_min": 1.8204,
+   "triad_min": 29.127,
+   "triad_mean": 29.189,
+   "triad_spread_pct": 0.41,
+   "triad_node": 233.245,
+   "copy_node": 319.625,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.195,
+     "copy_gbps": 40.522,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.127,
+     "copy_gbps": 40.457,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.129,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.435,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.234,
+     "copy_gbps": 40.548,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.237,
+     "copy_gbps": 40.463,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.248,
+     "copy_gbps": 40.454,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.455,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0112",
+   "triad_core_min": 1.8222,
+   "triad_min": 29.155,
+   "triad_mean": 29.205,
+   "triad_spread_pct": 0.36,
+   "triad_node": 233.523,
+   "copy_node": 319.473,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.19,
+     "copy_gbps": 40.513,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.18,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.213,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.155,
+     "copy_gbps": 40.498,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.195,
+     "copy_gbps": 40.499,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.205,
+     "copy_gbps": 40.444,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.259,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.241,
+     "copy_gbps": 40.517,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0113",
+   "triad_core_min": 1.8222,
+   "triad_min": 29.156,
+   "triad_mean": 29.23,
+   "triad_spread_pct": 0.41,
+   "triad_node": 233.421,
+   "copy_node": 319.575,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.5,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.5,
+     "triad_gbps": 29.179,
+     "copy_gbps": 40.37,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.233,
+     "copy_gbps": 40.389,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.156,
+     "copy_gbps": 40.298,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.222,
+     "copy_gbps": 40.447,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.253,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.261,
+     "copy_gbps": 40.501,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.258,
+     "copy_gbps": 40.396,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.277,
+     "copy_gbps": 40.429,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0114",
+   "triad_core_min": 1.8221,
+   "triad_min": 29.154,
+   "triad_mean": 29.185,
+   "triad_spread_pct": 0.29,
+   "triad_node": 233.5,
+   "copy_node": 319.385,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.16,
+     "copy_gbps": 40.436,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.154,
+     "copy_gbps": 40.412,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.175,
+     "copy_gbps": 40.281,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.489,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.238,
+     "copy_gbps": 40.482,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.217,
+     "copy_gbps": 40.378,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.189,
+     "copy_gbps": 40.435,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.519,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0115",
+   "triad_core_min": 1.8209,
+   "triad_min": 29.135,
+   "triad_mean": 29.179,
+   "triad_spread_pct": 0.44,
+   "triad_node": 233.138,
+   "copy_node": 319.663,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.21,
+     "copy_gbps": 40.474,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.137,
+     "copy_gbps": 40.462,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.172,
+     "copy_gbps": 40.429,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.16,
+     "copy_gbps": 40.51,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.264,
+     "copy_gbps": 40.399,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.185,
+     "copy_gbps": 40.427,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.171,
+     "copy_gbps": 40.464,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.135,
+     "copy_gbps": 40.437,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0116",
+   "triad_core_min": 1.8223,
+   "triad_min": 29.157,
+   "triad_mean": 29.195,
+   "triad_spread_pct": 0.31,
+   "triad_node": 233.256,
+   "copy_node": 319.631,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.157,
+     "copy_gbps": 40.48,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.176,
+     "copy_gbps": 40.298,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.177,
+     "copy_gbps": 40.445,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.167,
+     "copy_gbps": 40.382,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.201,
+     "copy_gbps": 40.486,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.224,
+     "copy_gbps": 40.424,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.43,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.247,
+     "copy_gbps": 40.484,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0117",
+   "triad_core_min": 1.8203,
+   "triad_min": 29.125,
+   "triad_mean": 29.202,
+   "triad_spread_pct": 0.52,
+   "triad_node": 233.56,
+   "copy_node": 319.275,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.16,
+     "copy_gbps": 40.479,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.159,
+     "copy_gbps": 40.415,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.125,
+     "copy_gbps": 40.393,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.147,
+     "copy_gbps": 40.463,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.261,
+     "copy_gbps": 40.464,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.234,
+     "copy_gbps": 40.456,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.253,
+     "copy_gbps": 40.45,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.277,
+     "copy_gbps": 40.506,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0118",
+   "triad_core_min": 1.8227,
+   "triad_min": 29.163,
+   "triad_mean": 29.201,
+   "triad_spread_pct": 0.32,
+   "triad_node": 233.673,
+   "copy_node": 318.94,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.183,
+     "copy_gbps": 40.448,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.191,
+     "copy_gbps": 40.247,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.163,
+     "copy_gbps": 40.243,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.352,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.355,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.256,
+     "copy_gbps": 40.359,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.203,
+     "copy_gbps": 40.359,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.209,
+     "copy_gbps": 40.368,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0119",
+   "triad_core_min": 1.8208,
+   "triad_min": 29.133,
+   "triad_mean": 29.178,
+   "triad_spread_pct": 0.25,
+   "triad_node": 233.361,
+   "copy_node": 319.45,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.206,
+     "copy_gbps": 40.553,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.157,
+     "copy_gbps": 40.435,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.133,
+     "copy_gbps": 40.429,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.198,
+     "copy_gbps": 40.338,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.44,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.154,
+     "copy_gbps": 40.461,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.197,
+     "copy_gbps": 40.468,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.182,
+     "copy_gbps": 40.442,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0120",
+   "triad_core_min": 1.8234,
+   "triad_min": 29.174,
+   "triad_mean": 29.224,
+   "triad_spread_pct": 0.32,
+   "triad_node": 233.539,
+   "copy_node": 319.44,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.241,
+     "copy_gbps": 40.548,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.174,
+     "copy_gbps": 40.439,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.175,
+     "copy_gbps": 40.384,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.517,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.258,
+     "copy_gbps": 40.547,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.244,
+     "copy_gbps": 40.415,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.267,
+     "copy_gbps": 40.479,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.233,
+     "copy_gbps": 40.445,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0121",
+   "triad_core_min": 1.8209,
+   "triad_min": 29.134,
+   "triad_mean": 29.19,
+   "triad_spread_pct": 0.31,
+   "triad_node": 233.307,
+   "copy_node": 319.418,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.222,
+     "copy_gbps": 40.475,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.134,
+     "copy_gbps": 40.419,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.198,
+     "copy_gbps": 40.283,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.226,
+     "copy_gbps": 40.42,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.179,
+     "copy_gbps": 40.428,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.186,
+     "copy_gbps": 40.321,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.431,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.179,
+     "copy_gbps": 40.429,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  },
+  {
+   "node": "n0122",
+   "triad_core_min": 1.8246,
+   "triad_min": 29.194,
+   "triad_mean": 29.243,
+   "triad_spread_pct": 0.37,
+   "triad_node": 233.585,
+   "copy_node": 319.703,
+   "numa_nodes": 8,
+   "mem_min_gb": 62.6,
+   "issues": 0,
+   "issue_list": [],
+   "numa_domains": [
+    {
+     "id": 0,
+     "cpus": 16,
+     "mem_gb": 62.6,
+     "triad_gbps": 29.196,
+     "copy_gbps": 40.467,
+     "validated": true
+    },
+    {
+     "id": 1,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.23,
+     "copy_gbps": 40.346,
+     "validated": true
+    },
+    {
+     "id": 2,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.194,
+     "copy_gbps": 40.333,
+     "validated": true
+    },
+    {
+     "id": 3,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.202,
+     "copy_gbps": 40.335,
+     "validated": true
+    },
+    {
+     "id": 4,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.273,
+     "copy_gbps": 40.483,
+     "validated": true
+    },
+    {
+     "id": 5,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.26,
+     "copy_gbps": 40.427,
+     "validated": true
+    },
+    {
+     "id": 6,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.302,
+     "copy_gbps": 40.46,
+     "validated": true
+    },
+    {
+     "id": 7,
+     "cpus": 16,
+     "mem_gb": 63.0,
+     "triad_gbps": 29.291,
+     "copy_gbps": 40.452,
+     "validated": true
+    }
+   ],
+   "numa_balancing": "1",
+   "thp": "always"
+  }
+ ]
+}
