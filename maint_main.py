@@ -910,6 +910,324 @@ class hpcg:
 
                 
                 
+STREAM_SRC = "/project/hpcadmins/am2455/maint/stream/stream.c"
+STREAM_URL = "https://www.cs.virginia.edu/stream/FTP/Code/stream.c"
+
+def list_nodes(partition):
+    """Names of the nodes in a partition that are in the maint state."""
+    nodelist = run_command(f"sinfo -p {partition} | awk '$5 == \"maint\" {{print $NF}}'")
+    if not nodelist.strip():
+        return []
+    return run_command(f"scontrol show hostname {nodelist}").split()
+
+def _parse_numactl_hardware(text):
+    """Parse `numactl --hardware` into domain count, CPUs and memory per domain, and distances."""
+    info = {"numa_nodes": None, "cpus": {}, "mem_mb": {}, "distances": []}
+    in_dist = False
+    for line in text.splitlines():
+        m = re.match(r"available:\s+(\d+)\s+nodes", line)
+        if m:
+            info["numa_nodes"] = int(m.group(1))
+            continue
+        m = re.match(r"node\s+(\d+)\s+cpus:(.*)", line)
+        if m:
+            info["cpus"][int(m.group(1))] = len(m.group(2).split())
+            continue
+        m = re.match(r"node\s+(\d+)\s+size:\s+(\d+)\s+MB", line)
+        if m:
+            info["mem_mb"][int(m.group(1))] = int(m.group(2))
+            continue
+        if line.startswith("node distances"):
+            in_dist = True
+            continue
+        if in_dist:
+            m = re.match(r"\s*(\d+):\s+(.*)", line)
+            if m:
+                info["distances"].append([int(x) for x in m.group(2).split()])
+    return info
+
+def _parse_stream(text):
+    """Best rates of the four STREAM kernels in GB/s (STREAM prints MB/s, 1 MB = 10^6 bytes)."""
+    rates = {}
+    for kernel, rate in re.findall(r"^(Copy|Scale|Add|Triad):\s+([0-9.]+)", text, re.M):
+        rates[kernel.lower()] = round(float(rate) / 1000.0, 3)
+    rates["validated"] = "Solution Validates" in text
+    return rates
+
+def _most_common(values):
+    """Most frequent value of a list (values must be hashable)."""
+    counts = {}
+    for value in values:
+        counts[value] = counts.get(value, 0) + 1
+    return max(counts, key=counts.get) if counts else None
+
+class numa:
+    """NUMA health check for the CPU nodes.
+
+    Every node records its NUMA topology (numactl --hardware), then runs STREAM
+    once per NUMA domain with CPUs and memory both bound to that domain, and once
+    across the whole node. A weak DIMM or memory channel shows up as one domain
+    with a lower Triad rate, which a whole node benchmark such as HPCG averages away.
+    """
+
+    DOMAIN_ARRAY = 200_000_000     # elements per array for a single domain run (4.8 GB in total)
+    NODE_ARRAY = 800_000_000       # elements per array for the whole node run (19.2 GB in total)
+
+    def run(self, reservation=None, partition="general", cores=128):
+
+        print(f"Running NUMA / STREAM test in '{partition}' partition\n")
+        get_nodes(partition)
+        expected_nodes = list_nodes(partition)
+
+        res = resolve_reservation(reservation)
+        print("Using Reservation: ", res)
+
+        # stream.c is a single file, compiled on each node so -march=native matches its CPU
+        if not os.path.isfile(STREAM_SRC):
+            print(f"{STREAM_SRC} not found, downloading it from {STREAM_URL}")
+            os.makedirs(os.path.dirname(STREAM_SRC), exist_ok=True)
+            run_command(f"curl -fsSL -o {shlex.quote(STREAM_SRC)} {shlex.quote(STREAM_URL)}")
+            if not os.path.isfile(STREAM_SRC) or os.path.getsize(STREAM_SRC) == 0:
+                sys.exit(f"Could not download stream.c. Place it at {STREAM_SRC} and run again.")
+
+        enter_dir('numa')
+
+        print("Cleaning up existing files and direcotries\n")
+        run_command("find . -mindepth 1 ! -name '*slurm*' ! -name '*.py' -exec rm -rf {} +")
+
+        slurm_script = f"""\
+        #!/bin/bash
+        #SBATCH --job-name=maint_numa      # Job name
+        #SBATCH --output=numa-%j.out       # Output file
+        #SBATCH --error=numa-%j.err        # Error log file
+        #SBATCH --time=00:30:00            # Wall clock limit
+        #SBATCH --nodes=1
+        #SBATCH --ntasks-per-node=1
+        #SBATCH --cpus-per-task={cores}
+        #SBATCH --partition={partition}
+        #SBATCH --qos=standard
+        #SBATCH --reservation={res}
+        #SBATCH --exclusive
+
+        module load wulver
+        ml foss/2025a
+        command -v numactl >/dev/null 2>&1 || ml numactl
+
+        DIR=${{SLURM_NODELIST}}_${{SLURM_JOB_ID}}
+        mkdir -p $DIR
+        cd $DIR
+
+        # Topology and kernel settings
+        numactl --hardware > numactl_hardware.txt
+        lscpu > lscpu.txt
+        echo "numa_balancing=$(cat /proc/sys/kernel/numa_balancing 2>/dev/null)" > settings.txt
+        echo "thp=$(cat /sys/kernel/mm/transparent_hugepage/enabled 2>/dev/null)" >> settings.txt
+        echo "kernel=$(uname -r)" >> settings.txt
+
+        CFLAGS="-O3 -march=native -fopenmp -mcmodel=medium"
+        gcc $CFLAGS -DSTREAM_ARRAY_SIZE={self.DOMAIN_ARRAY} {STREAM_SRC} -o stream_domain
+        gcc $CFLAGS -DSTREAM_ARRAY_SIZE={self.NODE_ARRAY} {STREAM_SRC} -o stream_node
+
+        export OMP_PLACES=cores
+
+        # One run per NUMA domain, CPUs and memory both bound to that domain
+        for n in $(awk '$1 == "node" && $3 == "cpus:" {{print $2}}' numactl_hardware.txt); do
+            ncpu=$(awk -v n=$n '$1 == "node" && $2 == n && $3 == "cpus:" {{print NF - 3}}' numactl_hardware.txt)
+            if [ "$ncpu" -gt 0 ]; then
+                OMP_NUM_THREADS=$ncpu OMP_PROC_BIND=close \\
+                    numactl --cpunodebind=$n --membind=$n ./stream_domain > stream_domain_$n.txt 2>&1
+            fi
+        done
+
+        # One run across the whole node, threads spread over every domain
+        OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK OMP_PROC_BIND=spread ./stream_node > stream_node.txt 2>&1
+
+        rm -f stream_domain stream_node
+        """
+
+        slurm_script = textwrap.dedent(slurm_script)
+
+        print("Writing the Slurm script")
+        with open("maint_job.slurm", "w") as file:
+            file.write(slurm_script)
+            print("Slurm script is written\n")
+
+        # One job pinned to each node. A job array is not used here because a node that
+        # finishes early (fewer NUMA domains, or a failure) would be given a second task
+        # while another node is never tested.
+        job_ids = []
+        for node in expected_nodes:
+            job_output = submit_job(f"--nodelist={node} maint_job.slurm").splitlines()
+            job_ids.append(job_output[0].strip().split()[-1])
+        print(f"Submitted {len(job_ids)} jobs, one per node ({job_ids[0]} to {job_ids[-1]})")
+        print("Waiting for the jobs to complete...")
+
+        while True:
+            squeue_out = run_command(f"squeue -h -o %i -j {','.join(job_ids)}")
+            if not squeue_out.strip():
+                print("All jobs have completed.")
+                break
+            running = len(squeue_out.strip().splitlines())
+            print(f"  {running} job(s) still queued or running, checking again in 30 seconds...")
+            time.sleep(30)
+
+        self.collect(os.getcwd(), expected_nodes=expected_nodes)
+
+    def collect(self, directory, expected_nodes=None):
+        """Parse every <node>_<task> directory under `directory` and write numa_stream_results.json."""
+        node_dirs = [entry for entry in sorted(os.listdir(directory))
+                     if os.path.isdir(os.path.join(directory, entry)) and re.match(r"n\d+_\d+$", entry)]
+
+        print(f"\nParsing {len(node_dirs)} node directories")
+        if not node_dirs:
+            sys.exit("No per-node directories found - check the numa-*.out/.err files for what the jobs did")
+
+        records = {}
+        failed = []
+
+        for entry in node_dirs:
+            entry_path = os.path.join(directory, entry)
+            node_name, task_id = entry.split("_")[0], entry.split("_")[-1]
+
+            hw_file = os.path.join(entry_path, "numactl_hardware.txt")
+            if not os.path.isfile(hw_file):
+                failed.append(entry)
+                print(f"{entry}: no numactl_hardware.txt - the task did not start properly")
+                continue
+
+            with open(hw_file) as f:
+                topo = _parse_numactl_hardware(f.read())
+
+            settings = {}
+            settings_file = os.path.join(entry_path, "settings.txt")
+            if os.path.isfile(settings_file):
+                with open(settings_file) as f:
+                    for line in f:
+                        key, _, value = line.strip().partition("=")
+                        settings[key] = value
+            thp = re.search(r"\[(\w+)\]", settings.get("thp", ""))
+
+            domains = []
+            for dom in sorted(topo["cpus"]):
+                rates = {}
+                stream_file = os.path.join(entry_path, f"stream_domain_{dom}.txt")
+                if os.path.isfile(stream_file):
+                    with open(stream_file) as f:
+                        rates = _parse_stream(f.read())
+                domains.append({
+                    "id": dom,
+                    "cpus": topo["cpus"][dom],
+                    "mem_gb": round(topo["mem_mb"].get(dom, 0) / 1024.0, 1),
+                    "triad_gbps": rates.get("triad"),
+                    "copy_gbps": rates.get("copy"),
+                    "validated": rates.get("validated", False),
+                })
+
+            whole = {}
+            whole_file = os.path.join(entry_path, "stream_node.txt")
+            if os.path.isfile(whole_file):
+                with open(whole_file) as f:
+                    whole = _parse_stream(f.read())
+
+            triads = [d["triad_gbps"] for d in domains if d["triad_gbps"] is not None]
+            issues = []
+            for d in domains:
+                if d["cpus"] > 0 and d["triad_gbps"] is None:
+                    issues.append(f"STREAM produced no result on domain {d['id']}")
+                elif d["cpus"] > 0 and not d["validated"]:
+                    issues.append(f"STREAM did not validate on domain {d['id']}")
+            if whole.get("triad") is None:
+                issues.append("whole node STREAM produced no result")
+
+            record = {
+                "node": node_name,
+                "task_id": task_id,
+                "numa_nodes": topo["numa_nodes"],
+                "distances": topo["distances"],
+                "numa_balancing": settings.get("numa_balancing"),
+                "thp": thp.group(1) if thp else settings.get("thp"),
+                "kernel": settings.get("kernel"),
+                "domains": domains,
+                "triad_min_gbps": min(triads) if triads else None,
+                "triad_max_gbps": max(triads) if triads else None,
+                "triad_mean_gbps": round(sum(triads) / len(triads), 3) if triads else None,
+                "triad_spread_pct": round((max(triads) - min(triads)) / max(triads) * 100, 2) if triads else None,
+                "triad_node_gbps": whole.get("triad"),
+                "copy_node_gbps": whole.get("copy"),
+                "scale_node_gbps": whole.get("scale"),
+                "add_node_gbps": whole.get("add"),
+                "issues": issues,
+            }
+
+            # If a node was run more than once, keep the later job
+            if node_name in records and int(records[node_name]["task_id"]) > int(task_id):
+                continue
+            records[node_name] = record
+
+        # Topology check: every node is compared against what most nodes report
+        recs = list(records.values())
+        ref_shape = _most_common([(r["numa_nodes"], tuple(d["cpus"] for d in r["domains"])) for r in recs])
+        ref_dist = _most_common([json.dumps(r["distances"]) for r in recs])
+        ref_balancing = _most_common([r["numa_balancing"] for r in recs])
+        ref_thp = _most_common([r["thp"] for r in recs])
+        same_shape = [r for r in recs if (r["numa_nodes"], tuple(d["cpus"] for d in r["domains"])) == ref_shape]
+        ref_mem = []
+        if ref_shape:
+            for i in range(len(ref_shape[1])):
+                sizes = sorted(r["domains"][i]["mem_gb"] for r in same_shape)
+                ref_mem.append(sizes[len(sizes) // 2])
+
+        for r in recs:
+            shape = (r["numa_nodes"], tuple(d["cpus"] for d in r["domains"]))
+            if r["numa_nodes"] is None:
+                r["issues"].append("NUMA topology could not be read from numactl --hardware")
+            elif shape != ref_shape:
+                r["issues"].append(f"{r['numa_nodes']} NUMA domains with {list(shape[1])} cpus, "
+                                   f"most nodes have {ref_shape[0]} with {list(ref_shape[1])}")
+            else:
+                for d, expected in zip(r["domains"], ref_mem):
+                    if expected and abs(d["mem_gb"] - expected) / expected > 0.05:
+                        r["issues"].append(f"domain {d['id']} has {d['mem_gb']} GB of memory, most nodes have {expected} GB")
+            if r["numa_nodes"] is not None and json.dumps(r["distances"]) != ref_dist:
+                r["issues"].append("NUMA distance table differs from most nodes")
+            if r["numa_balancing"] is None or r["thp"] is None:
+                r["issues"].append("kernel NUMA settings could not be read")
+            else:
+                if r["numa_balancing"] != ref_balancing:
+                    r["issues"].append(f"numa_balancing is {r['numa_balancing']}, most nodes have {ref_balancing}")
+                if r["thp"] != ref_thp:
+                    r["issues"].append(f"transparent hugepages is {r['thp']}, most nodes have {ref_thp}")
+            r["topology_ok"] = not r["issues"]
+
+        results = sorted(recs, key=lambda r: r["node"])
+
+        print(f"\n{'Node':8} {'Domains':>7} {'Triad min':>10} {'Triad max':>10} {'Spread %':>9} {'Whole node':>11}  Issues")
+        for r in results:
+            fmt = lambda v: f"{v:.1f}" if isinstance(v, (int, float)) else "-"
+            print(f"{r['node']:8} {str(r['numa_nodes']):>7} {fmt(r['triad_min_gbps']):>10} {fmt(r['triad_max_gbps']):>10} "
+                  f"{fmt(r['triad_spread_pct']):>9} {fmt(r['triad_node_gbps']):>11}  {'; '.join(r['issues']) or 'none'}")
+
+        if failed:
+            print(f"\n{len(failed)} task(s) produced no result:")
+            for entry in failed:
+                print(f"  {entry}")
+                log = os.path.join(directory, f"numa-{entry.split('_')[-1]}.err")
+                tail = run_command(f"tail -n 10 {shlex.quote(log)}") if os.path.exists(log) else ""
+                for line in tail.splitlines():
+                    print(f"    {line}")
+
+        if expected_nodes:
+            missing = sorted(set(expected_nodes) - set(records))
+            if missing:
+                print(f"\n{len(missing)} node(s) in maint state were not tested: {', '.join(missing)}")
+
+        out_json = os.path.join(directory, "numa_stream_results.json")
+        with open(out_json, "w") as jf:
+            json.dump(results, jf, indent=2)
+
+        print(f"\nWrote {len(results)} records to {out_json}")
+
+
 def _parse_bandwidth_table(text):
     """Parse a bandwidth table from nvbandwidth output, handling N/A values."""
     bandwidth = {}
@@ -1886,7 +2204,7 @@ def main():
         description="Run a specific test from the script.",
         add_help=False  # Disable default help
     )
-    parser.add_argument("class_name", nargs="?", choices=["openfoam", "gromacs", "nccl", "torchcomm", "hpcg", "nvlink", "p2pBandwidthLatencyTest", "elbencho"], help=argparse.SUPPRESS)
+    parser.add_argument("class_name", nargs="?", choices=["openfoam", "gromacs", "nccl", "torchcomm", "hpcg", "numa", "nvlink", "p2pBandwidthLatencyTest", "elbencho"], help=argparse.SUPPRESS)
     parser.add_argument("sub_option", nargs="?", choices=["a100", "mig", "l40", "single", "multi"], help=argparse.SUPPRESS)
     # mig_type for the GPU tests, partition name for elbencho
     parser.add_argument("mig_type", nargs="?", metavar="mig_type|partition", help=argparse.SUPPRESS)
@@ -1914,6 +2232,9 @@ def main():
         print("           mig requires mig_type: 10g, 20g, or 40g")
         print("           e.g. python maint_main.py torchcomm mig 20g")
         print("hpcg       for running HPCG")
+        print("numa       for running the NUMA check on the CPU nodes: topology per node, plus")
+        print("           STREAM on each NUMA domain and across the whole node")
+        print("           e.g. python maint_main.py numa")
         print("nvlink     for running NVLink (requires: a100, mig, or l40)")
         print("           mig requires mig_type: 10g, 20g, or 40g")
         print("p2pBandwidthLatencyTest  for running P2P Bandwidth Latency Test (requires: a100, mig, or l40)")
@@ -1953,6 +2274,9 @@ def main():
         instance.run(args.sub_option, args.mig_type, reservation=args.reservation)
     elif args.class_name == "hpcg":
         instance = hpcg()
+        instance.run(reservation=args.reservation)
+    elif args.class_name == "numa":
+        instance = numa()
         instance.run(reservation=args.reservation)
     elif args.class_name == "nvlink":
         require_gpu_mode("nvlink", args.sub_option, args.mig_type)
